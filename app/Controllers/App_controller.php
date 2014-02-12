@@ -2,7 +2,7 @@
 class App_controller extends Controller{
 
   public function __construct(){
-    $this->tpl=array('sync'=>'main.html');
+    //$this->tpl=array('sync'=>'main.html');
   }
 
   
@@ -131,13 +131,13 @@ class App_controller extends Controller{
       }
       else
         var_dump($f3->get('erreur'));
-      $this->tpl='index.html';
+      $this->tpl='main.html';
     }
   }
   
   public function parseProduct($f3){
     $f3->set('product',$this->model->parseProduct(array('product'=>$f3->get('POST.product'))));
-    $this->tpl['async']='partials/contentProduct.html';
+    $this->tpl='partials/contentProduct.html';
   }
 
   // public function getUsers($f3){

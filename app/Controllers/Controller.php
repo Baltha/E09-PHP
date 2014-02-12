@@ -15,7 +15,7 @@ protected $model;
   public function afterroute($f3){
         
     $mimeTypes=array('html'=>'text/html','json'=>'application/json');
-    $tpl=$f3->get('AJAX')?$this->tpl['async']:$this->tpl['sync'];
+    $tpl=$this->tpl;
     $ext=substr($tpl,strrpos($tpl,'.')+1);
     $mime=$mimeTypes[$ext];
     echo View::instance()->render($tpl,$mime);
