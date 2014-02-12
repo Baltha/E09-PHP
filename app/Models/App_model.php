@@ -9,6 +9,26 @@ class App_model extends Model{
   function home(){
     
   }
+
+  public function getUserFb($params){
+    return $this->getMapper('users')->load(array('id_facebook=?', $params['id_facebook']));
+  }
+
+  public function getUser($params){
+    return $this->getMapper('users')->load(array('mail=?', $params['mail']));
+  }
+
+  public function addUser($params){
+    $map=$this->getMapper('users');
+    foreach($params as $key => $param){
+      $map->$key=$param;
+    }
+    $map->save();
+  }
+
+  public function password($mdp){
+    return sha1('4txuadj6'.$mdp.'tx5hcv7f');
+  }
   
   function parseProduct($params)
   {
