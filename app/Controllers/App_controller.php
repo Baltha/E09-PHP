@@ -140,6 +140,11 @@ class App_controller extends Controller{
     $this->tpl='partials/contentProduct.html';
   }
 
+  public function addProduct($f3){
+    $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'))));
+    $this->tpl='main.html';
+  }
+
   // public function getUsers($f3){
   //   $f3->set('users',$this->model->getUsers(array('promo'=>$f3->get('PARAMS.promo'))));
   //   $this->tpl['async']='partials/users.html';

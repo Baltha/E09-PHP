@@ -30,7 +30,7 @@ class App_model extends Model{
     return sha1('4txuadj6'.$mdp.'tx5hcv7f');
   }
   
-  function parseProduct($params)
+  public function parseProduct($params)
   {
 
     $homepage = file_get_contents($params['product']);
@@ -49,7 +49,6 @@ class App_model extends Model{
       $describe=$matchesDescribe[1];
       $picture=$matchesPicture[1];
       $tabResult=array('nom'=>$nom,'price'=>$price,'describe'=>$describe,'picture'=>$picture);
-      //echo "<img src=".$matchesPicture[0]."><br />";
     }
     //RueDuCommerce
     else if(preg_match('#rueducommerce#', $params['product']))
@@ -67,10 +66,14 @@ class App_model extends Model{
       $picture=$matchesPicture[1];
 
       $tabResult=array('like'=>$like->{'shares'},'nom'=>$nom,'price'=>$price,'describe'=>$describe,'picture'=>$picture);
-     // echo "Nb Like Facebook : ".$like->{'shares'}."<br />";
-     // echo "<div style=width:500px;height:500px>".$matchesPicture[1] ."</div><br />";
+
     }
       return $tabResult;
+  }
+
+  public function addProduct()
+  {
+    echo "Produit Ajouté <br />";
   }
 }
 ?>
