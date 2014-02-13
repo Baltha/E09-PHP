@@ -1,7 +1,7 @@
 <?php
 class Model{
   
-private $dB;
+protected $dB;
   
   function __construct(){
     $f3=\Base::instance();

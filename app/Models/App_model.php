@@ -56,7 +56,7 @@ class App_model extends Model{
       echo 'RUE DU COMMERCE'.'<br />';
       preg_match('/class="brandNameSpan"\>\s*\<a href=".*?"\>(.*?)\<\/a\>\s*<\/span\>\s*(.*?)\<\/h1\>/is', $homepage, $matchesName);
       preg_match('/class="newPrice"\>\s*(.*?)\<sup\>\s*(.*?)\<\/sup\>/is', $homepage, $matchesPrice);
-      preg_match('/class="ficheProduit_descriptionCourte"\>\s*(.*?)([^<br>]\s*[^<br \/>]*)\<\/div\>/is', $homepage, $matchesDescribe);
+      preg_match('/class="ficheProduit_descriptionCourte"\>\s*(.*?)([^\<br\>][^\<br \/>]*)\<\/div\>/is', $homepage, $matchesDescribe);
       preg_match('/class="photo"\>\s*\<a id="linkPhoto" target="_blank" href="(.*?)"\>/is', $homepage, $matchesPicture);
       $like =file_get_contents("http://graph.facebook.com/?id=".$params['product']);
       $like=json_decode($like);
@@ -64,16 +64,18 @@ class App_model extends Model{
       $price=$matchesPrice[1].$matchesPrice[2];
       $describe=$matchesDescribe[1];
       $picture=$matchesPicture[1];
-
       $tabResult=array('like'=>$like->{'shares'},'nom'=>$nom,'price'=>$price,'describe'=>$describe,'picture'=>$picture);
 
     }
       return $tabResult;
   }
 
-  public function addProduct()
+  public function addProduct($params)
   {
     echo "Produit Ajouté <br />";
+    return $this->dB->exec(
+      array('INSERT INTO article (nom,description,prix,image,lien) VALUES ("lalalala","efefe","10.50","efefef","efef")')
+  );
   }
 }
 ?>
