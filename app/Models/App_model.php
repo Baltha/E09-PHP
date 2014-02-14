@@ -32,8 +32,11 @@ class App_model extends Model{
   
   public function parseProduct($params)
   {
+    $web=new Web;
+    $request=$web->request($params['product']);
 
-    $homepage = file_get_contents($params['product']);
+    $homepage = $request['body'];
+
     $homepage = utf8_encode($homepage); 
 
     //Amazon
