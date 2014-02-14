@@ -2,29 +2,23 @@
 class App_controller extends Controller{
 
   public function __construct(){
+    parent::__construct();
     //$this->tpl=array('sync'=>'main.html');
   }
 
-  
   public function home($f3){
-    $f3->set('SESSION.test', 'testeee');
-    $this->tpl='main.html';
-  }
-  
-  public function loginFb($f3){
-    require_once('api/facebook.php');
 
+    require_once('api/facebook.php');
     $facebook = new Facebook(array(
       'appId'  => '479303535507941',
       'secret' => '2d568c782decb0e86bf9fefb5ec1f16e',
     ));
-
     // récupère l'id facebook
     $f3->set('user', $facebook->getUser());
-    
     if ($f3->get('user')) {
       // vérification si l'id facebook est déjà dans la base
       $f3->set('informations', $this->model->getUserFb(array('id_facebook'=>$f3->get('user'))));
+      var_dump($f3->get('informations'));
       if($f3->get('informations')==false){
         // si pas d'informations on va chercher avec l'api les données
         try {
@@ -35,18 +29,19 @@ class App_controller extends Controller{
           error_log($e);
           $f3->set('user', null);
         }
+      }else{
+        $user=array(
+          'id'=>$f3->get('informations.id_user'),
+          'firstname'=>$f3->get('informations.nom'),
+          'lastname'=>$f3->get('informations.prenom')
+        );
+        // On lance la session, on configure le lien de lougout et redirige vers wishlist
+        $f3->set('SESSION',$user);
+        $f3->set('logoutUrl', $facebook->getLogoutUrl());  
+        $f3->reroute('/wishlist');
       }
     }
-
-    if($f3->get('user')){
-      // si user on va juste afficher le lien de déconnexion
-      $f3->set('logoutUrl', $facebook->getLogoutUrl());
-    } 
-    else{
-      $f3->set('statusUrl', $facebook->getLoginStatusUrl());
-      $f3->set('loginUrl', $facebook->getLoginUrl(array('scope' => 'email, user_birthday')));
-    }
-
+ 
     if($f3->exists('me')){
       // récupération et mise en variable des informations
       $param = array(
@@ -56,6 +51,7 @@ class App_controller extends Controller{
       );
       $response = $facebook->api($param);
       $f3->set('me.pic_small', $response[0]['pic_small']);
+
 
       // envoie en BDD des informations ciblées
       $this->model->addUser(array(
@@ -68,13 +64,52 @@ class App_controller extends Controller{
         'id_facebook'=>$f3->get('user')));
     }
 
-    $this->tpl='facebook_connect.html';
+    $this->tpl['sync']='main.html';
+
+  }
+  
+  public function loginFb($f3){
+    
+  }
+
+  public function login($f3){
+    switch($f3->get('VERB')){
+      case 'GET':
+        $this->tpl['sync']='login.html';
+      break;
+      case 'POST':
+        $auth=$this->model->login(array(
+          'login'=>$f3->get('POST.login'),
+          'password' => $f3->get('POST.password')
+        ));
+        if(!$auth){
+          $f3->set('error', 'Oops , vos identifians sont érronés. Veuillez réessayer');
+          $this->tpl['sync']='login.html';
+        }
+        else{
+          $user=array(
+            'id'=>$auth->id_user,
+            'firstname'=>$auth->prenom,
+            'lastname'=>$auth->nom
+          );
+          $f3->set('SESSION',$user);
+          $f3->reroute('/wishlist');
+        }
+      break;
+    }
+
+
+  }
+
+  public function logout($f3){
+    session_destroy();
+    $f3->reroute('/');
   }
 
   public function inscription($f3){
     var_dump($_SESSION);
     if(!$f3->get('POST'))
-      $this->tpl='inscription.html';
+      $this->tpl['sync']='inscription.html';
     else{
       $f3->set('erreur', array());
 
@@ -125,19 +160,24 @@ class App_controller extends Controller{
             'mail'=>$mail,
             'sexe'=>$sexe
             ));
+
         }
         else
           var_dump($f3->get('erreur'));
       }
       else
         var_dump($f3->get('erreur'));
-      $this->tpl='main.html';
+      $this->tpl['sync']='wishlist.html';
     }
+  }
+
+  public function wishlist($f3){
+    $this->tpl['sync']='wishlist.html';
   }
   
   public function parseProduct($f3){
     $f3->set('product',$this->model->parseProduct(array('product'=>$f3->get('POST.product'))));
-    $this->tpl='partials/contentProduct.html';
+    $this->tpl['sync']='contentProduct.html';
   }
 
   public function addProduct($f3){
@@ -150,10 +190,10 @@ class App_controller extends Controller{
   //   $this->tpl['async']='partials/users.html';
   // }
   
-  // public function getUser($f3){
-  //   $f3->set('user',$this->model->getUser(array('name'=>$f3->get('PARAMS.name'))));
-  //   $this->tpl['async']='partials/user.html';
-  // }
+  public function getUser($f3){
+     $f3->set('user',$this->model->getUser(array('name'=>$f3->get('PARAMS.name'))));
+     $this->tpl['sync']='user.html';
+  }
   
   // public function searchUsers($f3){
   //   $f3->set('users',$this->model->searchUsers(array('keywords'=>$f3->get('POST.name'),'filter'=>$f3->get('POST.filter'))));
@@ -166,4 +206,12 @@ class App_controller extends Controller{
   // }
 
 }
+
+
+
+
+
+
+
+
 ?>

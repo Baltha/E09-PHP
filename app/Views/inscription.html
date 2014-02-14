@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Inscription</title>
-	<link rel="stylesheet" href="">
-</head>
-<body>
+<?php require('header.html');?>
+
 	<form action="inscription" method="post">
 		<p><label for="mail">Mail</label><input type="email" name="mail"/></p>
 		<p><label for="mdp">Mot de passe</label><input type="password" name="mdp"/></p>
@@ -17,5 +10,5 @@
 		<p><label for="Sexe">Sexe</label><input type="text" name="sexe"/></p>
 		<input type="submit">
 	</form>
-</body>
-</html>
+
+<?php require('footer.html');?>

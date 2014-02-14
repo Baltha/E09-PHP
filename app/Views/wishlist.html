@@ -1,0 +1,11 @@
+<?php require('header.html');?>
+    
+    <h1> Bienvenu <?php echo $SESSION['firstname']; ?> </h1>
+    <h2>Wishlist</h2>
+
+    <form method="post" action='product'>
+      <input type='text' name='product'>
+      <input type='submit' value='Add'>
+    </form>
+
+<?php require('footer.html');?>

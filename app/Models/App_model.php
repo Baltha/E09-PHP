@@ -29,6 +29,11 @@ class App_model extends Model{
   public function password($mdp){
     return sha1('4txuadj6'.$mdp.'tx5hcv7f');
   }
+
+  public function login($params){
+    return $this->getMapper('users')->load(array('mail=?',$params['login']));
+
+   }
   
   public function parseProduct($params)
   {

@@ -1,10 +1,7 @@
-<!doctype html>
-<html xmlns:fb="http://www.facebook.com/2008/fbml">
-  <head>
-    <title>Fb connect</title>
-  </head>
-  <body>
-    <h1>Fb connect</h1>
+    
+<?php require('header.html');?>
+
+<h1>Fb connect</h1>
 
     <?php if ($user): ?>
       <a href="<?php echo $logoutUrl; ?>">Logout</a>
@@ -32,5 +29,5 @@
       <strong><em>You are not Connected.</em></strong>
     <?php endif ?>
 
-  </body>
-</html>
+
+<?php require('footer.html');?>
