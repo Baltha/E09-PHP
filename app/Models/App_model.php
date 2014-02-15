@@ -15,7 +15,7 @@ class App_model extends Model{
   }
 
   public function getUser($params){
-    return $this->getMapper('users')->load(array('mail=?', $params['mail']));
+    return $this->getMapper('users')->load(array('id_user=?', $params['id_user']));
   }
 
   public function addUser($params){

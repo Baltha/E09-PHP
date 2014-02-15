@@ -35,8 +35,8 @@ class App_controller extends Controller{
       }else{
         $user=array(
           'id'=>$f3->get('informations->fields.id_user.value'),
-          'firstname'=>$f3->get('informations->fields.nom.value'),
-          'lastname'=>$f3->get('informations->fields.prenom.value')
+          'firstname'=>$f3->get('informations->fields.prenom.value'),
+          'lastname'=>$f3->get('informations->fields.nom.value')
         );
         // On lance la session, on configure le lien de lougout et redirige vers wishlist
         $f3->set('SESSION',$user); 
@@ -62,8 +62,8 @@ class App_controller extends Controller{
 
       // envoie en BDD des informations ciblées
       $this->model->addUser(array(
-        'nom'=>$f3->get('me.first_name'), 
-        'prenom'=>$f3->get('me.last_name'),
+        'nom'=>$f3->get('me.last_name'), 
+        'prenom'=>$f3->get('me.first_name'),
         'naissance'=>date('Y-m-d', strtotime($f3->get('me.birthday'))),
         'mail'=>$f3->get('me.email'), 
         'sexe'=>$f3->get('me.gender'),
@@ -75,9 +75,6 @@ class App_controller extends Controller{
 
   }
   
-  public function loginFb($f3){
-    
-  }
 
   public function login($f3){
     switch($f3->get('VERB')){
@@ -178,17 +175,14 @@ class App_controller extends Controller{
     }
   }
 
-  public function wishlist($f3){
-    require_once('api/facebook.php');
-    $facebook = new Facebook(array(
-      'appId'  => '479303535507941',
-      'secret' => '2d568c782decb0e86bf9fefb5ec1f16e',
-    ));
-
-    $f3->set('logoutUrl', $facebook->getLogoutUrl()); 
+  public function getMyWishlist($f3){
     $this->tpl['sync']='wishlist.html';
-
   }
+  public function getUserWishlist($f3){
+          $f3->set('user',$this->model->getUser(array('id_user'=>$f3->get('PARAMS.id_user'))));
+          $this->tpl['sync']='wishlist.html';  
+  }
+  
   
   public function parseProduct($f3){
     $f3->set('product',$this->model->parseProduct(array('product'=>$f3->get('POST.product'))));
@@ -205,11 +199,7 @@ class App_controller extends Controller{
   //   $this->tpl['async']='partials/users.html';
   // }
   
-  public function getUser($f3){
-     $f3->set('user',$this->model->getUser(array('name'=>$f3->get('PARAMS.name'))));
-     $this->tpl['sync']='user.html';
-  }
-  
+
   // public function searchUsers($f3){
   //   $f3->set('users',$this->model->searchUsers(array('keywords'=>$f3->get('POST.name'),'filter'=>$f3->get('POST.filter'))));
   //   $this->tpl['async']='partials/users.html';

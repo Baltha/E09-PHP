@@ -1,8 +1,13 @@
 <?php require('header.html');?>
     
     <a href="logout/">Logout</a>
-    <h1> Bienvenu <?php echo $SESSION['firstname']; ?> </h1>
-    <h2>Wishlist</h2>
+    <h1> 
+    <?php if(isset($user)): ?>
+		Wishlist de <?php echo $user['fields']['prenom']['value']; ?>
+	<?php else: ?>
+		Bienvenue sur votre wishlist <?php echo $SESSION['firstname']; ?>
+	<?php endif; ?>
+    </h1>
 
     <form method="post" action='product'>
       <input type='text' name='product'>
