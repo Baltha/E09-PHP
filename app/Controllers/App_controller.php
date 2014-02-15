@@ -145,9 +145,14 @@ class App_controller extends Controller{
   }
 
   public function addProduct($f3){
-    $this->tpl='main.html';
-    $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'))));
+    $this->tpl='partials/contentProduct.html';
+    $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$f3->get('SESSION.product'))));
     $f3->set('SESSION.product',array());
+  }
+
+  public function addWishlist($f3){
+     $this->tpl='partials/contentWishlist.html';
+     $wishlist=$this->model->addWishlist();
   }
 
 }
