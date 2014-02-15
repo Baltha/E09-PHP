@@ -3,3 +3,11 @@
   <label>Ajouter un article</label><input type='text' name='product'>
   <input type='submit' value='Parse'>
 </form>
+<?php
+if(isset($allProduct))
+{
+	foreach ($allProduct as $product) {
+		echo $product['nom'].'<br />';	
+	}
+}
+?>
