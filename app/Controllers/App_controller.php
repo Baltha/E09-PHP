@@ -185,19 +185,29 @@ class App_controller extends Controller{
   
   
   public function parseProduct($f3){
+
     $f3->set('product',$this->model->parseProduct(array('product'=>$f3->get('POST.product'))));
     $this->tpl['sync']='contentProduct.html';
+
+    $product=$this->model->parseProduct(array('product'=>$f3->get('POST.product')));
+    $f3->set('ESCAPE',FALSE);
+    $f3->set('product',$product);
+
+    $f3->set('SESSION.product',$product);
+    $this->tpl['sync']='partials/contentProduct.html';
   }
 
   public function addProduct($f3){
-    $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'))));
-    $this->tpl='main.html';
+    $this->tpl['sync']='partials/contentProduct.html';
+    $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$f3->get('SESSION.product'))));
+    $f3->set('SESSION.product',array());
   }
 
-  // public function getUsers($f3){
-  //   $f3->set('users',$this->model->getUsers(array('promo'=>$f3->get('PARAMS.promo'))));
-  //   $this->tpl['async']='partials/users.html';
-  // }
+  public function addWishlist($f3){
+     $this->tpl['sync']='partials/contentWishlist.html';
+     $wishlist=$this->model->addWishlist();
+  }
+  
   
 
   // public function searchUsers($f3){
@@ -209,6 +219,7 @@ class App_controller extends Controller{
   //      $f3->set('status',$this->model->favorite(array('favId'=>$f3->get('PARAMS.favId'),'logId'=>$f3->get('logId'))));
   //     $this->tpl['async']='json/status.json';
   // }
+
 
 }
 

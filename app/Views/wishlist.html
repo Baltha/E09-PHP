@@ -3,15 +3,14 @@
     <a href="logout/">Logout</a>
     <h1> 
     <?php if(isset($user)): ?>
-		Wishlist de <?php echo $user['fields']['prenom']['value']; ?>
+		Wishlists de <?php echo $user['fields']['prenom']['value']; ?>
 	<?php else: ?>
-		Bienvenue sur votre wishlist <?php echo $SESSION['firstname']; ?>
+		Bienvenue sur vos wishlists <?php echo $SESSION['firstname']; ?>
 	<?php endif; ?>
     </h1>
 
-    <form method="post" action='product'>
-      <input type='text' name='product'>
-      <input type='submit' value='Add'>
+    <form method="post" action='newWishlist'>
+      <input type='submit' value='Créer wishlist'>
     </form>
 
 <?php require('footer.html');?>

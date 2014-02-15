@@ -9,9 +9,6 @@ if(isset($product['like']))
 	echo '<p>Nb de Like: '.$product['like'].'</p><br />';
 }
 ?>
-<form method="post" action='addProduct'>
-      <input type='hidden' name='nom' value=''<?php $product['nom'] ?>''>
-      <input type='submit' value='Ajouter Produit'>
-</form>
+<a href='addProduct'>Ajouter Produit</a>
 
 
