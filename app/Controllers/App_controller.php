@@ -13,12 +13,14 @@ class App_controller extends Controller{
       'appId'  => '479303535507941',
       'secret' => '2d568c782decb0e86bf9fefb5ec1f16e',
     ));
+
     // récupère l'id facebook
     $f3->set('user', $facebook->getUser());
+
     if ($f3->get('user')) {
+
       // vérification si l'id facebook est déjà dans la base
       $f3->set('informations', $this->model->getUserFb(array('id_facebook'=>$f3->get('user'))));
-      var_dump($f3->get('informations'));
       if($f3->get('informations')==false){
         // si pas d'informations on va chercher avec l'api les données
         try {
@@ -29,18 +31,23 @@ class App_controller extends Controller{
           error_log($e);
           $f3->set('user', null);
         }
+
       }else{
         $user=array(
-          'id'=>$f3->get('informations.id_user'),
-          'firstname'=>$f3->get('informations.nom'),
-          'lastname'=>$f3->get('informations.prenom')
+          'id'=>$f3->get('informations->fields.id_user.value'),
+          'firstname'=>$f3->get('informations->fields.nom.value'),
+          'lastname'=>$f3->get('informations->fields.prenom.value')
         );
         // On lance la session, on configure le lien de lougout et redirige vers wishlist
-        $f3->set('SESSION',$user);
-        $f3->set('logoutUrl', $facebook->getLogoutUrl());  
+        $f3->set('SESSION',$user); 
         $f3->reroute('/wishlist');
+        
       }
-    }
+    }else{
+       $f3->set('statusUrl', $facebook->getLoginStatusUrl());
+       $f3->set('loginUrl', $facebook->getLoginUrl(array('scope' => 'email, user_birthday')));
+     }
+
  
     if($f3->exists('me')){
       // récupération et mise en variable des informations
@@ -172,7 +179,15 @@ class App_controller extends Controller{
   }
 
   public function wishlist($f3){
+    require_once('api/facebook.php');
+    $facebook = new Facebook(array(
+      'appId'  => '479303535507941',
+      'secret' => '2d568c782decb0e86bf9fefb5ec1f16e',
+    ));
+
+    $f3->set('logoutUrl', $facebook->getLogoutUrl()); 
     $this->tpl['sync']='wishlist.html';
+
   }
   
   public function parseProduct($f3){

@@ -7,7 +7,7 @@ protected $model;
   
   public function __construct(){
     $f3=\Base::instance();
-    if($f3->get('SESSION.id') && ($f3->get('PATTERN')!='/wishlist')){
+    if($f3->get('SESSION.id') && ($f3->get('PATTERN')=='/')){
       $f3->reroute('/wishlist');
     }
   }
