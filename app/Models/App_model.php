@@ -35,7 +35,7 @@ class App_model extends Model{
 
    }
   
-  public function parseProduct($params)
+ public function parseProduct($params)
   {
     $web=new Web;
     $request=$web->request($params['product']);
@@ -82,7 +82,6 @@ class App_model extends Model{
   public function addProduct($params)
   {
 
-    echo "Produit Ajouté <br />";
     if(!isset($params['product']['like']))
     {
       $params['product']['like']=0;
@@ -94,18 +93,14 @@ class App_model extends Model{
                 array(1=>$params['product']['nom'],2=>$params['product']['describe'],3=>$params['product']['price'],4=>$params['product']['picture'],5=>$params['product']['like'],6=>$params['product']['link'])
               )
       );
-   return $f3->set('allProduct',$this->$db->exec('SELECT * FROM article'));
+   $lastId=$this->dB->exec('SELECT LAST_INSERT_ID() AS id From article LIMIT 1');
+   echo $lastId[0]['id'];
+   //Création relation user/article
+   return $lastId[0]['id'];
   }
-  public function addWishlist()
+  public function getProducts()
   {
-    //ICI, l'id_user reste en dur mais il devra prendre celui de la session courante, id_article est nul au début 
-    return  $this->dB->exec(
-      array(
-            'INSERT INTO souhait (id_user,id_article) VALUES (?,?)'),
-      array(
-                array(1=>'1',2=>'')
-              )
-      );
+    return $this->dB->exec('SELECT * FROM article');
   }
 }
 ?>
