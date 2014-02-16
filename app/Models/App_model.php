@@ -17,6 +17,9 @@ class App_model extends Model{
   public function getUser($params){
     return $this->getMapper('users')->load(array('id_user=?', $params['id_user']));
   }
+  public function verifNewUser($params){
+     return $this->getMapper('users')->load(array('mail=?', $params['mail']));
+  }
 
   public function addUser($params){
     $map=$this->getMapper('users');
@@ -26,13 +29,13 @@ class App_model extends Model{
     $map->save();
   }
 
+
   public function password($mdp){
     return sha1('4txuadj6'.$mdp.'tx5hcv7f');
   }
 
   public function login($params){
     return $this->getMapper('users')->load(array('mail=?',$params['login']));
-
    }
   
   public function parseProduct($params)

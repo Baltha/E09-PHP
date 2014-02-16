@@ -101,8 +101,7 @@ class App_controller extends Controller{
         }
       break;
     }
-
-
+    
   }
 
   public function logout($f3){
@@ -111,7 +110,6 @@ class App_controller extends Controller{
   }
 
   public function inscription($f3){
-    var_dump($_SESSION);
     if(!$f3->get('POST'))
       $this->tpl['sync']='inscription.html';
     else{
@@ -155,7 +153,7 @@ class App_controller extends Controller{
       if(empty($f3->get('erreur'))){
         // pas d'erreur on envoie
         // d'abord vérif si l'adresse mail est déjà présente dans la BDD dans ce cas on l'indique
-        if($this->model->getUser(array('mail'=>$mail))==false){
+        if($this->model->verifNewUser(array('mail'=>$mail))==false){
           $this->model->addUser(array(
             'nom'=>$nom,
             'prenom'=>$prenom,
@@ -164,14 +162,14 @@ class App_controller extends Controller{
             'mail'=>$mail,
             'sexe'=>$sexe
             ));
-
+          $f3->reroute('/');
         }
         else
           var_dump($f3->get('erreur'));
       }
       else
         var_dump($f3->get('erreur'));
-      $this->tpl['sync']='wishlist.html';
+      
     }
   }
 
