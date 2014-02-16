@@ -14,6 +14,11 @@ class App_model extends Model{
     return $this->getMapper('users')->load(array('id_facebook=?', $params['id_facebook']));
   }
 
+  // get user id after facebook signin
+  public function getUserInfoAfterSignin($params){
+    return $this->getMapper('users')->load(array('mail=?',$params['mail']));
+  }
+
   public function getUser($params){
     return $this->getMapper('users')->load(array('id_user=?', $params['id_user']));
   }

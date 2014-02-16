@@ -9,4 +9,15 @@
   <link href="public/stylesheet/style.css" rel="stylesheet" type="text/css" />  
 </head>
 <body>
+<header>
 
+<?php if (!isset($SESSION['id'])){ ?>
+
+  <a href="<?php echo $loginUrl; ?>">Login with Facebook</a>
+  <a href="login">Login</a>
+  <a href="inscription">inscription</a>
+<?php }else{ ?>
+  <a href="logout/">Logout</a>
+<?php } ?>
+  
+</header>

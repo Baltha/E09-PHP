@@ -1,4 +1,14 @@
-<?php 
-var_dump($product);
-echo '<p>'.$product['nom'].'</p>'; ?>
+<?php require('header.html');?>
 
+<?php echo '<h3>'.$product['nom'].'</h3> <br />
+<p><b>Prix: '.$product['price'].'</b></p><br />
+'.$product['describe'].'<br />
+<img src='.$product['picture'].'>';
+if(isset($product['like']))
+{
+	echo '<p>Nb de Like: '.$product['like'].'</p><br />';
+}
+?>
+<a href='addProduct'>Ajouter Produit</a>
+
+<?php require('footer.html');?>
