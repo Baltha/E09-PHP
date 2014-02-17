@@ -24,6 +24,8 @@ class App_controller extends Controller{
       if($f3->get('informations')==false){
         // si pas d'informations on va chercher avec l'api les données
         try {
+          // me : informations personnelles
+          // friends : liste des amis du user
           $f3->set('me', $facebook->api('/me'));
           $f3->set('friends', $facebook->api('/me/friends'));
         } 
@@ -115,7 +117,8 @@ class App_controller extends Controller{
   }
 
   public function logout($f3){
-    session_destroy();
+    //session_destroy();
+    $f3->clear('SESSION');
     $f3->reroute('/');
   }
 
