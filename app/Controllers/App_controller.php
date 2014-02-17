@@ -212,10 +212,10 @@ class App_controller extends Controller{
   }
 
   public function addProduct($f3){
-    $this->tpl['sync']='wishlist.html';
     $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$f3->get('SESSION.product'),'id_user'=>$f3->get('SESSION.id'))));
     $f3->set('SESSION.product',array());
     $f3->set('allProduct',$this->model->getProducts(array('id_user'=>$f3->get('SESSION.id'))));
+    $f3->reroute("/wishlist");
   }
 
   // public function searchUsers($f3){

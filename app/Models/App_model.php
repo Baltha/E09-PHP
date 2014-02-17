@@ -114,8 +114,16 @@ class App_model extends Model{
   }
   public function getProducts($params)
   {
-    $souhaits = $this->getMapper('souhait')->load(array('id_user=?',$params['id_user']));
-    return $allproducts = $this->getMapper('article')->load(array('id_article=?',$souhaits['fields']['id_article']['value']));
+    $souhaits = $this->dB->exec(
+      'SELECT * FROM souhait '.
+      'WHERE id_user = '.$params['id_user']
+    );
+
+    $allproducts = array();
+    foreach ($souhaits as $souhait) {
+      array_push($allproducts, $this->getMapper('article')->load(array('id_article=?',$souhait['id_article'])));
+    }
+    return $allproducts;
   }
 }
 ?>
