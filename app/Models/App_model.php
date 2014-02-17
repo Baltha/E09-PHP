@@ -84,7 +84,7 @@ class App_model extends Model{
       $tabResult=array('like'=>$like->{'shares'},'nom'=>$nom,'price'=>$price,'describe'=>$describe,'picture'=>$picture, 'link'=>$params['product']);
 
     }
-      return $tabResult;
+    return $tabResult;
   }
 
   public function addProduct($params)
