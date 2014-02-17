@@ -58,17 +58,47 @@ class App_model extends Model{
       echo 'AMAZON'.'<br />'; 
 
       preg_match('/product\/([^\/]*)/is',$url,$matcheId);
-
-      preg_match('/id="btAsinTitle"\>\s*\<span[^>]*\>\s*([^<]*)\s*/is', $homepage, $matchesName);
-      preg_match('/id="actualPriceValue"\>\s*\<b[^>]*\>EUR ([^<]*)\s*/is', $homepage, $matchesPrice);
-      preg_match('/class="productDescriptionWrapper"\>\s*(.*?)\s*\<div class="emptyClear"/is', $homepage, $matchesDescribe);
-      preg_match('/<img id="main-image-nonjs" src="(.*?)"/is', $homepage, $matchesPicture);
       $id=$matcheId[1];
-      $nom=$matchesName[1];
-      $price=$matchesPrice[1];
-      $price=(float)str_replace(',', '.', $price);
-      $describe=$matchesDescribe[1];
-      $picture=$matchesPicture[1];
+      preg_match('/id="btAsinTitle"\>\s*\<span[^>]*\>\s*([^<]*)\s*/is', $homepage, $matchesName);
+      if(!isset($matchesName[1]))
+      {
+        preg_match('/id="btAsinTitle"\>(.*?)\<\/span\>/is', $homepage, $matchesName);
+      }
+        $nom=$matchesName[1];
+
+      preg_match('/id="actualPriceValue"\>\s*\<b[^>]*\>EUR ([^<]*)\s*/is', $homepage, $matchesPrice); 
+      if(!isset($matchesPrice[1]))
+      {
+        //On est sur un produit Phare d'Amazon, on le traite différement.
+        preg_match('/id="buyingPriceValue"\>\s*\<b[^>]*\>EUR ([^<]*)\s*/is', $homepage, $matchesPrice); 
+      }
+        $price=$matchesPrice[1];
+        $price=(float)str_replace(',', '.', $price);
+
+      preg_match('/class="productDescriptionWrapper"\>\s*(.*?)\s*\<div class="emptyClear"/is', $homepage, $matchesDescribe);
+      
+      if(!isset($matchesDescribe[1]))
+      {
+        preg_match('/id="kindle-feature-bullets-atf"\>\s*(.*?)\s*\<\/div\>/is', $homepage, $matchesDescribe);
+          
+      }
+      if(isset($matchesDescribe[1]))
+      {
+        $describe=$matchesDescribe[1];
+      }
+      else
+      {
+        $describe="Pas de description";
+      }
+        
+      
+      preg_match('/<img id="main-image-nonjs" src="(.*?)"/is', $homepage, $matchesPicture);
+      if(!isset($matchesPicture[1]))
+      {
+        preg_match('/id="kib-ma-container-0" .*?\>\s*<img class="kib-ma kib-image-ma" .*? src="(.*?)" /is', $homepage, $matchesPicture);
+      }
+        $picture=$matchesPicture[1];
+
       $tabResult=array('nom'=>$nom,'price'=>$price,'describe'=>$describe,'picture'=>$picture, 'link'=>$url, 'qid'=>$id);
     }
     //RueDuCommerce
