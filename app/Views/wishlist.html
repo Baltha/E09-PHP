@@ -4,12 +4,25 @@
     <?php if(isset($user)): ?>
 		Wishlists de <?php echo $user['fields']['prenom']['value']; ?>
 	<?php else: ?>
-		Bienvenue sur vos wishlists <?php echo $SESSION['firstname']; ?>
+		Bienvenue sur votre wishlist <?php echo $SESSION['firstname']; ?>
 	<?php endif; ?>
     </h1>
 
-    <form method="post" action='newWishlist'>
-      <input type='submit' value='Créer wishlist'>
+    <form method="post" action='product'>
+      <label>Ajouter un article</label><input type='text' name='product'>
+      <input type='submit' value='Parse'>
     </form>
+    
+    </br>
+    
+    <?php
+    if(isset($allProducts))
+    {
+        foreach ($allProducts as $product) {
+            echo $product['nom'].'<br />';  
+    }
+}
+?>
 
 <?php require('footer.html');?>
+
