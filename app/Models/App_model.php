@@ -52,12 +52,16 @@ class App_model extends Model{
     $homepage = $request['body'];
 
     $homepage = utf8_encode($homepage); 
-    //http://www.amazon.fr/gp/product/B00D2J4D4U/
+   
     if(preg_match('#amazon#',$url))
     {
       echo 'AMAZON'.'<br />'; 
 
       preg_match('/product\/([^\/]*)/is',$url,$matcheId);
+      if(!isset($matcheId[1]))
+      {
+        preg_match('/dp\/([^\/]*)/is',$url,$matcheId);
+      }
       $id=$matcheId[1];
       preg_match('/id="btAsinTitle"\>\s*\<span[^>]*\>\s*([^<]*)\s*/is', $homepage, $matchesName);
       if(!isset($matchesName[1]))
