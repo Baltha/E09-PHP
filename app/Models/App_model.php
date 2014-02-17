@@ -102,13 +102,20 @@ class App_model extends Model{
               )
       );
    $lastId=$this->dB->exec('SELECT LAST_INSERT_ID() AS id From article LIMIT 1');
-   echo $lastId[0]['id'];
-   //Création relation user/article
-   return $lastId[0]['id'];
+   //Création d'un souhait
+   $this->dB->exec(
+      array(
+            'INSERT INTO souhait (id_user,id_article) VALUES (?,?)'),
+      array(
+                array(1=>$params['id_user'],2=>$lastId[0]['id'])
+              )
+      );
+  return $lastId[0]['id'];
   }
-  public function getProducts()
+  public function getProducts($params)
   {
-    return $this->dB->exec('SELECT * FROM article');
+    $souhaits = $this->getMapper('souhait')->load(array('id_user=?',$params['id_user']));
+    return $allproducts = $this->getMapper('article')->load(array('id_article=?',$souhaits['fields']['id_article']['value']));
   }
 }
 ?>

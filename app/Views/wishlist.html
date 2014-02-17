@@ -17,6 +17,7 @@
     
     <?php
     if(isset($allProducts))
+        print_r($allProducts['nom']);
     {
         foreach ($allProducts as $product) {
             echo $product['nom'].'<br />';  
