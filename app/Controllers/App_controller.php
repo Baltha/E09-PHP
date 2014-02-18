@@ -218,6 +218,10 @@ class App_controller extends Controller{
     $f3->reroute("/wishlist");
   }
 
+  public function deleteProduct($f3){
+   $f3->set('OneProduct',$this->model->deleteProduct(array('id_souhait'=>$f3->get('PARAMS.id_souhait'))));
+   $f3->reroute("/wishlist");
+  }
   // public function searchUsers($f3){
   //   $f3->set('users',$this->model->searchUsers(array('keywords'=>$f3->get('POST.name'),'filter'=>$f3->get('POST.filter'))));
   //   $this->tpl['async']='partials/users.html';
