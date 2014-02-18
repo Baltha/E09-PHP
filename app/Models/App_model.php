@@ -173,17 +173,13 @@ class App_model extends Model{
   }
 
   public function getProducts($params)
+  {  
+     $allproducts=$this->dB->exec('SELECT * FROM souhait s LEFT JOIN article a ON s.id_article=a.id_article WHERE s.id_user='.$params['id_user']);
+     return $allproducts;
+  }
+  public function deleteProduct($params)
   {
-    $souhaits = $this->dB->exec(
-      'SELECT * FROM souhait '.
-      'WHERE id_user = '.$params['id_user']
-    );
-
-    $allproducts = array();
-    foreach ($souhaits as $souhait) {
-      array_push($allproducts, $this->getMapper('article')->load(array('id_article=?',$souhait['id_article'])));
-    }
-    return $allproducts;
+    return $this->dB->exec('DELETE FROM souhait WHERE id_souhait='.$params['id_souhait']);
   }
 }
 ?>
