@@ -6,26 +6,34 @@
   
   <title>GiftMe</title>
   <meta name="description" content="">
-  <link href="public/stylesheet/style.css" rel="stylesheet" type="text/css" />  
+  <link href="public/stylesheet/style.css" rel="stylesheet" type="text/css" /> 
+  <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Exo+2:400,100,100italic,200,200italic,300italic,300,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<header>
+<div id="globalContainer">
+	<?php if (!isset($SESSION['id'])){ ?>
+	<header class="home">
+		<?php if(isset($error)): ?> 
+			<div class="error"><?php echo $error; ?></div>
+		<?php endif;?>  
+		<form action="login/" id="login" method="post">
+			<input type="text" name="login" placeholder="login" />
+			<input type="password" name="password" placeholder="password" />
+			<input type="submit" value="Sign in"/>
+		</form>
 
-<?php if (!isset($SESSION['id'])){ ?>
+	 	<a href="<?php echo $loginUrl; ?>">Login with Facebook</a>
+	</header>
 
-	<?php if(isset($error)): ?> 
-		<div class="error"><?php echo $error; ?></div>
-	<?php endif;?>  
-	<form action="login/" id="login" method="post">
-		<input type="text" name="login" placeholder="login" />
-		<input type="password" name="password" placeholder="password" />
-		<input type="submit" value="Sign in"/>
-	</form>
-
- 	<a href="<?php echo $loginUrl; ?>">Login with Facebook</a>
-
-<?php }else{ ?>
-	<a href="logout/">Logout</a>
-<?php } ?>
+	<?php }else{ ?>
+		<?php require("leftSidebar.html"); ?>
+		<div id="mainContent">
+			<header>
+				<p class="messageBonjour"><?php echo 'Bonjour '.$SESSION['firstname'].'!'; ?></p>
+				<a class="logo" href="#">Gift<span>Me</span> </a>
+				<a class="logout" href="logout/">Logout</a>
+			</header>
+	<?php } ?>
   
-</header>

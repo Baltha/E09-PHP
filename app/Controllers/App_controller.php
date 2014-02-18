@@ -7,7 +7,7 @@ class App_controller extends Controller{
   }
 
   public function home($f3){
-
+    
     require_once('api/facebook.php');
     $facebook = new Facebook(array(
       'appId'  => '479303535507941',
