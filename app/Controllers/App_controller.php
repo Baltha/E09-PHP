@@ -38,7 +38,8 @@ class App_controller extends Controller{
         $user=array(
           'id'=>$f3->get('informations->fields.id_user.value'),
           'firstname'=>$f3->get('informations->fields.prenom.value'),
-          'lastname'=>$f3->get('informations->fields.nom.value')
+          'lastname'=>$f3->get('informations->fields.nom.value'),
+          'profil_picture'=>$f3->get('informations->fields.photo.value')
         );
         // On lance la session, on configure le lien de lougout et redirige vers wishlist
         $f3->set('SESSION',$user); 
@@ -84,7 +85,8 @@ class App_controller extends Controller{
         $user=array(
           'id'=>$auth->id_user,
           'firstname'=>$auth->prenom,
-          'lastname'=>$auth->nom
+          'lastname'=>$auth->nom,
+          'profil_picture'=>$auth->photo
         );
         $f3->set('SESSION',$user);
         $f3->reroute('/wishlist');
@@ -179,7 +181,7 @@ class App_controller extends Controller{
           $user=array(
             'id'=>$auth->id_user,
             'firstname'=>$auth->prenom,
-            'lastname'=>$auth->nom
+            'lastname'=>$auth->nom,
           );
           $f3->set('SESSION',$user);
           $f3->reroute('/wishlist');

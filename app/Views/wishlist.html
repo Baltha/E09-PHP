@@ -1,28 +1,28 @@
 <?php require('header.html');?>
-    <h1> 
+    <div id="bannerTop">
     <?php if(isset($user)): ?>
+        <h1>
 		Wishlists de <?php echo $user['fields']['prenom']['value']; ?>
-	<?php endif; ?>
-    </h1>
-
-    <form method="post" action='product'>
-      <label>Ajouter un article</label><input type='text' name='product'>
-      <input type='submit' value='Parse'>
-    </form>
-    
-    </br>
-    
-    <?php
-    if(isset($allProducts))
-    {
-        foreach ($allProducts as $product) { ?>
-            <img src="<?php echo $product['image'] ?>" alt=""> </br>
-            <?php echo $product['nom'].'<br />';  ?>
-            <?php echo 'prix:'.$product['prix'].'<br /> <br />';  ?>
-            <?php echo '<a href="./deleteProduct/'.$product['id_souhait'].'">SUPPRIMER</a><br />';?>
-        <?php } 
-}
-?>
-
+        </h1>
+	<?php else: ?>  
+        <form method="post" action='product'>
+          <label>Ajouter un article</label><input type='text' name='product'>
+          <input type='submit' value='Parse'>
+        </form>
+    <?php endif; ?>
+    </div>
+    <div id="content">
+        <?php
+        if(isset($allProducts))
+        {
+            foreach ($allProducts as $product) { ?>
+                <img src="<?php echo $product['image'] ?>" alt=""> </br>
+                <?php echo $product['nom'].'<br />';  ?>
+                <?php echo 'prix:'.$product['prix'].'<br /> <br />';  ?>
+                <?php echo '<a class="delete" href="./deleteProduct/'.$product['id_souhait'].'">SUPPRIMER</a><br />';?>
+            <?php } 
+        }
+        ?>
+    </div>
 <?php require('footer.html');?>
 

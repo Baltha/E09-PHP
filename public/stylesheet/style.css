@@ -73,6 +73,8 @@ html,body{
 	width: 100%;
 	height: 100%;
 	font-size: 62.5%;
+	font-family: "Exo 2", "verdana", "sans-serif";
+	background: #f0f0f0;
 }
 
 
@@ -82,19 +84,45 @@ header{
 	height: 50px;
 	background: #222222;
 	border-left: 1px solid #434343;
+	display: table;
+	width: 100%;
 	 -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
 
 .messageBonjour{
-	color:#fff;
-	display: block;
-	float: left;
+	color:#f0f0f0;
+	display: table-cell;
+	width: 33.33%;
+	font-size: 1.5rem;
+	padding-top: 17px;
+	padding-left: 20px;
 }
 .logo{
 	margin-left: 30%;
+	display: table-cell;
+	width: 33.33%;
+	text-align: center;
+	color:#f0f0f0;
+	font-size: 2.2rem;
+	font-weight: 300;
+	font-style: italic;
+	text-decoration: none;
+
 }
-.logout{
+.logo span{
+	font-weight: 600;
+	font-style: italic;
+}
+#logout{
+	display: table-cell;
+	width: 33.33%;
+}
+#logout a{
 	float: right;
+	font-size: 1.5rem;
+	color:#f0f0f0;
+	text-decoration: none;
+	margin-right: 20px;
 }
 
 
@@ -105,21 +133,48 @@ header{
 #leftSidebar{
 	height: 100%;
 	background: #222222;
-	width: 300px;
-	display: table-cell;
+	width: 280px;
+	position: absolute;
+	top:0;
+	left: 0;
+}
+
+#leftSidebar .name{
+	font-size: 3.0rem;
+	font-family: "Varela Round";
+	color:#f0f0f0;
+	text-align: center;
+}
+
+#leftSidebar .profilPicture{
+	width: 100px;
+	height: auto;
+	overflow: hidden;
+	display: block;
+	margin: 30px auto;
 }
 
   /* 5.0 - Content */
   	  /* 5.1 - Struture content */
 
-	  #globalContainer{
-	  	display: table;
-	  	width: 100%;
-	  }
+
   	  #mainContent{	
 		width: auto;
-		display: table-cell;
+		padding-left: 280px;
   	  }
+	
+	  #bannerTop{
+	  	height: 100px;
+	  	width: 100%;
+	  }
+
+	  #content{
+	  	width: 100%;
+	  	height: auto;
+	  	background: url("../images/pageBackground.png") repeat;
+	  	padding: 50px;
+
+	  }
 
 
 
