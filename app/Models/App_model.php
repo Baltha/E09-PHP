@@ -34,7 +34,6 @@ class App_model extends Model{
     $map->save();
   }
 
-
   public function password($mdp){
     return sha1('4txuadj6'.$mdp.'tx5hcv7f');
   }

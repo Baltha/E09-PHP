@@ -162,6 +162,21 @@ class App_controller extends Controller{
       else
         $f3->push('erreur', 'Sexe manquant');
 
+      if($f3->exists('POST.adresse'))
+        $adresse=$f3->clean($f3->get('POST.adresse'));
+      else
+        $f3->push('erreur', 'Adresse manquante');
+
+      if($f3->exists('POST.ville'))
+        $ville=$f3->clean($f3->get('POST.ville'));
+      else
+        $f3->push('erreur', 'Ville manquante');
+
+      if($f3->exists('POST.cp'))
+        $cp=$f3->clean($f3->get('POST.cp'));
+      else
+        $f3->push('erreur', 'Code postal manquant');
+
       if(empty($f3->get('erreur'))){
         // pas d'erreur on envoie
         // d'abord vérif si l'adresse mail est déjà présente dans la BDD dans ce cas on l'indique
@@ -172,7 +187,10 @@ class App_controller extends Controller{
             'mdp'=>$this->model->password($mdp),
             'naissance'=>$naissance,
             'mail'=>$mail,
-            'sexe'=>$sexe
+            'sexe'=>$sexe,
+            'adresse'=>$adresse,
+            'ville'=>$ville,
+            'code_postal'=>$cp
           ));
 
           $auth=$this->model->getUserInfoAfterSignin(array(
@@ -182,6 +200,7 @@ class App_controller extends Controller{
             'id'=>$auth->id_user,
             'firstname'=>$auth->prenom,
             'lastname'=>$auth->nom,
+            'ville'=>$auth->ville
           );
           $f3->set('SESSION',$user);
           $f3->reroute('/wishlist');

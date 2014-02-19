@@ -1,4 +1,6 @@
 <aside id="leftSidebar">
-	<img class="profilPicture" src="<?php echo $SESSION['profil_picture'] ?>" alt=""> 
+	<?php if(isset($SESSION['profil_picture'])): ?>
+		<img class="profilPicture" src="<?php echo $SESSION['profil_picture'] ?>" alt=""> 
+	<?php endif; ?>
 	<p class="name"><?php echo $SESSION['firstname'].' '.$SESSION['lastname'] ?></p>
 </aside>
