@@ -56,11 +56,11 @@ class App_controller extends Controller{
       // récupération et mise en variable des informations
       $param = array(
         'method' => 'fql.query',
-        'query' => 'SELECT pic_small FROM user WHERE uid='.$f3->get('user'),
+        'query' => 'SELECT pic FROM user WHERE uid='.$f3->get('user'),
         'callback' => ''
       );
       $response = $facebook->api($param);
-      $f3->set('me.pic_small', $response[0]['pic_small']);
+      $f3->set('me.pic', $response[0]['pic']);
 
 
       // envoie en BDD des informations ciblées
@@ -70,7 +70,7 @@ class App_controller extends Controller{
         'naissance'=>date('Y-m-d', strtotime($f3->get('me.birthday'))),
         'mail'=>$f3->get('me.email'), 
         'sexe'=>$f3->get('me.gender'),
-        'photo'=>$f3->get('me.pic_small'),
+        'photo'=>$f3->get('me.pic'),
         'id_facebook'=>$f3->get('user')));
 
       $auth=$this->model->getUserInfoAfterSignin(array(
