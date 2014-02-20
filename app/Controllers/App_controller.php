@@ -3,6 +3,7 @@ class App_controller extends Controller{
 
   public function __construct(){
     parent::__construct();
+    $this->tpl=array('sync'=>'wishlist.html');
   }
 
   public function home($f3){
@@ -71,7 +72,6 @@ class App_controller extends Controller{
         'sexe'=>$f3->get('me.gender'),
         'photo'=>$f3->get('me.pic'),
         'id_facebook'=>$f3->get('user')));
-
       $auth=$this->model->getUserInfoAfterSignin(array(
           'mail'=>$f3->get('me.email')
       ));
@@ -87,6 +87,7 @@ class App_controller extends Controller{
           'lastname'=>$auth->nom,
           'profil_picture'=>$auth->photo
         );
+
         $f3->set('SESSION',$user);
         $f3->reroute('/wishlist');
       }
@@ -226,6 +227,8 @@ class App_controller extends Controller{
         var_dump($f3->get('erreur'));
   }
 
+
+
   public function getMyWishlist($f3){
     $this->tpl['sync']='wishlist.html';
     $f3->set('allProducts',$this->model->getProducts(array('id_user'=>$f3->get('SESSION.id'))));
@@ -237,9 +240,8 @@ class App_controller extends Controller{
     $f3->set('tags',$this->model->getUserTags(array('id_user'=>$f3->get('SESSION.id'))));
   }
   public function getUserWishlist($f3){
-
           $f3->set('user',$this->model->getUser(array('id_user'=>$f3->get('PARAMS.id_user'))));
-          $this->tpl['sync']='wishlist.html';  
+          $this->tpl['async']='wishlist.html';  
   }
   
   
@@ -251,12 +253,13 @@ class App_controller extends Controller{
     $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$f3->get('SESSION.product'),'tag'=>$f3->get('POST.tag'),'id_user'=>$f3->get('SESSION.id'))));
     $f3->set('SESSION.product',array());
     $f3->set('allProduct',$this->model->getProducts(array('id_user'=>$f3->get('SESSION.id'))));
+    $this->tpl['async']='partials/newItem.html';
     $f3->reroute("/wishlist");
   }
 
   public function deleteProduct($f3){
    $f3->set('OneProduct',$this->model->deleteProduct(array('id_souhait'=>$f3->get('PARAMS.id_souhait'))));
-   $f3->reroute("/wishlist");
+   $this->tpl['async']='partials/newItem.html';
   }
 
   public function newTag($f3){
