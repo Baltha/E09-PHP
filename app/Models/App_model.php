@@ -34,6 +34,14 @@ class App_model extends Model{
     $map->save();
   }
 
+  public function addDefaultTag($id_user){
+    $insert=$this->getMapper('tag');
+    $insert->id_user=$id_user;
+    $insert->nom='Tous';
+    $insert->date_tag=date('Y-m-d H:i:s');
+    $insert->save();
+  }
+
   public function password($mdp){
     return sha1('4txuadj6'.$mdp.'tx5hcv7f');
   }
@@ -212,6 +220,15 @@ class App_model extends Model{
   public function deleteProduct($params)
   {
     return $this->dB->exec('DELETE FROM souhait WHERE id_souhait='.$params['id_souhait']);
+  }
+
+  public function createContrib($params){
+    $page=$this->getMapper('users');
+    foreach($params as $key => $param){
+      $page->$key=$param;
+    }
+    $page->save();
+
   }
 
 
