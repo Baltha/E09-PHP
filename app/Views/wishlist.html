@@ -6,8 +6,9 @@
         </h1>
 	<?php else: ?>  
         <form method="post" action='product'>
-          <label>Ajouter un article</label><input type='text' name='product'>
-          <select name="Categorie" id="category">
+          <label>Ajouter un article</label>
+          <input type='text' name='product'>
+          <select name="tag" id="category">
             <option value="all">Pas de catégorie</option>
            <?php if(isset($tags))
           {
@@ -40,7 +41,7 @@
                     }?>
                     <div class="wish <?php if(isset($productTags[$i][0]['nom'])){ echo $productTags[$i][0]['nom'];} ?> " >
                         <img src="<?php echo $product['image'] ?>" alt="">
-                        <p class="wish_name"><?php echo $productName; ?></p>
+                        <p class="wish_name"><a href="<?php echo $product['lien']; ?>" target="_blank"><?php echo $productName; ?></a></p>
                         <p class="wish_prix"><?php echo $product['prix']."€";  ?></p>
                         <a class="delete" href="./deleteProduct/<?php echo $product['id_souhait'];?>">SUPPRIMER</a>
                     </div>

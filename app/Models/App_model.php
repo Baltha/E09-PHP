@@ -54,7 +54,6 @@ class App_model extends Model{
    
     if(preg_match('#amazon#',$url))
     {
-      echo 'AMAZON'.'<br />'; 
 
       preg_match('/product\/([^\/]*)/is',$url,$matcheId);
       if(!isset($matcheId[1]))
@@ -107,7 +106,6 @@ class App_model extends Model{
     //RueDuCommerce
     else if(preg_match('#rueducommerce#', $url))
     {
-      echo 'RUE DU COMMERCE'.'<br />';
       preg_match('/mpid:([^#]*)/is',$url,$matcheId);
       preg_match('/class="brandNameSpan"\>\s*\<a href=".*?"\>(.*?)\<\/a\>\s*<\/span\>\s*(.*?)\<\/h1\>/is', $homepage, $matchesName);
       preg_match('/class="newPrice"\>\s*(.*?)\<sup\>&euro;(.*?)\<\/sup\>/is', $homepage, $matchesPrice);
@@ -151,13 +149,13 @@ class App_model extends Model{
                   array(1=>$params['product']['nom'],2=>$params['product']['describe'],3=>$params['product']['price'],4=>$params['product']['picture'],5=>$params['product']['like'],6=>$params['product']['link'],7=>$params['product']['qid'])
                 )
         );
-     $lastId=$this->dB->exec('SELECT LAST_INSERT_ID() AS id From article LIMIT 1');
-     $lastId=$lastId[0]['id'];
+     $lastIdArticle=$this->dB->exec('SELECT LAST_INSERT_ID() AS id From article LIMIT 1');
+     $lastIdArticle=$lastIdArticle[0]['id'];
     }
     else
     {
       //Le produit existe déja en base, n'oublions pas de créer le souhait quand même, récupérations de l'id produit
-      $lastId=$testQid[0]['id'];
+      $lastIdArticle=$testQid[0]['id'];
     }
    //Création d'un souhait
    
@@ -165,10 +163,33 @@ class App_model extends Model{
       array(
             'INSERT INTO souhait (id_user,id_article) VALUES (?,?)'),
       array(
-                array(1=>$params['id_user'],2=>$lastId)
+                array(1=>$params['id_user'],2=>$lastIdArticle)
               )
       );
-      return $lastId;
+
+      $lastIdSouhait=$this->dB->exec('SELECT LAST_INSERT_ID() AS id_souhait From souhait LIMIT 1');
+      $lastIdSouhait=$lastIdSouhait[0]['id_souhait'];
+
+   // Ajout du tag
+    $idTag = $this->getMapper('tag')->load(array('nom=? && user_id=?', $params['tag'], $params['id_user']));
+    $idTag = $idTag["fields"]["id_tag"]["value"];
+    $this->dB->exec(
+      array(
+            'INSERT INTO appartenance (id_souhait,id_tag) VALUES (?,?)'),
+      array(
+                array(1=>$lastIdSouhait,2=>$idTag)
+           )
+    );
+
+    return $lastIdArticle;
+  }
+
+  public function addTag($params){
+    $map=$this->getMapper('tag');
+    foreach($params as $key => $param){
+      $map->$key=$param;
+    }
+    $map->save();
   }
 
   public function getProducts($params)

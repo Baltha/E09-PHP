@@ -71,7 +71,7 @@ html,body{
 	height: 100%;
 	font-size: 62.5%;
 	font-family: "Exo 2", "verdana", "sans-serif";
-	background: #f0f0f0;
+	background: url("../images/pageBackground.png") repeat;
 }
 
 .clear{
@@ -167,12 +167,12 @@ header{
 	  #bannerTop{
 	  	height: 100px;
 	  	width: 100%;
+	  	background: #f0f0f0;
 	  }
 
 	  #content{
 		width: auto;
 	  	height: auto;
-	  	background: url("../images/pageBackground.png") repeat;
 	  	padding: 50px;
 	  }
 
@@ -203,11 +203,12 @@ header{
 	  	position: relative;
 	  }
 	  
-	  .wish .wish_name{
+	  .wish .wish_name a{
 	  	font-family: "Exo 2", "verdana", "sans-serif";
 	  	font-size: 1.6rem;
 	  	color: #222;
 	  	padding: 10px;
+	  	text-decoration: none;
 	  }
 
 	  .wish .delete{
