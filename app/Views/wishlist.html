@@ -5,11 +5,10 @@
 		Wishlists de <?php echo $user['fields']['prenom']['value']; ?>
         </h1>
 	<?php else: ?>  
-        <form method="post" action='product' onsubmit="addProduct()">
+        <form method="post" action='product'>
           <label>Ajouter un article</label>
           <input type='text' name='product'>
           <select name="tag" id="category">
-            <option value="all">Pas de catégorie</option>
            <?php if(isset($tags))
           {
               foreach ($tags as $tag) { ?>

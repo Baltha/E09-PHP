@@ -25,7 +25,6 @@ $(".delete").click(function(){
 });
 
 function addProduct(){
-	alert("coucou");
 	$.ajax({
 		url:"partials/addProduct"
 	})

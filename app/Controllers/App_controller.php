@@ -3,7 +3,6 @@ class App_controller extends Controller{
 
   public function __construct(){
     parent::__construct();
-    $this->tpl=array('sync'=>'wishlist.html');
   }
 
   public function home($f3){
@@ -227,8 +226,6 @@ class App_controller extends Controller{
         var_dump($f3->get('erreur'));
   }
 
-
-
   public function getMyWishlist($f3){
     $this->tpl['sync']='wishlist.html';
     $f3->set('allProducts',$this->model->getProducts(array('id_user'=>$f3->get('SESSION.id'))));
@@ -241,7 +238,7 @@ class App_controller extends Controller{
   }
   public function getUserWishlist($f3){
           $f3->set('user',$this->model->getUser(array('id_user'=>$f3->get('PARAMS.id_user'))));
-          $this->tpl['async']='wishlist.html';  
+          $this->tpl['sync']='wishlist.html';  
   }
   
   
@@ -259,7 +256,6 @@ class App_controller extends Controller{
 
   public function deleteProduct($f3){
    $f3->set('OneProduct',$this->model->deleteProduct(array('id_souhait'=>$f3->get('PARAMS.id_souhait'))));
-   $this->tpl['async']='partials/newItem.html';
   }
 
   public function newTag($f3){
