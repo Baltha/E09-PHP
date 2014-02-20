@@ -37,7 +37,7 @@ class App_model extends Model{
   public function addDefaultTag($id_user){
     $insert=$this->getMapper('tag');
     $insert->id_user=$id_user;
-    $insert->nom='Tous';
+    $insert->nom='Toutes';
     $insert->date_tag=date('Y-m-d H:i:s');
     $insert->save();
   }
