@@ -5,7 +5,7 @@
 		Wishlists de <?php echo $user['fields']['prenom']['value']; ?>
         </h1>
 	<?php else: ?>  
-        <form method="post" action='product'>
+        <form method="post" action='product' onsubmit="addProduct()">
           <label>Ajouter un article</label>
           <input type='text' name='product'>
           <select name="tag" id="category">

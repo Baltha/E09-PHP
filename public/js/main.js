@@ -20,6 +20,20 @@ $('#tags a').click(function(){
   return false;
 });
 
+$(".delete").click(function(){
+	$container.isotope( 'remove', $(this).parent());
+});
+
+function addProduct(){
+	alert("coucou");
+	$.ajax({
+		url:"partials/addProduct"
+	})
+	.success(function(data){
+		$('body').html(data);
+	});
+}
+
 
 //.Wish Hover
 
