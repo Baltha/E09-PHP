@@ -107,6 +107,7 @@ class App_model extends Model{
     else if(preg_match('#rueducommerce#', $url))
     {
       preg_match('/mpid:([^#]*)/is',$url,$matcheId);
+      preg_match('/moid:([^#]*)/is',$url,$matcheId);
       preg_match('/class="brandNameSpan"\>\s*\<a href=".*?"\>(.*?)\<\/a\>\s*<\/span\>\s*(.*?)\<\/h1\>/is', $homepage, $matchesName);
       preg_match('/class="newPrice"\>\s*(.*?)\<sup\>&euro;(.*?)\<\/sup\>/is', $homepage, $matchesPrice);
       preg_match('/class="ficheProduit_descriptionCourte"\>\s*(.*?)([^\<br\>][^\<br \/>]*)\<\/div\>/is', $homepage, $matchesDescribe);
