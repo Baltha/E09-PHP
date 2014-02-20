@@ -219,7 +219,8 @@ class App_model extends Model{
 
   public function deleteProduct($params)
   {
-    return $this->dB->exec('DELETE FROM souhait WHERE id_souhait='.$params['id_souhait']);
+    $this->dB->exec('DELETE FROM souhait WHERE id_souhait='.$params['id_souhait']);
+    return '1';
   }
 
   public function createContrib($params){

@@ -42,7 +42,7 @@
                         <img src="<?php echo $product['image'] ?>" alt="">
                         <p class="wish_name"><a href="<?php echo $product['lien']; ?>" target="_blank"><?php echo $productName; ?></a></p>
                         <p class="wish_prix"><?php echo $product['prix']."€";  ?></p>
-                        <a class="delete" href="./deleteProduct/<?php echo $product['id_souhait'];?>">SUPPRIMER</a>
+                        <a class="delete" href="deleteProduct/<?php echo $product['id_souhait'];?>">SUPPRIMER</a>
                     </div>
                 <?php } 
             }
