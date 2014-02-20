@@ -88,9 +88,12 @@ class App_controller extends Controller{
         );
 
         $f3->set('SESSION',$user);
+        $this->model->addDefaultTag($auth->id_user);
         $f3->reroute('/wishlist');
       }
     }
+
+
 
     $this->tpl['sync']='main.html';
 
@@ -217,6 +220,7 @@ class App_controller extends Controller{
             'profil_picture'=>$auth->photo
           );
           $f3->set('SESSION',$user);
+          $this->model->addDefaultTag($auth->id_user);
           $f3->reroute("/wishlist");
         }
         else
