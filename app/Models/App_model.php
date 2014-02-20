@@ -191,5 +191,7 @@ class App_model extends Model{
   {
     return $this->dB->exec('DELETE FROM souhait WHERE id_souhait='.$params['id_souhait']);
   }
+
+
 }
 ?>
