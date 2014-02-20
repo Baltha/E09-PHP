@@ -7,16 +7,17 @@
 	<?php else: ?>  
         <form method="post" action='product'>
           <label>Ajouter un article</label><input type='text' name='product'>
-          <input type='submit' value='Ajouter'>
-          <?php
-          if(isset($tags))
+          <select name="Categorie" id="category">
+            <option value="all">Pas de catégorie</option>
+           <?php if(isset($tags))
           {
               foreach ($tags as $tag) { ?>
-                  <?php echo $tag['nom']." :";?><input type="checkbox" value="<?php echo $tag['nom'];?>">
+                <option  value="<?php echo $tag['nom'];?>"><?php echo $tag['nom'];?> </option>
               <?php } 
           }
           ?> 
-
+          </select>
+          <input type='submit' value='Ajouter'>
         </form>
 
         <form method="post" action='newTag'>
@@ -31,13 +32,13 @@
             <?php
             if(isset($allProducts))
             {
-                foreach ($allProducts as $product) { ?>
+                foreach ($allProducts as $i => $product) { ?>
                     <?php $productName = $product['nom'];
                     if(strlen($productName) > 50){
                         $productName = substr($productName, 0, 50);
                         $productName = $productName."...";
                     }?>
-                    <div class="wish">
+                    <div class="wish <?php if(isset($productTags[$i][0]['nom'])){ echo $productTags[$i][0]['nom'];} ?> " >
                         <img src="<?php echo $product['image'] ?>" alt="">
                         <p class="wish_name"><?php echo $productName; ?></p>
                         <p class="wish_prix"><?php echo $product['prix']."€";  ?></p>
@@ -50,12 +51,13 @@
         </div>
         <div class="clear"></div>
         <ul id="tags">
+            <li><a href="#" data-filter="*">ALL</a></li>
         
            <?php
             if(isset($tags))
             {
                 foreach ($tags as $tag) { ?>
-                    <li><a href=""><?php echo $tag['nom'];?></a></li>
+                    <li><a href="#" data-filter="<?php echo ".".$tag['nom'];?>"><?php echo $tag['nom'];?></a></li>
                 <?php } 
             }
             ?> 

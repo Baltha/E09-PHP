@@ -94,28 +94,29 @@ header{
 	display: table-cell;
 	width: 33.33%;
 	font-size: 1.5rem;
-	padding-top: 17px;
+	vertical-align: middle;
 	padding-left: 20px;
 }
 .logo{
-	margin-left: 30%;
 	display: table-cell;
 	width: 33.33%;
 	text-align: center;
 	color:#f0f0f0;
 	font-size: 2.2rem;
-	font-weight: 300;
+	font-weight: 200;
 	font-style: italic;
 	text-decoration: none;
+	vertical-align: middle;
 
 }
 .logo span{
-	font-weight: 600;
+	font-weight: 300;
 	font-style: italic;
 }
 #logout{
 	display: table-cell;
 	width: 33.33%;
+	vertical-align: middle;
 }
 #logout a{
 	float: right;

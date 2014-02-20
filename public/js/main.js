@@ -14,6 +14,12 @@ $container.isotope({
   layoutMode: 'fitRows'
 });
 
+$('#tags a').click(function(){
+  var selector = $(this).attr('data-filter');
+  $container.isotope({ filter: selector });
+  return false;
+});
+
 
 //.Wish Hover
 

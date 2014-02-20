@@ -231,7 +231,12 @@ class App_controller extends Controller{
   public function getMyWishlist($f3){
     $this->tpl['sync']='wishlist.html';
     $f3->set('allProducts',$this->model->getProducts(array('id_user'=>$f3->get('SESSION.id'))));
-    $f3->set('tags',$this->model->getTags(array('id_user'=>$f3->get('SESSION.id'))));
+    $productTags = array();
+    foreach ($f3->get('allProducts') as $i => $product) {
+      $productTags[$i] = $this->model->getProductTags(array('id_souhait'=>$product['id_souhait']));
+    }
+    $f3->set('productTags' , $productTags);
+    $f3->set('tags',$this->model->getUserTags(array('id_user'=>$f3->get('SESSION.id'))));
   }
   public function getUserWishlist($f3){
 
