@@ -3,7 +3,6 @@ class App_controller extends Controller{
 
   public function __construct(){
     parent::__construct();
-    //$this->tpl=array('sync'=>'main.html');
   }
 
   public function home($f3){
@@ -96,7 +95,6 @@ class App_controller extends Controller{
     $this->tpl['sync']='main.html';
 
   }
-  
 
   public function login($f3){
     $auth=$this->model->login(array(
@@ -250,7 +248,7 @@ class App_controller extends Controller{
     $f3->set('ESCAPE',FALSE);
     $f3->set('product',$product);
     $f3->set('SESSION.product',$product);
-    $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$f3->get('SESSION.product'),'id_user'=>$f3->get('SESSION.id'))));
+    $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$f3->get('SESSION.product'),'tag'=>$f3->get('POST.tag'),'id_user'=>$f3->get('SESSION.id'))));
     $f3->set('SESSION.product',array());
     $f3->set('allProduct',$this->model->getProducts(array('id_user'=>$f3->get('SESSION.id'))));
     $f3->reroute("/wishlist");
@@ -260,6 +258,14 @@ class App_controller extends Controller{
    $f3->set('OneProduct',$this->model->deleteProduct(array('id_souhait'=>$f3->get('PARAMS.id_souhait'))));
    $f3->reroute("/wishlist");
   }
+
+  public function newTag($f3){
+    $date = date('Y-m-d H:i:s');
+    $f3->set('product',$this->model->addTag(array('nom'=>$f3->get('POST.tag'),'id_user'=>$f3->get('SESSION.id'),'date_tag'=>$date)));
+    $f3->reroute("/wishlist");
+  }
+
+
   // public function searchUsers($f3){
   //   $f3->set('users',$this->model->searchUsers(array('keywords'=>$f3->get('POST.name'),'filter'=>$f3->get('POST.filter'))));
   //   $this->tpl['async']='partials/users.html';
