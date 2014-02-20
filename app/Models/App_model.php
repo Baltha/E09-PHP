@@ -172,7 +172,7 @@ class App_model extends Model{
       $lastIdSouhait=$lastIdSouhait[0]['id_souhait'];
 
    // Ajout du tag
-    $idTag = $this->getMapper('tag')->load(array('nom=? && user_id=?', $params['tag'], $params['id_user']));
+    $idTag = $this->getMapper('tag')->load(array('nom=? && id_user=?', $params['tag'], $params['id_user']));
     $idTag = $idTag["fields"]["id_tag"]["value"];
     $this->dB->exec(
       array(
