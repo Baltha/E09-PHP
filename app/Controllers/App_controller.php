@@ -177,6 +177,19 @@ class App_controller extends Controller{
       else
         $f3->push('erreur', 'Code postal manquant');
 
+
+      // $f3->set('file', \Web::instance()->receive(function($file){
+      //       print_r($file["name"]);
+      //  },true,true));
+
+      if($_FILES['file']['error'] == 0){
+        $photo = \Web::instance()->receive(function($file){
+            $f3 = \Base::instance();
+            $f3->set('photo_url', $f3->get('UPLOADS').$_FILES['file']['name']);
+        },true,true);
+      }
+      print_r($f3->get('photo_url'));
+
       if(empty($f3->get('erreur'))){
         // pas d'erreur on envoie
         // d'abord vérif si l'adresse mail est déjà présente dans la BDD dans ce cas on l'indique
@@ -188,6 +201,7 @@ class App_controller extends Controller{
             'naissance'=>$naissance,
             'mail'=>$mail,
             'sexe'=>$sexe,
+            'photo' => $f3->get('photo_url'),
             'adresse'=>$adresse,
             'ville'=>$ville,
             'code_postal'=>$cp
@@ -196,14 +210,16 @@ class App_controller extends Controller{
           $auth=$this->model->getUserInfoAfterSignin(array(
             'mail'=>$mail
           ));
+
           $user=array(
             'id'=>$auth->id_user,
             'firstname'=>$auth->prenom,
             'lastname'=>$auth->nom,
-            'ville'=>$auth->ville
+            'ville'=>$auth->ville,
+            'profil_picture'=>$auth->photo
           );
           $f3->set('SESSION',$user);
-          $f3->reroute('/wishlist');
+          $f3->reroute("/wishlist");
         }
         else
           var_dump($f3->get('erreur'));
@@ -215,6 +231,7 @@ class App_controller extends Controller{
   public function getMyWishlist($f3){
     $this->tpl['sync']='wishlist.html';
     $f3->set('allProducts',$this->model->getProducts(array('id_user'=>$f3->get('SESSION.id'))));
+    $f3->set('tags',$this->model->getTags(array('id_user'=>$f3->get('SESSION.id'))));
   }
   public function getUserWishlist($f3){
 
@@ -227,12 +244,7 @@ class App_controller extends Controller{
     $product=$this->model->parseProduct(array('product'=>$f3->get('POST.product')));
     $f3->set('ESCAPE',FALSE);
     $f3->set('product',$product);
-
     $f3->set('SESSION.product',$product);
-    $this->tpl['sync']='contentProduct.html';
-  }
-
-  public function addProduct($f3){
     $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$f3->get('SESSION.product'),'id_user'=>$f3->get('SESSION.id'))));
     $f3->set('SESSION.product',array());
     $f3->set('allProduct',$this->model->getProducts(array('id_user'=>$f3->get('SESSION.id'))));

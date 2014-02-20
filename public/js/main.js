@@ -4,8 +4,27 @@ $( document ).ready(function() {
 });
 
 
+//Isotope
+
+var $container = $('#wishlist');
+// init
+$container.isotope({
+  // options
+  itemSelector: '.wish',
+  layoutMode: 'fitRows'
+});
 
 
+//.Wish Hover
+
+$('.wish').mouseover(function(){
+	$(this).children().eq(2).addClass('active');
+	$(this).children().eq(3).addClass('active');
+});
+$('.wish').mouseleave(function(){
+	$(this).children().eq(2).removeClass('active');
+	$(this).children().eq(3).removeClass('active');
+});
 
 
 

@@ -176,6 +176,11 @@ class App_model extends Model{
      $allproducts=$this->dB->exec('SELECT * FROM souhait s LEFT JOIN article a ON s.id_article=a.id_article WHERE s.id_user='.$params['id_user']);
      return $allproducts;
   }
+
+  public function getTags($params)
+  {  
+     return $this->dB->exec('SELECT * FROM tag WHERE id_user='.$params['id_user']);
+  }
   public function deleteProduct($params)
   {
     return $this->dB->exec('DELETE FROM souhait WHERE id_souhait='.$params['id_souhait']);
