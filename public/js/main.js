@@ -22,20 +22,17 @@ $('#tags a').on('click', function(){
 
 $('.delete').on('click', function(e){
 	e.preventDefault();
+	var $this = $(this);
 	var lien = $(this).attr('href');
-		console.log(lien);
-
 	$.ajax({
 		url: lien
 	})
 	.done(function() {
-	    alert( "success" );
-	  })
-	  .fail(function(a) {
-	    console.log(a);
-	  });
-
-		//$container.isotope('remove', $(this).parent());
+	    $container.isotope('remove', $this.parent());
+	})
+	.fail(function(a) {
+		console.log(a);
+	});
 	return false;
 });
 
