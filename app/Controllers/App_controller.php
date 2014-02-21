@@ -260,6 +260,7 @@ class App_controller extends Controller{
 
   public function deleteProduct($f3){
    $f3->set('OneProduct',$this->model->deleteProduct(array('id_souhait'=>$f3->get('PARAMS.id_souhait'))));
+   
   }
 
   public function newTag($f3){
