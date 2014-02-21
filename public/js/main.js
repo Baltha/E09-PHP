@@ -14,24 +14,28 @@ $container.isotope({
   layoutMode: 'fitRows'
 });
 
-$('#tags a').click(function(){
+$('#tags a').on('click', function(){
   var selector = $(this).attr('data-filter');
   $container.isotope({ filter: selector });
   return false;
 });
 
-$(".delete").click(function(){
-	$container.isotope( 'remove', $(this).parent());
+$('.delete').on('click', function(e){
+	e.preventDefault();
+	var $this = $(this);
+	var lien = $(this).attr('href');
+	$.ajax({
+		url: lien
+	})
+	.done(function() {
+	    $container.isotope('remove', $this.parent());
+	})
+	.fail(function(a) {
+		console.log(a);
+	});
+	return false;
 });
 
-function addProduct(){
-	$.ajax({
-		url:"partials/addProduct"
-	})
-	.success(function(data){
-		$('body').html(data);
-	});
-}
 
 
 //.Wish Hover

@@ -23,7 +23,12 @@ protected $model;
     $mimeTypes=array('html'=>'text/html','json'=>'application/json');
     $tpl=$f3->get('AJAX')?$this->tpl['async']:$this->tpl['sync'];
     $ext=substr($tpl,strrpos($tpl,'.')+1);
-    $mime=$mimeTypes[$ext];
+    if(isset($mimeTypes[$ext])){
+      $mime=$mimeTypes[$ext];
+    }
+    else{
+      $mime=$mimeTypes['html'];
+    }
     echo View::instance()->render($tpl,$mime);
   } 
   

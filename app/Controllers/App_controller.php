@@ -259,8 +259,10 @@ class App_controller extends Controller{
   }
 
   public function deleteProduct($f3){
-   $f3->set('OneProduct',$this->model->deleteProduct(array('id_souhait'=>$f3->get('PARAMS.id_souhait'))));
-   
+
+   $f3->set('OneProduct',$this->model->deleteProduct(array('id_souhait'=>$f3->get('PARAMS.id_souhait'))));   
+   $f3->set('status',$this->model->deleteProduct(array('id_souhait'=>$f3->get('PARAMS.id_souhait'))));
+   $this->tpl['async']='json/status.json';
   }
 
   public function newTag($f3){
