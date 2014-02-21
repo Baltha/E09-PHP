@@ -126,6 +126,8 @@ class App_controller extends Controller{
 
   public function inscription($f3){
 
+
+      //tableau php puis pousser f3
       $f3->set('erreur', array());
 
       if($f3->exists('POST.mail'))
@@ -191,7 +193,7 @@ class App_controller extends Controller{
       }
       print_r($f3->get('photo_url'));
 
-      if(empty($f3->get('erreur'))){
+      if(count($f3->get('erreur'))==0){
         // pas d'erreur on envoie
         // d'abord vérif si l'adresse mail est déjà présente dans la BDD dans ce cas on l'indique
         if($this->model->verifNewUser(array('mail'=>$mail))==false){
