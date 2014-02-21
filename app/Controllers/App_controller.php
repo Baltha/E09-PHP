@@ -128,58 +128,14 @@ class App_controller extends Controller{
 
 
       //tableau php puis pousser f3
-      $f3->set('erreur', array());
+      $erreur = array();
 
-      if($f3->exists('POST.mail'))
-        $mail=$f3->clean($f3->get('POST.mail'));
-      else
-        $f3->push('erreur', 'Mail manquant');
-
-      if($f3->exists('POST.mdp'))
-        $mdp=$f3->clean($f3->get('POST.mdp'));
-      else
-        $f3->push('erreur', 'Mot de passe manquant');
-
-      if($f3->exists('POST.mdp2'))
-        $mdp2=$f3->clean($f3->get('POST.mdp2'));
-      else
-        $f3->push('erreur', 'Confirmation du mot de passe manquant');
-
-      if($f3->exists('POST.nom'))
-        $nom=$f3->clean($f3->get('POST.nom'));
-      else
-        $f3->push('erreur', 'Nom manquant');
-
-      if($f3->exists('POST.prenom'))
-        $prenom=$f3->clean($f3->get('POST.prenom'));
-      else
-        $f3->push('erreur', 'Prénom manquant');
-
-      if($f3->exists('POST.naissance'))
-        $naissance=$f3->clean($f3->get('POST.naissance'));
-      else
-        $f3->push('erreur', 'Date de naissance manquante');
-
-      if($f3->exists('POST.sexe'))
-        $sexe=$f3->clean($f3->get('POST.sexe'));
-      else
-        $f3->push('erreur', 'Sexe manquant');
-
-      if($f3->exists('POST.adresse'))
-        $adresse=$f3->clean($f3->get('POST.adresse'));
-      else
-        $f3->push('erreur', 'Adresse manquante');
-
-      if($f3->exists('POST.ville'))
-        $ville=$f3->clean($f3->get('POST.ville'));
-      else
-        $f3->push('erreur', 'Ville manquante');
-
-      if($f3->exists('POST.cp'))
-        $cp=$f3->clean($f3->get('POST.cp'));
-      else
-        $f3->push('erreur', 'Code postal manquant');
-
+      foreach($f3->get('POST') as $key => $value){
+        if($f3->exists('POST.'.$key))
+          $f3->clean($f3->get('POST'.$key));
+        else
+          array_push($erreur, 'Champ manquant : '.$key);
+      }
 
       // $f3->set('file', \Web::instance()->receive(function($file){
       //       print_r($file["name"]);
@@ -193,43 +149,53 @@ class App_controller extends Controller{
       }
       print_r($f3->get('photo_url'));
 
-      if(count($f3->get('erreur'))==0){
-        // pas d'erreur on envoie
-        // d'abord vérif si l'adresse mail est déjà présente dans la BDD dans ce cas on l'indique
-        if($this->model->verifNewUser(array('mail'=>$mail))==false){
-          $this->model->addUser(array(
-            'nom'=>$nom,
-            'prenom'=>$prenom,
-            'mdp'=>$this->model->password($mdp),
-            'naissance'=>$naissance,
-            'mail'=>$mail,
-            'sexe'=>$sexe,
-            'photo' => $f3->get('photo_url'),
-            'adresse'=>$adresse,
-            'ville'=>$ville,
-            'code_postal'=>$cp
-          ));
+      if(count($erreur)==0){
 
-          $auth=$this->model->getUserInfoAfterSignin(array(
-            'mail'=>$mail
-          ));
+        if($f3->get('mdp')==$f3->get('mdp2')){
+             // pas d'erreur on envoie
+          // d'abord vérif si l'adresse mail est déjà présente dans la BDD dans ce cas on l'indique
+          if($this->model->verifNewUser(array('mail'=>$f3->get('mail')))==false){
+            $this->model->addUser(array(
+              'nom'=>$f3->get('POST.nom'),
+              'prenom'=>$f3->get('POST.prenom'),
+              'mdp'=>$this->model->password($f3->get('POST.mdp')),
+              'naissance'=>$f3->get('POST.naissance'),
+              'mail'=>$f3->get('POST.mail'),
+              'sexe'=>$f3->get('POST.sexe'),
+              'photo' => $f3->get('POST.photo_url'),
+              'adresse'=>$f3->get('POST.adresse'),
+              'ville'=>$f3->get('POST.ville'),
+              'code_postal'=>$f3->get('POST.cp')
+            ));
 
-          $user=array(
-            'id'=>$auth->id_user,
-            'firstname'=>$auth->prenom,
-            'lastname'=>$auth->nom,
-            'ville'=>$auth->ville,
-            'profil_picture'=>$auth->photo
-          );
-          $f3->set('SESSION',$user);
-          $this->model->addDefaultTag($auth->id_user);
-          $f3->reroute("/wishlist");
+            echo $f3->get('POST.mail');
+            $auth=$this->model->getUserInfoAfterSignin(array(
+              'mail'=>$f3->get('POST.mail')
+            ));
+
+            $user=array(
+              'id'=>$auth->id_user,
+              'firstname'=>$auth->prenom,
+              'lastname'=>$auth->nom,
+              'ville'=>$auth->ville,
+              'profil_picture'=>$auth->photo
+            );
+            $f3->set('SESSION',$user);
+            $this->model->addDefaultTag($auth->id_user);
+            $f3->reroute("/wishlist");
+          }
+          else{
+            array_push($erreur, 'Adresse mail déjà présente');
+            $f3->set('erreur', $erreur);
+          }  
         }
-        else
-          var_dump($f3->get('erreur'));
+        else{
+          array_push($erreur, 'Les mots de passe ne sont pas identiques');
+          $f3->set('erreur', $erreur);
+        }
       }
       else
-        var_dump($f3->get('erreur'));
+        $f3->set('erreur', $erreur);
   }
 
   public function getMyWishlist($f3){
