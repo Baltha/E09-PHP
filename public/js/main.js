@@ -10,8 +10,8 @@ var $container = $('#wishlist');
 // init
 $container.isotope({
   // options
-  itemSelector: '.wish',
-  layoutMode: 'fitRows'
+  itemSelector : '.wish',
+  layoutMode : 'fitRows'
 });
 
 $('#tags a').on('click', function(){
@@ -29,11 +29,28 @@ $('.delete').on('click', function(e){
 	})
 	.done(function() {
 	    $container.isotope('remove', $this.parent());
+	    $container.isotope('layout');
 	})
 	.fail(function(a) {
 		console.log(a);
 	});
 	return false;
+});
+
+
+$('#addProduct').submit(function(e){
+	e.preventDefault();
+	$.ajax({
+		type: "POST",
+		data: $(this).serialize(),
+		url: "addProduct/"
+	})
+	.done(function(data) {
+		$container.isotope( 'insert', data);
+	})
+	.fail(function(a) {
+		console.log(a);
+	});
 });
 
 

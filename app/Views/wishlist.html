@@ -5,7 +5,7 @@
 		Wishlists de <?php echo $user['fields']['prenom']['value']; ?>
         </h1>
 	<?php else: ?>  
-        <form method="post" action='product'>
+        <form method="post" action='addProduct' id="addProduct">
           <label>Ajouter un article</label>
           <input type='text' name='product'>
           <select name="tag" id="category">
@@ -40,7 +40,7 @@
                     }?>
                     <div class="wish <?php if(isset($productTags[$i][0]['nom'])){ echo $productTags[$i][0]['nom'];} ?> " >
                         <img src="<?php echo $product['image'] ?>" alt="">
-                        <p class="wish_name"><a href="<?php echo $product['lien']; ?>" target="_blank"><?php echo $productName; ?></a></p>
+                        <div  class="wish_name"><p><a href="<?php echo $product['lien']; ?>" target="_blank"><?php echo $productName; ?></a></p></div>
                         <p class="wish_prix"><?php echo $product['prix']."€";  ?></p>
                         <a class="delete" href="deleteProduct/<?php echo $product['id_souhait'];?>">SUPPRIMER</a>
                     </div>
@@ -52,8 +52,6 @@
         <div class="clear"></div>
     </div>
     <ul id="tags">
-        <li><a href="#" data-filter="*">ALL</a></li>
-    
        <?php
         if(isset($tags))
         {

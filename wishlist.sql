@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Lun 17 Février 2014 à 17:33
+-- Généré le: Ven 21 Février 2014 à 09:15
 -- Version du serveur: 5.5.33
 -- Version de PHP: 5.5.3
 
@@ -22,6 +22,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `amis` (
   `id_ami` int(11) NOT NULL AUTO_INCREMENT,
+  `statut` char(1) NOT NULL,
   `user_parent` int(11) NOT NULL,
   `user_enfant` int(11) NOT NULL,
   PRIMARY KEY (`id_ami`),
@@ -42,7 +43,7 @@ CREATE TABLE `appartenance` (
   PRIMARY KEY (`id_appartenance`),
   KEY `id_souhait` (`id_souhait`),
   KEY `id_tag` (`id_tag`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
 
 -- --------------------------------------------------------
 
@@ -60,7 +61,7 @@ CREATE TABLE `article` (
   `lien` varchar(150) NOT NULL,
   `qid` varchar(20) NOT NULL,
   PRIMARY KEY (`id_article`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=61 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
 
 --
 -- Contenu de la table `article`
@@ -118,7 +119,27 @@ INSERT INTO `article` (`id_article`, `nom`, `description`, `prix`, `image`, `nbl
 (57, 'Road 66\n      ', 'Entre l incandescence de la vie et le zen bouddhiste, il n y a qu un infime pas... Ainsi Jack Kerouac, dans sa qu&#xEA;te in&#xE9;puisable de l infini, nous emm&#xE8;ne-t-il sur les routes de l Am&#xE9;rique, des canyons aux &#xE9;toiles... Une Am&#xE9;rique entre fantasmes et v&#xE9;rit&#xE9;s, sur l id&#xE9;e d''une longue route - la mythique &#xAB; Route 66 &#xBB; - comme un parcours musical pr&#xE9;cis traversant les &#xC9;tats-Unis g&#xE9;ographiquement et musicalement : &#xAB; A l est de ma jeunesse, &#xE0; l ouest de mon avenir &#xBB; (Kerouac). C est sur ces traces et sur la recherche de l infiniment grand dans l infiniment petit que s est construit tout ce disque. J ai pu ainsi d&#xE9;couvrir des paysages in&#xE9;dits : Amy Beach compositrice de g&#xE9;nie, ou Percy Grainger devenu am&#xE9;ricain par vocation ; la cr&#xE9;ation mondiale de Hyung-ki Joo qui composa Chandeliers &#xE0; New York apr&#xE8;s le 11 septembre ; la m&#xE9;ditation hypnotique de John Adams, John Cage ou Philip Glass ; ou encore la filiation passionnante entre Bernstein, Copland et Ginastera, son &#xE9;l&#xE8;ve &#xE0; Bloomington et vecteur de l influence sudam&#xE9;ricaine ; le lien intime entre Gershwin et le jazz, qui inspira Bill Evans ou Keith Jarrett. Pour clore ce p&#xE9;riple, Natalie Dessay nous offre sa pr&#xE9;sence exceptionnelle dans une version in&#xE9;dite de Cole Porter compos&#xE9;e sp&#xE9;cialement pour ce disque par Rapha&#xEB;l Merlin du Quatuor Eb&#xE8;ne.', 10.99, 'http://ecx.images-amazon.com/images/I/61HDYlO5BXL._SX300__PJautoripBadge,BottomRight,4,-40_OU11__.jpg', 0, 'http://www.amazon.fr/Road-66-Adams-John/dp/B00G6T4NNO/ref=br_lf_m_1000780583_1_2_img?ie=UTF8&m=A1X6FK5RDHNB96&s=music&pf_rd_p=467494087&pf_rd_s=center', ''),
 (58, 'Mad Catz M.M.O.7 Souris Filaire Gaming pour PC et MAC - Rouge\n      ', 'Reprenant à son compte le concept R.A.T., la souris<b> MMO 7</b> de Mad Catz affiche non seulement un look déstructuré et hyper design mais aussi des fonctions de pointe indispensables à tout bon gamer.<br>Dotée de 13 boutons programmables et d''un capteur laser commutable en temps réel de 25 à 6400 dpi, cette souris filaire garantit une précision et une réactivité redoutables pour tous vos jeux.<br>Très confortable à l''usage et fiable en tous points, la <b>M.M.O. 7</b> est le périphérique de contrôle ultime pour tous les joueurs exigeants.<p><b>Général:</b><p>Sans fil : Non<p>Optique : Laser<p>Portable/PC de bureau : Bureau<p>Mac/PC : Mac et PC<p>Configuration requise : Apple MacOS, Microsoft Windows 7, Microsoft Windows Vista, Microsoft Windows XP (32/64 bits)<p>Autre : Boutons programmables, roulette de défilement, rétro-éclairage, technologie Twin-Eye Laser, poids réglable, connecteur USB doré, câble tressé', 94.20, 'http://ecx.images-amazon.com/images/I/419EgCLktDL._SY300_.jpg', 0, 'http://www.amazon.fr/dp/B00A79DJMK/ref=gb1h_img_c-3_5907_585457e4?smid=A1X6FK5RDHNB96&pf_rd_m=A1X6FK5RDHNB96&pf_rd_t=101&pf_rd_s=center-3&pf_rd_r=0V47', ''),
 (59, 'Road 66\n      ', 'Entre l incandescence de la vie et le zen bouddhiste, il n y a qu un infime pas... Ainsi Jack Kerouac, dans sa qu&#xEA;te in&#xE9;puisable de l infini, nous emm&#xE8;ne-t-il sur les routes de l Am&#xE9;rique, des canyons aux &#xE9;toiles... Une Am&#xE9;rique entre fantasmes et v&#xE9;rit&#xE9;s, sur l id&#xE9;e d''une longue route - la mythique &#xAB; Route 66 &#xBB; - comme un parcours musical pr&#xE9;cis traversant les &#xC9;tats-Unis g&#xE9;ographiquement et musicalement : &#xAB; A l est de ma jeunesse, &#xE0; l ouest de mon avenir &#xBB; (Kerouac). C est sur ces traces et sur la recherche de l infiniment grand dans l infiniment petit que s est construit tout ce disque. J ai pu ainsi d&#xE9;couvrir des paysages in&#xE9;dits : Amy Beach compositrice de g&#xE9;nie, ou Percy Grainger devenu am&#xE9;ricain par vocation ; la cr&#xE9;ation mondiale de Hyung-ki Joo qui composa Chandeliers &#xE0; New York apr&#xE8;s le 11 septembre ; la m&#xE9;ditation hypnotique de John Adams, John Cage ou Philip Glass ; ou encore la filiation passionnante entre Bernstein, Copland et Ginastera, son &#xE9;l&#xE8;ve &#xE0; Bloomington et vecteur de l influence sudam&#xE9;ricaine ; le lien intime entre Gershwin et le jazz, qui inspira Bill Evans ou Keith Jarrett. Pour clore ce p&#xE9;riple, Natalie Dessay nous offre sa pr&#xE9;sence exceptionnelle dans une version in&#xE9;dite de Cole Porter compos&#xE9;e sp&#xE9;cialement pour ce disque par Rapha&#xEB;l Merlin du Quatuor Eb&#xE8;ne.', 10.99, 'http://ecx.images-amazon.com/images/I/61HDYlO5BXL._SX300__PJautoripBadge,BottomRight,4,-40_OU11__.jpg', 0, 'http://www.amazon.fr/Road-66-Adams-John/dp/B00G6T4NNO/ref=br_lf_m_1000780583_1_2_img?ie=UTF8&m=A1X6FK5RDHNB96&s=music&pf_rd_p=467494087&pf_rd_s=center', ''),
-(60, 'Road 66\n      ', 'Entre l incandescence de la vie et le zen bouddhiste, il n y a qu un infime pas... Ainsi Jack Kerouac, dans sa qu&#xEA;te in&#xE9;puisable de l infini, nous emm&#xE8;ne-t-il sur les routes de l Am&#xE9;rique, des canyons aux &#xE9;toiles... Une Am&#xE9;rique entre fantasmes et v&#xE9;rit&#xE9;s, sur l id&#xE9;e d''une longue route - la mythique &#xAB; Route 66 &#xBB; - comme un parcours musical pr&#xE9;cis traversant les &#xC9;tats-Unis g&#xE9;ographiquement et musicalement : &#xAB; A l est de ma jeunesse, &#xE0; l ouest de mon avenir &#xBB; (Kerouac). C est sur ces traces et sur la recherche de l infiniment grand dans l infiniment petit que s est construit tout ce disque. J ai pu ainsi d&#xE9;couvrir des paysages in&#xE9;dits : Amy Beach compositrice de g&#xE9;nie, ou Percy Grainger devenu am&#xE9;ricain par vocation ; la cr&#xE9;ation mondiale de Hyung-ki Joo qui composa Chandeliers &#xE0; New York apr&#xE8;s le 11 septembre ; la m&#xE9;ditation hypnotique de John Adams, John Cage ou Philip Glass ; ou encore la filiation passionnante entre Bernstein, Copland et Ginastera, son &#xE9;l&#xE8;ve &#xE0; Bloomington et vecteur de l influence sudam&#xE9;ricaine ; le lien intime entre Gershwin et le jazz, qui inspira Bill Evans ou Keith Jarrett. Pour clore ce p&#xE9;riple, Natalie Dessay nous offre sa pr&#xE9;sence exceptionnelle dans une version in&#xE9;dite de Cole Porter compos&#xE9;e sp&#xE9;cialement pour ce disque par Rapha&#xEB;l Merlin du Quatuor Eb&#xE8;ne.', 10.99, 'http://ecx.images-amazon.com/images/I/61HDYlO5BXL._SX300__PJautoripBadge,BottomRight,4,-40_OU11__.jpg', 0, 'http://www.amazon.fr/Road-66-Adams-John/dp/B00G6T4NNO/ref=br_lf_m_1000780583_1_2_img?ie=UTF8&m=A1X6FK5RDHNB96&s=music&pf_rd_p=467494087&pf_rd_s=center', '');
+(60, 'Road 66\n      ', 'Entre l incandescence de la vie et le zen bouddhiste, il n y a qu un infime pas... Ainsi Jack Kerouac, dans sa qu&#xEA;te in&#xE9;puisable de l infini, nous emm&#xE8;ne-t-il sur les routes de l Am&#xE9;rique, des canyons aux &#xE9;toiles... Une Am&#xE9;rique entre fantasmes et v&#xE9;rit&#xE9;s, sur l id&#xE9;e d''une longue route - la mythique &#xAB; Route 66 &#xBB; - comme un parcours musical pr&#xE9;cis traversant les &#xC9;tats-Unis g&#xE9;ographiquement et musicalement : &#xAB; A l est de ma jeunesse, &#xE0; l ouest de mon avenir &#xBB; (Kerouac). C est sur ces traces et sur la recherche de l infiniment grand dans l infiniment petit que s est construit tout ce disque. J ai pu ainsi d&#xE9;couvrir des paysages in&#xE9;dits : Amy Beach compositrice de g&#xE9;nie, ou Percy Grainger devenu am&#xE9;ricain par vocation ; la cr&#xE9;ation mondiale de Hyung-ki Joo qui composa Chandeliers &#xE0; New York apr&#xE8;s le 11 septembre ; la m&#xE9;ditation hypnotique de John Adams, John Cage ou Philip Glass ; ou encore la filiation passionnante entre Bernstein, Copland et Ginastera, son &#xE9;l&#xE8;ve &#xE0; Bloomington et vecteur de l influence sudam&#xE9;ricaine ; le lien intime entre Gershwin et le jazz, qui inspira Bill Evans ou Keith Jarrett. Pour clore ce p&#xE9;riple, Natalie Dessay nous offre sa pr&#xE9;sence exceptionnelle dans une version in&#xE9;dite de Cole Porter compos&#xE9;e sp&#xE9;cialement pour ce disque par Rapha&#xEB;l Merlin du Quatuor Eb&#xE8;ne.', 10.99, 'http://ecx.images-amazon.com/images/I/61HDYlO5BXL._SX300__PJautoripBadge,BottomRight,4,-40_OU11__.jpg', 0, 'http://www.amazon.fr/Road-66-Adams-John/dp/B00G6T4NNO/ref=br_lf_m_1000780583_1_2_img?ie=UTF8&m=A1X6FK5RDHNB96&s=music&pf_rd_p=467494087&pf_rd_s=center', ''),
+(61, 'Road 66\n      ', 'Entre l incandescence de la vie et le zen bouddhiste, il n y a qu un infime pas... Ainsi Jack Kerouac, dans sa qu&#xEA;te in&#xE9;puisable de l infini, nous emm&#xE8;ne-t-il sur les routes de l Am&#xE9;rique, des canyons aux &#xE9;toiles... Une Am&#xE9;rique entre fantasmes et v&#xE9;rit&#xE9;s, sur l id&#xE9;e d''une longue route - la mythique &#xAB; Route 66 &#xBB; - comme un parcours musical pr&#xE9;cis traversant les &#xC9;tats-Unis g&#xE9;ographiquement et musicalement : &#xAB; A l est de ma jeunesse, &#xE0; l ouest de mon avenir &#xBB; (Kerouac). C est sur ces traces et sur la recherche de l infiniment grand dans l infiniment petit que s est construit tout ce disque. J ai pu ainsi d&#xE9;couvrir des paysages in&#xE9;dits : Amy Beach compositrice de g&#xE9;nie, ou Percy Grainger devenu am&#xE9;ricain par vocation ; la cr&#xE9;ation mondiale de Hyung-ki Joo qui composa Chandeliers &#xE0; New York apr&#xE8;s le 11 septembre ; la m&#xE9;ditation hypnotique de John Adams, John Cage ou Philip Glass ; ou encore la filiation passionnante entre Bernstein, Copland et Ginastera, son &#xE9;l&#xE8;ve &#xE0; Bloomington et vecteur de l influence sudam&#xE9;ricaine ; le lien intime entre Gershwin et le jazz, qui inspira Bill Evans ou Keith Jarrett. Pour clore ce p&#xE9;riple, Natalie Dessay nous offre sa pr&#xE9;sence exceptionnelle dans une version in&#xE9;dite de Cole Porter compos&#xE9;e sp&#xE9;cialement pour ce disque par Rapha&#xEB;l Merlin du Quatuor Eb&#xE8;ne.', 10.99, 'http://ecx.images-amazon.com/images/I/61kJq8gP8BL._SY300__PJautoripBadge,BottomRight,4,-40_OU11__.jpg', 0, 'http://www.amazon.fr/Road-66-Adams-John/dp/B00G6T4NNO/ref=br_lf_m_1000780583_1_2_img?ie=UTF8&m=A1X6FK5RDHNB96&s=music&pf_rd_p=467494087&pf_rd_s=center', 'B00G6T4NNO'),
+(62, 'Kindle Fire HD 7" (17 cm)\n      ', '<div>\n    <ul>\n        <li><span>Un écran HD stupéfiant (1280 x 800) de 216 ppp et un processeur double c½ur rapide de 1,5 GHz</span></li><li><span>Facile à utiliser : touchez une seule fois l''écran pour commencer à lire, écouter, naviguer ou jouer</span></li><li><span>Parfait pour les enfants et les parents grâce au large choix de livres, jeux et applications pour enfants ainsi que le contrôle parental facile d''utilisation</span></li><li><span>Navigation web ultra-rapide via la connexion Wi-Fi intégrée, et prise en charge des solutions de messagerie et calendrier telles que Gmail, Outlook et plus encore</span></li><li><span>Léger et durable : conçu pour résister aux chocs et aux rayures accidentels grâce à son écran 20 fois plus solide et 30 fois plus dur que le plastique</span></li><li><span>Stockage gratuit et illimité dans le Cloud pour tous vos contenus Amazon</span></li>\n    </ul>', 139.00, 'http://g-ecx.images-amazon.com/images/G/08/kindle/dp/2013/KS/ks-slate-01-lg-noVid._V355466431_.jpg', 0, 'http://www.amazon.fr/gp/product/B00CTV13Z4/ref=amb_link_179345607_1/279-5480727-1657334?ie=UTF8&nav_sdd=aps&pf_rd_m=A1X6FK5RDHNB96&pf_rd_s=center-1&pf', 'B00CTV13Z4'),
+(63, 'Chargeur Kindle PowerFast, pour une charge accélérée, pour l''Union européenne (c', 'Pas de description', 14.99, 'http://ecx.images-amazon.com/images/I/31-sjaUAixL._SX300_.jpg', 0, 'http://www.amazon.fr/gp/product/B006GWO6XI/ref=s9_simh_gw_p424_d0_i3?pf_rd_m=A1X6FK5RDHNB96&pf_rd_s=center-2&pf_rd_r=04QNSXJMKQS75P62DPW8&pf_rd_t=101&', 'B006GWO6XI'),
+(64, 'Mad Catz M.M.O.7 Souris Filaire Gaming pour PC et MAC - Rouge\n      ', 'Reprenant à son compte le concept R.A.T., la souris<b> MMO 7</b> de Mad Catz affiche non seulement un look déstructuré et hyper design mais aussi des fonctions de pointe indispensables à tout bon gamer.<br>Dotée de 13 boutons programmables et d''un capteur laser commutable en temps réel de 25 à 6400 dpi, cette souris filaire garantit une précision et une réactivité redoutables pour tous vos jeux.<br>Très confortable à l''usage et fiable en tous points, la <b>M.M.O. 7</b> est le périphérique de contrôle ultime pour tous les joueurs exigeants.<p><b>Général:</b><p>Sans fil : Non<p>Optique : Laser<p>Portable/PC de bureau : Bureau<p>Mac/PC : Mac et PC<p>Configuration requise : Apple MacOS, Microsoft Windows 7, Microsoft Windows Vista, Microsoft Windows XP (32/64 bits)<p>Autre : Boutons programmables, roulette de défilement, rétro-éclairage, technologie Twin-Eye Laser, poids réglable, connecteur USB doré, câble tressé', 94.20, 'http://ecx.images-amazon.com/images/I/419EgCLktDL._SY300_.jpg', 0, 'http://www.amazon.fr/dp/B00A79DJMK/ref=gb1h_img_c-3_5907_585457e4?smid=A1X6FK5RDHNB96&pf_rd_m=A1X6FK5RDHNB96&pf_rd_t=101&pf_rd_s=center-3&pf_rd_r=0V47', 'B00A79DJMK'),
+(65, 'Alice''s Garden- Trampoline rond Ã 250cm Uranus avec son filet de protection - T', 'Trampoline diamÃ¨tre 250cm avec son filet de protection intÃ©rieur<br />\nLes + produit :Â <br /><br />\n-Â MobilitÃ©Â : FacilitÃ© de le dÃ©placer; les pieds ne tombent pas lorsque vous le dÃ©placez pour passer la tondeuse !Â <br /><br />\n-Â SÃ©curitÃ©Â : Filet de protection intÃ©rieur, rÃ©duit considÃ©rablement le risque de chocs !Â <br /><br />\n-Â StabilitÃ©Â : Pieds en W afin de s''adapter au mieux Ã  la surface oÃ¹ est installÃ© le trampolineÂ <br />\nCaractÃ©ristiques dÃ©taillÃ©esÂ :Â <br /><br />\nTrampoline :Â <br /><br />\n- DiamÃ¨tre extÃ©rieur : Ã2,45mÂ <br /><br />\n- Hauteur sol/cadre : 59cmÂ <br /><br />\n- Tapis de saut : Ã203cmÂ <br', 65.00, 'http://s3.static69.com/m/image-offre/b/d/a/0/bda0fc843f5ae115c17d109aacd468b2-500x500.jpg', 0, 'http://www.rueducommerce.fr/m/ps/mpid:MP-D76B4M17443122#!moid:MO-D76B4M28453568', 'MO-D76B4M28453568');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `don`
+--
+
+CREATE TABLE `don` (
+  `id_don` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL,
+  `prix` double(8,2) NOT NULL,
+  `date_don` datetime NOT NULL,
+  PRIMARY KEY (`id_don`),
+  KEY `id_user` (`id_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -148,28 +169,27 @@ CREATE TABLE `souhait` (
   `id_souhait` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) DEFAULT NULL,
   `id_article` int(11) DEFAULT NULL,
+  `date_souhait` datetime NOT NULL,
   PRIMARY KEY (`id_souhait`),
   KEY `F1_idx` (`id_user`),
   KEY `F2_idx` (`id_article`),
   KEY `id_user` (`id_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=68 ;
+
+-- --------------------------------------------------------
 
 --
--- Contenu de la table `souhait`
+-- Structure de la table `souhait_page`
 --
 
-INSERT INTO `souhait` (`id_souhait`, `id_user`, `id_article`) VALUES
-(1, 6, 50),
-(2, 6, 51),
-(3, 6, 52),
-(4, 6, 53),
-(5, 6, 54),
-(6, 6, 55),
-(7, 6, 56),
-(8, 6, 57),
-(9, 6, 58),
-(10, 6, 59),
-(11, 6, 60);
+CREATE TABLE `souhait_page` (
+  `id_souhait_page` int(11) NOT NULL AUTO_INCREMENT,
+  `id_page` int(11) NOT NULL,
+  `id_souhait` int(11) NOT NULL,
+  PRIMARY KEY (`id_souhait_page`),
+  KEY `id_page` (`id_page`),
+  KEY `id_souhait` (`id_souhait`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -181,10 +201,21 @@ CREATE TABLE `tag` (
   `id_tag` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL,
-  `date_creation` datetime NOT NULL,
+  `date_tag` datetime NOT NULL,
   PRIMARY KEY (`id_tag`),
   KEY `id_user` (`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Contenu de la table `tag`
+--
+
+INSERT INTO `tag` (`id_tag`, `id_user`, `nom`, `date_tag`) VALUES
+(1, 6, 'Anniversaire', '2014-02-20 00:00:00'),
+(2, 6, 'Noël', '2014-02-20 00:00:00'),
+(3, 6, 'Crémaillère', '2014-02-20 00:00:00'),
+(8, 6, 'coucou', '2014-02-20 15:10:53'),
+(9, 8, 'test', '2014-02-20 16:03:52');
 
 -- --------------------------------------------------------
 
@@ -206,7 +237,7 @@ CREATE TABLE `users` (
   `sexe` char(1) NOT NULL,
   `id_facebook` varchar(15) NOT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Contenu de la table `users`
@@ -217,8 +248,8 @@ INSERT INTO `users` (`id_user`, `nom`, `prenom`, `mdp`, `naissance`, `adresse`, 
 (3, 'ares', 'ares', '7b95f017f5b444ddece1ffc8516e884d99f34e2b', '2014-02-13', '', '', '', 'ares@gmail.com', '', 'f', ''),
 (4, 'serre', 'louis', 'd39c4e6b4eb430ab72bf57f7bd55f0428825f518', '2014-02-10', '', '', '', 'test@gmail.com', '', 'm', ''),
 (5, 'blabla', 'blibli', 'bed66cf49364311b150748a7d0b033ec0114d070', '2014-02-28', '', '', '', 'blabla@gmail.com', '', 'm', ''),
-(6, 'Serre', 'Louis', '', '1991-07-22', '', '', '', 'louis_du_45@hotmail.fr', 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/t5/1119612_1291209345_220126003_t.jpg', 'm', '1291209345'),
-(7, 'Bigot', 'Jérémy', '', '1993-06-05', '', '', '', 'jerem.bigot@gmail.com', 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/t5/371061_1576329859_1016725262_t.jpg', 'm', '1576329859');
+(7, 'Bigot', 'Jérémy', '', '1993-06-05', '', '', '', 'jerem.bigot@gmail.com', 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/t5/371061_1576329859_1016725262_t.jpg', 'm', '1576329859'),
+(8, 'Serre', 'Louis', '', '1991-07-22', '', '', '', 'louis_du_45@hotmail.fr', 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/t5/1119612_1291209345_220126003_s.jpg', 'm', '1291209345');
 
 --
 -- Contraintes pour les tables exportées
@@ -235,8 +266,14 @@ ALTER TABLE `amis`
 -- Contraintes pour la table `appartenance`
 --
 ALTER TABLE `appartenance`
-  ADD CONSTRAINT `appartenance_ibfk_2` FOREIGN KEY (`id_tag`) REFERENCES `tag` (`id_tag`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `appartenance_ibfk_1` FOREIGN KEY (`id_souhait`) REFERENCES `souhait` (`id_souhait`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `appartenance_ibfk_1` FOREIGN KEY (`id_souhait`) REFERENCES `souhait` (`id_souhait`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `appartenance_ibfk_2` FOREIGN KEY (`id_tag`) REFERENCES `tag` (`id_tag`) ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `don`
+--
+ALTER TABLE `don`
+  ADD CONSTRAINT `don_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `page`
@@ -249,5 +286,12 @@ ALTER TABLE `page`
 -- Contraintes pour la table `souhait`
 --
 ALTER TABLE `souhait`
-  ADD CONSTRAINT `souhait_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `F2` FOREIGN KEY (`id_article`) REFERENCES `article` (`id_article`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `F2` FOREIGN KEY (`id_article`) REFERENCES `article` (`id_article`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `souhait_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `souhait_page`
+--
+ALTER TABLE `souhait_page`
+  ADD CONSTRAINT `souhait_page_ibfk_2` FOREIGN KEY (`id_souhait`) REFERENCES `souhait` (`id_souhait`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `souhait_page_ibfk_1` FOREIGN KEY (`id_page`) REFERENCES `page` (`id_page`) ON UPDATE CASCADE;
