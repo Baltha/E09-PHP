@@ -92,7 +92,7 @@ p{
  /* 3.0 - Header */
 
 header{
-	height: 50px;
+	height: 38px;
 	background: #222222;
 	border-left: 1px solid #434343;
 	display: table;
@@ -104,39 +104,77 @@ header{
 	color:#f0f0f0;
 	display: table-cell;
 	width: 33.33%;
-	font-size: 1.5rem;
+	font-size: 1.1rem;
 	vertical-align: middle;
-	padding-left: 20px;
+	padding-left: 14px;
+	font-weight: 300;
+	letter-spacing: 0.3pt;
 }
+
 .logo{
 	display: table-cell;
 	width: 33.33%;
 	text-align: center;
 	color:#f0f0f0;
-	font-size: 2.2rem;
+	font-size: 1.6rem;
 	font-weight: 200;
 	font-style: italic;
 	text-decoration: none;
 	vertical-align: middle;
+	letter-spacing: 0.4pt;
 
 }
 .logo span{
-	font-weight: 300;
+	font-weight: 400;
 	font-style: italic;
 }
 #logout{
 	display: table-cell;
 	width: 33.33%;
 	vertical-align: middle;
-}
-#logout a{
-	float: right;
-	font-size: 1.5rem;
-	color:#f0f0f0;
-	text-decoration: none;
-	margin-right: 20px;
+	cursor: pointer;
 }
 
+#logout a{
+	float: right;
+	font-size: 1.1rem;
+	color:#f0f0f0;
+	text-decoration: none;
+	margin-right: 14px;
+	font-weight: 300;
+	letter-spacing: 0.3pt;
+}
+
+#logout:hover{
+	background: -webkit-gradient(
+		linear,
+		right top, left top,
+		from(rgba(255,255,255,0.15)),
+		to(rgba(0,0,0,0))
+	);
+	background: -webkit-linear-gradient(
+		right,
+		rgba(255,255,255,0.15),
+		rgba(0,0,0,0)
+	);
+	background: -moz-linear-gradient(
+		right,
+		rgba(255,255,255,0.15),
+		rgba(0,0,0,0)
+	);
+	background: -o-linear-gradient(
+		right,
+		rgba(255,255,255,0.15),
+		rgba(0,0,0,0)
+	);
+	background: linear-gradient(
+		right,
+		rgba(255,255,255,0.15),
+		rgba(0,0,0,0)
+	);
+
+	text-shadow: 1px 1px black;
+}
 
 
   /* 4.0 - LeftSidebar */
@@ -152,10 +190,11 @@ header{
 }
 
 #leftSidebar .name{
-	font-size: 3.0rem;
+	font-size: 2.0rem;
 	font-family: "Varela Round";
 	color:#f0f0f0;
 	text-align: center;
+	letter-spacing: 1pt;
 }
 
 #leftSidebar .profilPicture{
@@ -163,7 +202,11 @@ header{
 	height: auto;
 	overflow: hidden;
 	display: block;
-	margin: 30px auto;
+	margin: 0 auto;
+	margin-top: 80px;
+	margin-bottom: 35px;
+	border-radius: 50%;
+	border: 2px solid #f0f0f0;
 }
 
   /* 5.0 - Content */
