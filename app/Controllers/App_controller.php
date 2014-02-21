@@ -246,16 +246,17 @@ class App_controller extends Controller{
   }
   
   
-  public function parseProduct($f3){
+  public function addProduct($f3){
     $product=$this->model->parseProduct(array('product'=>$f3->get('POST.product')));
     $f3->set('ESCAPE',FALSE);
     $f3->set('product',$product);
     $f3->set('SESSION.product',$product);
     $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$f3->get('SESSION.product'),'tag'=>$f3->get('POST.tag'),'id_user'=>$f3->get('SESSION.id'))));
     $f3->set('SESSION.product',array());
-    $f3->set('allProduct',$this->model->getProducts(array('id_user'=>$f3->get('SESSION.id'))));
+    $f3->set('lastProduct',$this->model->lastProduct(array('id_user'=>$f3->get('SESSION.id'))));
+    $lastProduct = $f3->get('lastProduct');
+    $f3->set('productTags' , $this->model->getProductTags(array('id_souhait'=>$lastProduct[0]["id_souhait"])));
     $this->tpl['async']='partials/newItem.html';
-    $f3->reroute("/wishlist");
   }
 
   public function deleteProduct($f3){
