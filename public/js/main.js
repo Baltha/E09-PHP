@@ -46,7 +46,13 @@ $('#addProduct').submit(function(e){
 		url: "addProduct/"
 	})
 	.done(function(data) {
-		$container.isotope( 'insert', data);
+		var node = $(data, {
+    	 	html: $('.newWish').html()
+		});
+		$('#wishlist').prepend(node);
+		$('#wishlist').isotope( 'prepended', node);
+		$container.isotope('layout');
+
 	})
 	.fail(function(a) {
 		console.log(a);

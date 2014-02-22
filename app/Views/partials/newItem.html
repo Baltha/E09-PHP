@@ -4,7 +4,7 @@
         $productName = $productName."...";
 }?>
 
-<div class="wish <?php if(isset($productTags[0]['nom'])){ echo $productTags[0]['nom'];} ?> " >
+<div class="newWish wish" class="<?php if(isset($productTags[0]['nom'])){ echo $productTags[0]['nom'];} ?> " >
     <img src="<?php echo $lastProduct[0]['image'] ?>" alt="">
     <div  class="wish_name"><p><a href="<?php echo $lastProduct[0]['lien']; ?>" target="_blank"><?php echo $productName; ?></a></p></div>
     <p class="wish_prix"><?php echo $lastProduct[0]['prix']."€";  ?></p>
