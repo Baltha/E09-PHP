@@ -183,8 +183,8 @@ header{
 #leftSidebar{
 	height: 100%;
 	background: #222222;
-	width: 280px;
-	position: absolute;
+	width: 270px;
+	position: fixed;
 	top:0;
 	left: 0;
 }
@@ -203,7 +203,7 @@ header{
 	overflow: hidden;
 	display: block;
 	margin: 0 auto;
-	margin-top: 80px;
+	margin-top: 70px;
 	margin-bottom: 35px;
 	border-radius: 50%;
 	border: 2px solid #f0f0f0;
@@ -215,13 +215,14 @@ header{
 
   	  #mainContent{	
 		width: auto;
-		padding-left: 280px;
+		padding-left: 270px;
   	  }
 	
 	  #bannerTop{
-	  	height: 100px;
+	  	height: 76px;
 	  	width: 100%;
 	  	background: #f0f0f0;
+	  	border-bottom: 1px solid #dddddd;
 	  }
 
 	  #content{
@@ -230,6 +231,24 @@ header{
 	  	padding: 50px;
 	  }
 
+	  /*
+		width: 120px;
+		border: none;
+		background: none;
+		margin: 0;
+		padding: 0;
+		cursor: pointer;
+		background: #288dff;
+		border-radius: 4px;
+		height: 30px;
+		margin-top: 23px;
+		font-family: "Exo 2";
+		color: #f0f0f0;
+		font-weight: 200;
+		text-transform: uppercase;
+		letter-spacing: 0.3pt;
+		font-size: 1.2rem;
+			
 	  /* 5.2 - Wislist Page */
 
 	  #wishlist{
@@ -303,7 +322,8 @@ header{
 		z-index: 10;
 		background: #f0f0f0;
 		width: 100%;
-		height: 50px;
+		height: 40px;
+		border-top: 1px solid #dddddd;
 	  }
 
 	  #tags li{
