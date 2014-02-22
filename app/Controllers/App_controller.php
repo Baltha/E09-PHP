@@ -27,6 +27,7 @@ class App_controller extends Controller{
           // friends : liste des amis du user
           $f3->set('me', $facebook->api('/me'));
           $f3->set('friends', $facebook->api('/me/friends'));
+          print_r($f3->get("friends"));
         } 
         catch (FacebookApiException $e) {
           error_log($e);
@@ -38,7 +39,9 @@ class App_controller extends Controller{
           'id'=>$f3->get('informations->fields.id_user.value'),
           'firstname'=>$f3->get('informations->fields.prenom.value'),
           'lastname'=>$f3->get('informations->fields.nom.value'),
-          'profil_picture'=>$f3->get('informations->fields.photo.value')
+          'profil_picture'=>$f3->get('informations->fields.photo.value'),
+          'ville'=>$f3->get('informations->fields.ville.value'),
+
         );
         // On lance la session, on configure le lien de lougout et redirige vers wishlist
         $f3->set('SESSION',$user); 
@@ -70,6 +73,7 @@ class App_controller extends Controller{
         'mail'=>$f3->get('me.email'), 
         'sexe'=>$f3->get('me.gender'),
         'photo'=>$f3->get('me.pic'),
+        'ville'=>$f3->get('me.location.name'),
         'id_facebook'=>$f3->get('user')));
       $auth=$this->model->getUserInfoAfterSignin(array(
           'mail'=>$f3->get('me.email')
@@ -84,7 +88,8 @@ class App_controller extends Controller{
           'id'=>$auth->id_user,
           'firstname'=>$auth->prenom,
           'lastname'=>$auth->nom,
-          'profil_picture'=>$auth->photo
+          'profil_picture'=>$auth->photo,
+          'ville'=>$auth->ville
         );
 
         $f3->set('SESSION',$user);
@@ -112,7 +117,8 @@ class App_controller extends Controller{
       $user=array(
         'id'=>$auth->id_user,
         'firstname'=>$auth->prenom,
-        'lastname'=>$auth->nom
+        'lastname'=>$auth->nom,
+        'ville'=>$auth->ville
       );
       $f3->set('SESSION',$user);
       $f3->reroute('/wishlist');
@@ -199,7 +205,6 @@ class App_controller extends Controller{
   }
 
   public function getMyWishlist($f3){
-    $this->tpl['sync']='wishlist.html';
     $f3->set('allProducts',$this->model->getProducts(array('id_user'=>$f3->get('SESSION.id'))));
     $productTags = array();
     foreach ($f3->get('allProducts') as $i => $product) {
@@ -207,10 +212,17 @@ class App_controller extends Controller{
     }
     $f3->set('productTags' , $productTags);
     $f3->set('tags',$this->model->getUserTags(array('id_user'=>$f3->get('SESSION.id'))));
+    $this->tpl['sync']='wishlist.html';
   }
   public function getUserWishlist($f3){
-          $f3->set('user',$this->model->getUser(array('id_user'=>$f3->get('PARAMS.id_user'))));
-          $this->tpl['sync']='wishlist.html';  
+    $f3->set('user',$this->model->getUser(array('id_user'=>$f3->get('PARAMS.id_user'))));
+    $f3->set('allProducts',$this->model->getProducts(array('id_user'=>$f3->get('PARAMS.id_user'))));
+    foreach ($f3->get('allProducts') as $i => $product) {
+      $productTags[$i] = $this->model->getProductTags(array('id_souhait'=>$product['id_souhait']));
+    }
+    $f3->set('productTags' , $productTags);
+    $f3->set('tags',$this->model->getUserTags(array('id_user'=>$f3->get('PARAMS.id_user'))));
+    $this->tpl['sync']='wishlist.html';
   }
   
   
