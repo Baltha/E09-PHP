@@ -47,9 +47,12 @@ $('#addProduct').submit(function(e){
 	})
 	.done(function(data) {
 		var node = $(data, {
-    	 	html: $('#wishlist').html()
+    	 	html: $('.newWish').html()
 		});
-		$('#wishlist').isotope( 'insert', node);
+		$('#wishlist').prepend(node);
+		$('#wishlist').isotope( 'prepended', node);
+		$container.isotope('layout');
+
 	})
 	.fail(function(a) {
 		console.log(a);
