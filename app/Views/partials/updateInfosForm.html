@@ -1,11 +1,11 @@
 <h3>Mise à jour de mes informations</h3>
 
 <form action="setInfos" method="post" enctype="multipart/form-data">
-    <p><label for="mail">Adresse e-mail:</label></p>
-    <input type="email" name="mail" value="<?php echo $infos['mail'];?>"/></p>
     <p><label for="mdp">Mot de passe:</label></p>
     <input type="password" name="mdp" required/>
     <input type="password" name="mdp2" required/>
+    <p><label for="mail">Adresse e-mail:</label></p>
+    <input type="email" name="mail" value="<?php echo $infos['mail'];?>"/></p>
     <p><label for="adresse">Adresse postale:</label></p>
     <input type="text" name="adresse" value="<?php echo $infos['adresse'];?>" required/>
     <input type="text" name="ville" value="<?php echo $infos['ville'];?>" required/>
