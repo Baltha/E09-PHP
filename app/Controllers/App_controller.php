@@ -153,7 +153,6 @@ class App_controller extends Controller{
             $f3->set('photo_url', $f3->get('UPLOADS').$_FILES['file']['name']);
         },true,true);
       }
-      print_r($f3->get('photo_url'));
 
       if(count($erreur)==0){
 
@@ -217,6 +216,7 @@ class App_controller extends Controller{
   public function getUserWishlist($f3){
     $f3->set('user',$this->model->getUser(array('id_user'=>$f3->get('PARAMS.id_user'))));
     $f3->set('allProducts',$this->model->getProducts(array('id_user'=>$f3->get('PARAMS.id_user'))));
+    $productTags = array();
     foreach ($f3->get('allProducts') as $i => $product) {
       $productTags[$i] = $this->model->getProductTags(array('id_souhait'=>$product['id_souhait']));
     }
@@ -252,6 +252,66 @@ class App_controller extends Controller{
     $f3->reroute("/wishlist");
   }
 
+  public function myFollow($f3){
+    require_once('api/facebook.php');
+    $facebook = new Facebook(array(
+      'appId'  => '479303535507941',
+      'secret' => '2d568c782decb0e86bf9fefb5ec1f16e',
+    ));
+
+    $f3->set('user', $facebook->getUser());
+    $f3->set('friends', $facebook->api('/me/friends'));
+    print_r($f3->get('friends'));
+    
+    $this->tpl['sync']='follow.html';
+    $ourServiceUsers = array();
+    // foreach ($f3->get('friends.data') as $i => $friend) {
+    //   $isOnSite = $this->model->isOnSite(array('id_facebook'=>$friend["id"]));
+    //   if($isOnSite){
+    //     array_push($ourServiceUsers, $friend["name"]);
+    //   }
+    // }
+    $f3->set('ourServiceUsers', $ourServiceUsers);
+  }
+
+   public function getInfos($f3){
+    $f3->set('infos',$this->model->getUser(array('id_user'=>$f3->get('SESSION.id'))));
+    $this->tpl['async']='partials/updateInfosForm.html';
+
+  }
+    public function setInfos($f3){
+      //tableau php puis pousser f3
+      $erreur = array();
+
+      foreach($f3->get('POST') as $key => $value){
+        if($f3->exists('POST.'.$key))
+          $f3->clean($f3->get('POST'.$key));
+        else
+          array_push($erreur, 'Champ manquant : '.$key);
+      }
+
+      if(count($erreur)==0){
+
+        if($f3->get('mdp')==$f3->get('mdp2')){
+             // pas d'erreur on envoie
+          // d'abord vérif si l'adresse mail est déjà présente dans la BDD dans ce cas on l'indique
+          $this->model->setInfos(array(
+            'id_user'=>$f3->get('SESSION.id'),
+            'mdp'=>$this->model->password($f3->get('POST.mdp')),
+            'mail'=>$f3->get('POST.mail'),
+            'adresse'=>$f3->get('POST.adresse'),
+            'ville'=>$f3->get('POST.ville'),
+            'code_postal'=>$f3->get('POST.cp')
+          ));
+
+          $auth=$this->model->getUserInfoAfterSignin(array(
+            'mail'=>$f3->get('POST.mail')
+          ));
+          $f3->set('SESSION.ville',$auth->ville);
+          $f3->reroute("/wishlist");
+        }
+      }
+    }      
 
   // public function searchUsers($f3){
   //   $f3->set('users',$this->model->searchUsers(array('keywords'=>$f3->get('POST.name'),'filter'=>$f3->get('POST.filter'))));

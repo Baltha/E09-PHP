@@ -5,6 +5,8 @@
 		Wishlists de <?php echo $user['fields']['prenom']['value']; ?>
         </h1>
 	<?php else: ?>  
+
+    <?php echo $_SERVER['SERVER_NAME'];?>
         <form method="post" action='addProduct' id="addProduct">
           <label>Ajouter un article</label>
           <input type='text' name='product'>

@@ -1,7 +1,35 @@
 <aside id="leftSidebar">
+	<div id="update"><a href="getInfos/">Modifier mes infos</a></div>
+	
 	<?php if(isset($SESSION['profil_picture'])): ?>
 		<img class="profilPicture" src="<?php echo $SESSION['profil_picture'] ?>" alt=""> 
 	<?php endif; ?>
 	<p class="name"><?php echo $SESSION['firstname'].' '.$SESSION['lastname'] ?></p>
 	<p class="ville"><?php echo $SESSION['ville']; ?> </p>
+
+	<ul id="userStats">
+		<li>
+			<h4>Followers</h4>
+			<p>32</p>
+		</li>
+		<li>
+			<h4>Following</h4>
+			<p>45</p>
+		</li>
+		<li>
+			<h4>Whishes</h4>
+			<p>67</p>
+		</li>
+	</ul>
+	
+	<ul id="menu">
+		<li><a href="wishlist/">Ma wishlist</a></li>
+		<li><a href="myFollow/">Mes amis</a></li>
+		<li><a href="myContributions/">Mes contributions</a></li>
+		<li><a href="shareMyList/">Partager ma wishlist</a></li>
+	</ul>
+
+	<div id="updateForm">
+		
+	</div>
 </aside>

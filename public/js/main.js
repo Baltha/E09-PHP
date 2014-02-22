@@ -20,6 +20,36 @@ $('#tags a').on('click', function(){
   return false;
 });
 
+
+$('#update > a').on('click', function(e){
+	e.preventDefault();
+	if($('#menu').hasClass("editing")){
+		$('#menu').removeClass("editing");
+		$('#userStats').removeClass("editing");
+		$('#updateForm').addClass("hidden");
+		$('#leftSidebar .name').removeClass("hidden");
+		$('#leftSidebar .ville').removeClass("hidden");
+	}else{
+		if($('#updateForm').hasClass("hidden")){
+			$('#updateForm').removeClass("hidden");
+		}
+		var $this = $(this);
+		var lien = $(this).attr('href');
+		$.ajax({
+			url: lien
+		})
+		.done(function(data){
+			$('#menu').addClass("editing");
+			$('#userStats').addClass("editing");
+			$('#leftSidebar .name').addClass("editing");
+			$('#leftSidebar .ville').addClass("editing");
+			$('#updateForm').html(data);
+		});
+	}
+	
+
+});
+
 $('.delete').on('click', function(e){
 	e.preventDefault();
 	var $this = $(this);

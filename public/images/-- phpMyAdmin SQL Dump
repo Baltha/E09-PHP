@@ -1,0 +1,127 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.6
+-- http://www.phpmyadmin.net
+--
+-- Client: localhost
+-- Généré le: Mer 12 Février 2014 à 21:45
+-- Version du serveur: 5.5.33
+-- Version de PHP: 5.5.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Base de données: `wishlist`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `amis`
+--
+
+CREATE TABLE `amis` (
+  `id_ami` int(11) NOT NULL AUTO_INCREMENT,
+  `user_parent` int(11) NOT NULL,
+  `user_enfant` int(11) NOT NULL,
+  PRIMARY KEY (`id_ami`),
+  KEY `F3_idx` (`user_parent`),
+  KEY `F4_idx` (`user_enfant`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `article`
+--
+
+CREATE TABLE `article` (
+  `id_article` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(80) NOT NULL,
+  `description` text NOT NULL,
+  `prix` decimal(10,2) NOT NULL,
+  `image` varchar(150) NOT NULL,
+  `like` int(11) DEFAULT '0',
+  `lien` varchar(150) NOT NULL,
+  PRIMARY KEY (`id_article`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `evenement`
+--
+
+CREATE TABLE `evenement` (
+  `id_evenement` int(11) NOT NULL AUTO_INCREMENT,
+  `user_referent` int(11) NOT NULL,
+  `nom` varchar(50) NOT NULL,
+  `description` text NOT NULL,
+  `user_createur` int(11) NOT NULL,
+  `date_fin` date NOT NULL,
+  PRIMARY KEY (`id_evenement`),
+  KEY `F5_idx` (`user_referent`),
+  KEY `F6_idx` (`user_createur`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `souhait`
+--
+
+CREATE TABLE `souhait` (
+  `id_souhait` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) DEFAULT NULL,
+  `id_article` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_souhait`),
+  KEY `F1_idx` (`id_user`),
+  KEY `F2_idx` (`id_article`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
+
+CREATE TABLE `users` (
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(50) NOT NULL,
+  `prenom` varchar(50) NOT NULL,
+  `mdp` varchar(50) NOT NULL,
+  `naissance` date NOT NULL,
+  `adresse` varchar(200) NOT NULL,
+  `code_postal` varchar(10) NOT NULL,
+  `ville` varchar(50) NOT NULL,
+  `mail` varchar(50) NOT NULL,
+  `photo` varchar(180) NOT NULL,
+  `sexe` char(1) NOT NULL,
+  `id_facebook` varchar(15) NOT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `amis`
+--
+ALTER TABLE `amis`
+  ADD CONSTRAINT `F3` FOREIGN KEY (`user_parent`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `F4` FOREIGN KEY (`user_enfant`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `evenement`
+--
+ALTER TABLE `evenement`
+  ADD CONSTRAINT `F5` FOREIGN KEY (`user_referent`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `F6` FOREIGN KEY (`user_createur`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `souhait`
+--
+ALTER TABLE `souhait`
+  ADD CONSTRAINT `F1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `F2` FOREIGN KEY (`id_article`) REFERENCES `article` (`id_article`) ON DELETE NO ACTION ON UPDATE CASCADE;
