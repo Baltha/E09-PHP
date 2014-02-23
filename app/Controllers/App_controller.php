@@ -11,6 +11,8 @@ class App_controller extends Controller{
     $facebook = new Facebook(array(
       'appId'  => '479303535507941',
       'secret' => '2d568c782decb0e86bf9fefb5ec1f16e',
+      'allowSignedRequest' => false,
+      'cookie' => true
     ));
 
     // récupère l'id facebook
@@ -27,7 +29,7 @@ class App_controller extends Controller{
           // friends : liste des amis du user
           $f3->set('me', $facebook->api('/me'));
           $f3->set('friends', $facebook->api('/me/friends'));
-          print_r($f3->get("friends"));
+
         } 
         catch (FacebookApiException $e) {
           error_log($e);
@@ -41,6 +43,7 @@ class App_controller extends Controller{
           'lastname'=>$f3->get('informations->fields.nom.value'),
           'profil_picture'=>$f3->get('informations->fields.photo.value'),
           'ville'=>$f3->get('informations->fields.ville.value'),
+          'access_token' => $facebook->getAccessToken()
 
         );
         // On lance la session, on configure le lien de lougout et redirige vers wishlist
@@ -89,7 +92,8 @@ class App_controller extends Controller{
           'firstname'=>$auth->prenom,
           'lastname'=>$auth->nom,
           'profil_picture'=>$auth->photo,
-          'ville'=>$auth->ville
+          'ville'=>$auth->ville,
+          'access_token' => $facebook->getAccessToken()
         );
 
         $f3->set('SESSION',$user);
@@ -259,20 +263,22 @@ class App_controller extends Controller{
     $facebook = new Facebook(array(
       'appId'  => '479303535507941',
       'secret' => '2d568c782decb0e86bf9fefb5ec1f16e',
+      'allowSignedRequest' => false,
+      'cookie' => true
     ));
-
-    $f3->set('user', $facebook->getUser());
-    print_r($f3->get('user'));
     
+
+    $f3->set('friends',$facebook->api('/me/friends','GET',array('access_token' =>  $f3->get('SESSION.access_token'))));
+
+    $ourServiceUsers = array();
+     foreach ($f3->get('friends.data') as $i => $friend) {
+       $isOnSite = $this->model->isOnSite(array('id_facebook'=>$friend["id"]));
+       if($isOnSite){
+         array_push($ourServiceUsers, $friend["name"]);
+       }
+     }
+    $f3->set('ourServiceUsers', $ourServiceUsers);
     $this->tpl['sync']='follow.html';
-    //$ourServiceUsers = array();
-    // foreach ($f3->get('friends.data') as $i => $friend) {
-    //   $isOnSite = $this->model->isOnSite(array('id_facebook'=>$friend["id"]));
-    //   if($isOnSite){
-    //     array_push($ourServiceUsers, $friend["name"]);
-    //   }
-    // }
-    //$f3->set('ourServiceUsers', $ourServiceUsers);
   }
 
    public function getInfos($f3){

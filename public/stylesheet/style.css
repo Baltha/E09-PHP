@@ -613,7 +613,7 @@ header{
 	  #newtag{
 	  	display: none;
 	  }
-	  
+
 	  #newtag.active{
 		display: inline-block;
 		tansition: display 0.3s ease;
@@ -687,6 +687,12 @@ header{
 	  #tags li a.active:after{
 	  	background: url("../images/checkmark_active.svg") center center;
 	  	opacity: 1;
+	  }
+	/* 5.2 - Follow Page */ 
+
+	  #follow {  
+	  	margin: 0 auto;
+	  	padding-top: 114px;
 	  }
 
 	  #tags li a.active{

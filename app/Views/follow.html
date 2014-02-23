@@ -2,9 +2,13 @@
     <div id="bannerTop">
     
     </div>
+    <div class="clear"></div>
     <div id="content">
         <div id="follow">
-   
+        	<h2>Amis Facebook présent sur le site</h2>
+        	<?php foreach ($ourServiceUsers as $friend) { ?>
+        		<p> <?php echo $friend ?> </p>
+        	<?php } ?>
         </div>
         <div class="clear"></div>
     </div>
