@@ -446,7 +446,7 @@ header{
 
 	  .wish{
 	  	width: 200px;
-	  	height: auto;
+	  	height: 250px;
 	  	margin-bottom: 20px;
 	  	margin-right: 20px;
 	  	border: 1px solid #dddddd;
@@ -522,6 +522,14 @@ header{
 
 	  .wish .active{
 		display: block;
+	  }
+	  
+	  .itemLoader{
+	  	width: 32px !important;
+	  	height: 32px !important;
+	  	margin: 0 auto;
+	  	margin-top: 110px;
+	  	display: block;
 	  }
 		
 	  #tags{

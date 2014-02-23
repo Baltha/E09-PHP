@@ -70,37 +70,46 @@ $('.delete').on('click', function(e){
 
 $('#addProduct').submit(function(e){
 	e.preventDefault();
+	data = '<div class="newWish wish"> </div>'
+	var node = $(data, {
+    	html: $('.newWish').html()
+	});
+	$('#wishlist').prepend(node);
+	$('#wishlist').isotope( 'prepended', node);
+	$container.isotope('layout');
+	$('.newWish').html("<img class='itemLoader' src='public/images/itemLoader.GIF'>");
 	$.ajax({
 		type: "POST",
 		data: $(this).serialize(),
 		url: "addProduct/"
 	})
 	.done(function(data) {
-		var node = $(data, {
-    	 	html: $('.newWish').html()
-		});
-		$('#wishlist').prepend(node);
-		$('#wishlist').isotope( 'prepended', node);
-		$container.isotope('layout');
-
+		$('.newWish').html(data);
+		var classes = $("#tags_value").val();
+		$('.newWish').addClass(classes);
+		$('.newWish').removeClass("newWish");
 	})
 	.fail(function(a) {
 		console.log(a);
 	});
+
 });
 
 
+$(document).on({
+    mouseenter: function () {
+        $(this).find('.wish_prix').fadeIn(0);
+        $(this).find('.delete').fadeIn(0);
+    },
+    mouseleave: function () {
+        $(this).find('.wish_prix').fadeOut(0);
+        $(this).find('.delete').fadeOut(0);
+    }
+}, '.wish');
 
 //.Wish Hover
 
-$('.wish').mouseover(function(){
-	$(this).children().eq(2).addClass('active');
-	$(this).children().eq(3).addClass('active');
-});
-$('.wish').mouseleave(function(){
-	$(this).children().eq(2).removeClass('active');
-	$(this).children().eq(3).removeClass('active');
-});
+
 
 
 

@@ -35,7 +35,7 @@
                 foreach ($allProducts as $i => $product) { ?>
                     <?php $productName = $product['nom'];
                     if(strlen($productName) > 40){
-                        $productName = substr($productName, 0, 40);
+                        $productName = substr($productName, 0, 35);
                         $productName = $productName."...";
                     }?>
                     <div class="wish <?php if(isset($productTags[$i][0]['nom'])){ echo $productTags[$i][0]['nom'];} ?> " >
