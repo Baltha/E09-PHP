@@ -219,7 +219,7 @@ class App_model extends Model{
 
   public function getProducts($params)
   {  
-     $allproducts=$this->dB->exec('SELECT * FROM souhait s LEFT JOIN article a ON s.id_article=a.id_article WHERE s.id_user='.$params['id_user']);
+     $allproducts=$this->dB->exec('SELECT * FROM souhait s LEFT JOIN article a ON s.id_article=a.id_article WHERE s.id_user='.$params['id_user'].' ORDER BY id_souhait DESC');
      return $allproducts;
   }
 
