@@ -77,6 +77,10 @@ html{
 	font-size: 62.5%;
 }
 
+*{
+	outline:none;
+}
+
 body{
 	font-size: 1.4rem;
 }
@@ -201,7 +205,6 @@ header{
 	margin-top: 25px;
 	border-radius: 4px;
 	position: relative;
-	transition: all 0.3s ease;
 	cursor: pointer;
 }
 
@@ -220,7 +223,7 @@ header{
 	left:7px;
 	top:7px;
 	text-indent: -9000px;
-	transition: all 0.3s ease;
+	transition: background 0.3s ease;
 }
 
 #leftSidebar .name{
@@ -303,28 +306,32 @@ header{
 	position: relative;
 }
 
-#leftSidebar #menu li:first-child{
+#leftSidebar #menu li:first-child.actif{
 	border-left: 4px solid #288dff;
+	transition: all 0.3s ease;
 }
 
-#leftSidebar #menu li:nth-child(2){
+#leftSidebar #menu li:nth-child(2).actif{
 	border-left: 4px solid #e82f4e;
+	transition: all 0.3s ease;
 }
-#leftSidebar #menu li:nth-child(3){
+#leftSidebar #menu li:nth-child(3).actif{
 	border-left: 4px solid #fb9a00;
+	transition: all 0.3s ease;
 }
-#leftSidebar #menu li:nth-child(4){
+#leftSidebar #menu li:nth-child(4).actif{
 	border-left: 4px solid #04b300;
+	transition: all 0.3s ease;
 }
 
-#leftSidebar #menu li:before{
+/*#leftSidebar #menu li:before{
 	content:"";
 	width: 0; 
 	height: 0; 
 	border-top: 5px solid transparent;
 	border-bottom: 5px solid transparent;
 	border-left: 5px solid #288DFF;
-	display: none;
+	display: block;
 	background-size: cover;
 	position: absolute;
 	top:25px;
@@ -342,7 +349,7 @@ header{
 
 #leftSidebar #menu li:hover:before {
     display: block;
-}
+}*/
 
 #leftSidebar #menu a{
 	color:#f0f0f0;
@@ -358,13 +365,14 @@ header{
 	font-size: 1.4rem;
 }
 
-#leftSidebar #menu a:hover{
+#leftSidebar #menu a:hover, #leftSidebar #menu a.actif{
 	color:#f0f0f0;
 	text-decoration: none;
 	height: 60px;
 	line-height: 60px;
 	display: block;
 	background-color:#2d2d2d;
+	transition: all 0.3s ease;
 }
 
 #leftSidebar #updateForm{
@@ -408,8 +416,6 @@ header{
 }
 
 
-
-
   /* 5.0 - Content */
   	  /* 5.1 - Struture content */
 
@@ -421,13 +427,57 @@ header{
 	
 	  #bannerTop{
 	  	height: 76px;
-	  	width: 100%;
+	  	width: calc(100% - 270px);
 	  	background: #f0f0f0;
 	  	border-bottom: 1px solid #dddddd;
 	  	position: fixed;
 	  	top: 38px;
 	  	z-index: 10;
+	  	display: table;
 	  }
+
+	  #bannerTop form{
+	  	display: table-cell;
+	  	text-align: center;
+	  	vertical-align: middle;
+	  }
+
+		  /* style input ADDPRODUCT*/
+
+			#addProduct input, #addProduct select{
+				margin: 0;
+				padding: 0;
+				background: none;
+				border: none;
+				box-shadow: none;
+			}
+
+			#addProduct input[name="product"]{
+
+				width: 400px;
+				height: 30px;
+				background: white;
+				border-radius: 4px;
+				box-sizing: border-box;
+				border: 1px solid #dddddd;
+				color: #dddddd;
+				font-family: "Exo 2";
+				font-weight: 200;
+				letter-spacing: 0.3pt;
+				font-size: 1rem;
+				padding-left: 12px;
+			}
+
+			#addProduct input[name="product"]+select{
+				height: 30px;
+				box-sizing: border-box;
+				border-radius: 4px;
+				border: 1px solid #cccccc;
+				width: 120px;
+				font-family: "Exo 2";
+				letter-spacing: 0.3pt;
+				margin-left: 10px;
+			}
 
 	  #content{
 		width: auto;
@@ -512,7 +562,11 @@ header{
 	  	right: 10px;
 	  	z-index: 10;
 	  	text-indent: -9000px;
-	  	opacity: 0.9;
+	  }
+
+	  .wish .delete:active{
+	  	background: url("../images/delete_2.png");
+	  	background-size: contain;
 	  }
 
 	  .wish .wish_prix{
@@ -525,7 +579,7 @@ header{
 	  	min-width: 50px;
 	  	height: 18px;
 	  	display: none;
-	  	background: rgba(255,255,255,0.9);
+	  	background: #f0f0f0;
 	  	position: absolute;
 	  	top: 10px;
 	  	left: 10px;
@@ -560,51 +614,54 @@ header{
 
 	  #tags li{
 	  	display: inline;
-	  	margin-right: 20px;
-	  	border-radius: 5px;
+	  	margin-right: 4px;
 	  }
 
 	  #tags li:first-child{
-		margin-left: 100px;
+		margin-left: 8px;
 	  }
 
 	  #tags li a{
 	  	font-family: "Varela Bound", "verdana", "sans-serif";
-	  	font-size: 1.3rem;
+	  	font-size: 1rem;
 	  	color: #cccccc;
 	  	background: #fff;
 	  	text-transform: uppercase;
 	  	text-decoration: none;
 	  	line-height: 40px;
-	  	border-radius: 5px;
-	  	padding: 5px 10px;
-	  	border: 1px solid #cccccc;
+	  	border-radius: 4px;
+	  	padding: 5px 8px 5px 10px;
+	  	border: 1px solid #dddddd;
+	  	width: auto;
+	  	min-width: 130px !important;
+	  	letter-spacing: 0.5pt;
+	  	transition: all 0.3s ease;
 	  }
 
 
 	  #tags li a:hover{
-	  	font-family: "Varela Bound", "verdana", "sans-serif";
-	  	color: #9d9d9d;
-	  }
-
-	  #tags li a.active{
-	  	color: #3d3d3d;
+	  	color: #222222;
+	  	transition: all 0.3s ease;
 	  }
 
 	  #tags li a:after{
 		content:"";
-		width: 10px;
+		width: 12px;
 		height: 10px;
 		display: inline-block;
 		background: url("../images/checkmark.svg") center center;
 		background-size: cover;
 		margin-left: 20px;
-		opacity: 0.5;
+		opacity: 0.3;
 	  }
 
 	  #tags li a.active:after{
 	  	background: url("../images/checkmark_active.svg") center center;
 	  	opacity: 1;
+	  }
+
+	  #tags li a.active{
+	  	color: #222222;
 	  }
 
 

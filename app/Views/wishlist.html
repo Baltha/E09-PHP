@@ -6,8 +6,7 @@
         </h1>
 	<?php else: ?>  
         <form method="post" action='addProduct' id="addProduct">
-          <label>Ajouter un article</label>
-          <input type='text' name='product'>
+          <input type='text' name='product' placeholder="URL du produit à insérer dans votre wishlist">
           <select name="tag" id="category">
            <?php if(isset($tags))
           {
@@ -17,8 +16,7 @@
           }
           ?> 
           </select>
-          <label>Ajouter un nouveau</label>
-          <input type='text' name='newtag'>
+          <input type='text' name='newtag' placeholder="tag">
           <input type='submit' value='Ajouter'>
         </form>
     <?php endif; ?>
