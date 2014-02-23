@@ -1,6 +1,8 @@
 $( document ).ready(function() {
 	var document_height = $(document).height();
+	var wishlist_width = $("#wishlist").width();
 	$("#leftSidebar").height(document_height);
+
 });
 
 
@@ -88,6 +90,9 @@ $('#addProduct').submit(function(e){
 	.done(function(data) {
 		$('.newWish').html(data);
 		var classes = $("#tags_value").val();
+		if(classes != "Toutes"){
+			$('.newWish').addClass("Toutes");
+		}
 		$('.newWish').addClass(classes);
 		$('.newWish').removeClass("newWish");
 	})
@@ -97,6 +102,11 @@ $('#addProduct').submit(function(e){
 
 });
 
+$('#tags li a').on('click', function(e){
+	e.preventDefault();
+	$('#tags li a').removeClass("active");
+	$(this).addClass("active");
+});
 
 $(document).on({
     mouseenter: function () {

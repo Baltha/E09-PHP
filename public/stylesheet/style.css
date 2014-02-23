@@ -554,19 +554,57 @@ header{
 		z-index: 10;
 		background: #f0f0f0;
 		width: 100%;
-		height: 38px;
+		height: 40px;
 		border-top: 1px solid #dddddd;
 	  }
 
 	  #tags li{
 	  	display: inline;
-	  	font-family: "Exo 2", "verdana", "sans-serif";
-	  	font-size: 1.6rem;
-	  	color: #222;
+	  	margin-right: 20px;
+	  	border-radius: 5px;
+	  }
+
+	  #tags li:first-child{
+		margin-left: 100px;
+	  }
+
+	  #tags li a{
+	  	font-family: "Varela Bound", "verdana", "sans-serif";
+	  	font-size: 1.3rem;
+	  	color: #cccccc;
+	  	background: #fff;
 	  	text-transform: uppercase;
-	  	margin-right: 10px;
 	  	text-decoration: none;
-	  	line-height: 50px;
+	  	line-height: 40px;
+	  	border-radius: 5px;
+	  	padding: 5px 10px;
+	  	border: 1px solid #cccccc;
+	  }
+
+
+	  #tags li a:hover{
+	  	font-family: "Varela Bound", "verdana", "sans-serif";
+	  	color: #9d9d9d;
+	  }
+
+	  #tags li a.active{
+	  	color: #3d3d3d;
+	  }
+
+	  #tags li a:after{
+		content:"";
+		width: 10px;
+		height: 10px;
+		display: inline-block;
+		background: url("../images/checkmark.svg") center center;
+		background-size: cover;
+		margin-left: 20px;
+		opacity: 0.5;
+	  }
+
+	  #tags li a.active:after{
+	  	background: url("../images/checkmark_active.svg") center center;
+	  	opacity: 1;
 	  }
 
 

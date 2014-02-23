@@ -231,7 +231,15 @@ class App_controller extends Controller{
     $f3->set('ESCAPE',FALSE);
     $f3->set('product',$product);
     $f3->set('SESSION.product',$product);
-    $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$f3->get('SESSION.product'),'tag'=>$f3->get('POST.tag'),'id_user'=>$f3->get('SESSION.id'))));
+    if(!empty($f3->get('POST.newtag'))){
+      $date = date('Y-m-d H:i:s');
+      $f3->set('product',$this->model->addTag(array('nom'=>$f3->get('POST.newtag'),'id_user'=>$f3->get('SESSION.id'),'date_tag'=>$date)));
+      $f3->set('theTag', $f3->get('POST.newtag'));
+    }
+    else{
+      $f3->set('theTag', $f3->get('POST.tag'));
+    }
+    $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$f3->get('SESSION.product'),'tag'=>$f3->get('theTag'),'id_user'=>$f3->get('SESSION.id'))));
     $f3->set('SESSION.product',array());
     $f3->set('lastProduct',$this->model->lastProduct(array('id_user'=>$f3->get('SESSION.id'))));
     $lastProduct = $f3->get('lastProduct');
@@ -244,12 +252,6 @@ class App_controller extends Controller{
    $f3->set('OneProduct',$this->model->deleteProduct(array('id_souhait'=>$f3->get('PARAMS.id_souhait'))));   
    $f3->set('status',$this->model->deleteProduct(array('id_souhait'=>$f3->get('PARAMS.id_souhait'))));
    $this->tpl['async']='json/status.json';
-  }
-
-  public function newTag($f3){
-    $date = date('Y-m-d H:i:s');
-    $f3->set('product',$this->model->addTag(array('nom'=>$f3->get('POST.tag'),'id_user'=>$f3->get('SESSION.id'),'date_tag'=>$date)));
-    $f3->reroute("/wishlist");
   }
 
   public function myFollow($f3){
