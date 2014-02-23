@@ -450,6 +450,7 @@ header{
 				background: none;
 				border: none;
 				box-shadow: none;
+				transition: all 0.3s ease;
 			}
 
 			#addProduct input[name="product"]{
@@ -460,23 +461,71 @@ header{
 				border-radius: 4px;
 				box-sizing: border-box;
 				border: 1px solid #dddddd;
-				color: #dddddd;
+				color: #222222;
 				font-family: "Exo 2";
 				font-weight: 200;
 				letter-spacing: 0.3pt;
 				font-size: 1rem;
 				padding-left: 12px;
+				transition: all 0.3s ease;
 			}
 
 			#addProduct input[name="product"]+select{
 				height: 30px;
 				box-sizing: border-box;
 				border-radius: 4px;
-				border: 1px solid #cccccc;
+				border: 1px solid #dddddd;
 				width: 120px;
-				font-family: "Exo 2";
-				letter-spacing: 0.3pt;
 				margin-left: 10px;
+				background-color: white;
+				color: #222222;
+				font-family: "Exo 2";
+				font-weight: 200;
+				letter-spacing: 0.5pt;
+				font-size: 1.1rem;
+				padding-left: 12px;
+				transition: all 0.3s ease;
+			}
+
+			#addProduct input[name="newtag"]{
+
+				width: 120px;
+				height: 30px;
+				background: white;
+				border-radius: 4px;
+				box-sizing: border-box;
+				border: 1px solid #dddddd;
+				color: #222222;
+				font-family: "Exo 2";
+				font-weight: 200;
+				letter-spacing: 0.3pt;
+				font-size: 1rem;
+				padding-left: 12px;
+				margin-left: 10px;
+				transition: all 0.3s ease;
+			}
+
+			#addProduct input[value="Ajouter"]{
+
+				width: 120px;
+				margin-left: 10px;
+				background-color: #288DFF;
+				border-radius: 4px;
+				height: 30px;
+				color: white;
+				font-family: "Exo 2";
+				font-weight: 200;
+				text-transform: uppercase;
+				letter-spacing: 0.5pt;
+				cursor: pointer;
+				box-sizing: border-box;
+				transition: all 0.3s ease;
+			}
+
+			#addProduct input[value="Ajouter"]:hover{
+
+				transition: all 0.3s ease;
+
 			}
 
 	  #content{
@@ -512,7 +561,7 @@ header{
 
 	  .wish{
 	  	width: 200px;
-	  	height: 250px;
+	  	height: auto;
 	  	margin-bottom: 20px;
 	  	margin-right: 20px;
 	  	border: 1px solid #dddddd;
@@ -600,6 +649,7 @@ header{
 	  
 	  #newtag.active{
 		display: inline-block;
+		tansition: display 0.3s ease;
 	  }
 	  
 	  .itemLoader{
@@ -608,6 +658,11 @@ header{
 	  	margin: 0 auto;
 	  	margin-top: 110px;
 	  	display: block;
+	  }
+
+	  #tagList{
+	  	display: table;
+	  	text-align: center;
 	  }
 		
 	  #tags{
@@ -618,15 +673,13 @@ header{
 		width: 100%;
 		height: 40px;
 		border-top: 1px solid #dddddd;
+		display: table-cell;
+		width: calc(100% - 270px)
 	  }
 
 	  #tags li{
 	  	display: inline;
 	  	margin-right: 4px;
-	  }
-
-	  #tags li:first-child{
-		margin-left: 8px;
 	  }
 
 	  #tags li a{

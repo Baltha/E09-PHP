@@ -15,10 +15,10 @@
               <?php } 
           }
           ?> 
-            <option  value="newtag">Nouveau tag</option>
+            <option  value="newtag">Autre tag</option>
           </select>
 
-          <input type='text' name='newtag' id="newtag" placeolder="Nouveau tag">
+          <input type='text' name='newtag' id="newtag" placeholder="Nouveau tag">
 
           <input type='submit' value='Ajouter'>
         </form>
@@ -48,15 +48,17 @@
         </div>
         <div class="clear"></div>
     </div>
-    <ul id="tags">
-       <?php
-        if(isset($tags))
-        {
-            foreach ($tags as $tag) { ?>
-                <li><a href="#" data-filter="<?php echo ".".$tag['nom'];?>"><?php echo $tag['nom'];?></a></li>
-            <?php } 
-        }
-        ?> 
-    </ul>
+    <div id="tagList">
+      <ul id="tags">
+         <?php
+          if(isset($tags))
+          {
+              foreach ($tags as $tag) { ?>
+                  <li><a href="#" data-filter="<?php echo ".".$tag['nom'];?>"><?php echo $tag['nom'];?></a></li>
+              <?php } 
+          }
+          ?> 
+      </ul>
+    </div>
 <?php require('footer.html');?>
 
