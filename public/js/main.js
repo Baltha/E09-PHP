@@ -13,7 +13,7 @@ var $container = $('#wishlist');
 $container.isotope({
   // options
   itemSelector : '.wish',
-  layoutMode : 'fitRows'
+  layoutMode : 'masonry'
 });
 
 $('#tags a').on('click', function(){
