@@ -24,12 +24,14 @@ $('#tags a').on('click', function(){
 $('#update > a').on('click', function(e){
 	e.preventDefault();
 	if($('#menu').hasClass("editing")){
+		$('#update a').removeClass("updateActive");
 		$('#menu').removeClass("editing");
 		$('#userStats').removeClass("editing");
 		$('#updateForm').addClass("hidden");
-		$('#leftSidebar .name').removeClass("hidden");
-		$('#leftSidebar .ville').removeClass("hidden");
+		$('#leftSidebar .name').removeClass("hidden editing");
+		$('#leftSidebar .ville').removeClass("hidden editing");
 	}else{
+		$('#update a').addClass("updateActive");
 		if($('#updateForm').hasClass("hidden")){
 			$('#updateForm').removeClass("hidden");
 		}
