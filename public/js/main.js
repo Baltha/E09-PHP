@@ -102,6 +102,15 @@ $('#addProduct').submit(function(e){
 
 });
 
+$('#category').on('change', function() {
+  if(this.value == "newtag"){
+  	$("#newtag").addClass("active");
+  }
+  else{
+  	$("#newtag").removeClass("active");
+  }
+});
+
 $('#tags li a').on('click', function(e){
 	e.preventDefault();
 	$('#tags li a').removeClass("active");

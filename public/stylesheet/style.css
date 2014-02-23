@@ -539,6 +539,14 @@ header{
 	  .wish .active{
 		display: block;
 	  }
+
+	  #newtag{
+	  	display: none;
+	  }
+	  
+	  #newtag.active{
+		display: inline-block;
+	  }
 	  
 	  .itemLoader{
 	  	width: 32px !important;

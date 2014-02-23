@@ -262,18 +262,17 @@ class App_controller extends Controller{
     ));
 
     $f3->set('user', $facebook->getUser());
-    $f3->set('friends', $facebook->api('/me/friends'));
-    print_r($f3->get('friends'));
+    print_r($f3->get('user'));
     
     $this->tpl['sync']='follow.html';
-    $ourServiceUsers = array();
+    //$ourServiceUsers = array();
     // foreach ($f3->get('friends.data') as $i => $friend) {
     //   $isOnSite = $this->model->isOnSite(array('id_facebook'=>$friend["id"]));
     //   if($isOnSite){
     //     array_push($ourServiceUsers, $friend["name"]);
     //   }
     // }
-    $f3->set('ourServiceUsers', $ourServiceUsers);
+    //$f3->set('ourServiceUsers', $ourServiceUsers);
   }
 
    public function getInfos($f3){
