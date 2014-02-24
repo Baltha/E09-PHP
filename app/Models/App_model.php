@@ -63,7 +63,8 @@ class App_model extends Model{
   }
 
   public function login($params){
-    return $this->getMapper('users')->load(array('mail=?',$params['login']));
+
+    return $this->getMapper('users')->load(array('mail=? AND mdp=?',$params['login'],$this->password($params['password'])));
    }
   
  public function parseProduct($params)
@@ -196,15 +197,19 @@ class App_model extends Model{
       $lastIdSouhait=$lastIdSouhait[0]['id_souhait'];
 
    // Ajout du tag
-    $idTag = $this->getMapper('tag')->load(array('nom=? && id_user=?', $params['tag'], $params['id_user']));
-    $idTag = $idTag["fields"]["id_tag"]["value"];
-    $this->dB->exec(
-      array(
-            'INSERT INTO appartenance (id_souhait,id_tag) VALUES (?,?)'),
-      array(
-                array(1=>$lastIdSouhait,2=>$idTag)
-           )
-    );
+    if(isset($params['tag']))
+    {
+      $idTag = $this->getMapper('tag')->load(array('nom=? && id_user=?', $params['tag'], $params['id_user']));
+      $idTag = $idTag["fields"]["id_tag"]["value"];
+      $this->dB->exec(
+        array(
+              'INSERT INTO appartenance (id_souhait,id_tag) VALUES (?,?)'),
+        array(
+                  array(1=>$lastIdSouhait,2=>$idTag)
+             )
+      );
+    }
+    
 
     return $lastIdArticle;
   }
@@ -254,7 +259,7 @@ class App_model extends Model{
     $page->save();
 
   }
-
+  
 
 }
 ?>

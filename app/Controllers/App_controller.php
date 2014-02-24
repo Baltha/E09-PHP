@@ -11,8 +11,8 @@ class App_controller extends Controller{
     $facebook = new Facebook(array(
       'appId'  => '479303535507941',
       'secret' => '2d568c782decb0e86bf9fefb5ec1f16e',
-      'allowSignedRequest' => false,
-      'cookie' => true
+      'allowSignedRequest'=>false,
+      'cookie'=>true
     ));
 
     // récupère l'id facebook
@@ -29,7 +29,6 @@ class App_controller extends Controller{
           // friends : liste des amis du user
           $f3->set('me', $facebook->api('/me'));
           $f3->set('friends', $facebook->api('/me/friends'));
-
         } 
         catch (FacebookApiException $e) {
           error_log($e);
@@ -44,6 +43,7 @@ class App_controller extends Controller{
           'profil_picture'=>$f3->get('informations->fields.photo.value'),
           'ville'=>$f3->get('informations->fields.ville.value'),
           'access_token' => $facebook->getAccessToken()
+
 
         );
         // On lance la session, on configure le lien de lougout et redirige vers wishlist
@@ -93,7 +93,8 @@ class App_controller extends Controller{
           'lastname'=>$auth->nom,
           'profil_picture'=>$auth->photo,
           'ville'=>$auth->ville,
-          'access_token' => $facebook->getAccessToken()
+          'access_token'=>$facebook->getAccessToken()
+          'ville'=>$auth->ville
         );
 
         $f3->set('SESSION',$user);
@@ -102,8 +103,8 @@ class App_controller extends Controller{
       }
     }
 
-
-
+    $error=$f3->get('GET.error');
+    $f3->set('error',isset($error));
     $this->tpl['sync']='main.html';
 
   }
@@ -114,8 +115,7 @@ class App_controller extends Controller{
       'password' => $f3->get('POST.password')
     ));
     if(!$auth){
-      $f3->set('error', 'Oops , vos identifians sont érronés. Veuillez réessayer');
-      $this->tpl['sync']='login.html';
+      $f3->reroute('/?error');
     }
     else{
       $user=array(
@@ -265,23 +265,21 @@ class App_controller extends Controller{
       'secret' => '2d568c782decb0e86bf9fefb5ec1f16e',
       'allowSignedRequest' => false,
       'cookie' => true
-    ));
-    
+   ));
 
-    $f3->set('friends',$facebook->api('/me/friends','GET',array('access_token' =>  $f3->get('SESSION.access_token'))));
-
+    $f3->set('friends',$facebook->api('/me/friends','GET',array('access_token'=>$f3->get('SESSION.access_token'))));
     $ourServiceUsers = array();
-     foreach ($f3->get('friends.data') as $i => $friend) {
-       $isOnSite = $this->model->isOnSite(array('id_facebook'=>$friend["id"]));
-       if($isOnSite){
-         array_push($ourServiceUsers, $friend["name"]);
-       }
-     }
+    foreach ($f3->get('friends.data') as $i => $friend) {
+      $isOnSite = $this->model->isOnSite(array('id_facebook'=>$friend["id"]));
+      if($isOnSite){
+        array_push($ourServiceUsers, $friend["name"]);
+      }
+    }
     $f3->set('ourServiceUsers', $ourServiceUsers);
     $this->tpl['sync']='follow.html';
   }
 
-   public function getInfos($f3){
+  public function getInfos($f3){
     $f3->set('infos',$this->model->getUser(array('id_user'=>$f3->get('SESSION.id'))));
     $this->tpl['async']='partials/updateInfosForm.html';
 
@@ -318,8 +316,57 @@ class App_controller extends Controller{
           $f3->reroute("/wishlist");
         }
       }
-    }      
+    }  
+    public function giveIframe($f3)
+    {
+       $f3->set('url',$f3->get('GET.url'));
+       header_remove("X-Frame-Options");
+       $this->tpl['sync']='iframe.html';
+    }
+    public function verifIdInFrame($f3)
+    {
+      $id=$f3->get('SESSION.id');
+      if(isset($id))
+      {
+        //L'utilisateur est déja connecté, appelle d'une méthod pour ajout à la wishlist du user en question.
+        //et on affiche une page html annoncant que le produit a bien été ajouté.
+        $product=$this->model->parseProduct(array('product'=>$f3->get('GET.url')));
+        $f3->set('product',$this->model->addProduct(array(
+          'nom'=>$product['nom'],
+          'product'=>$product,
+          'id_user'=>$id
+        )));
+        $this->tpl['sync']='souhaitDone.html';
 
+      }
+      else
+      {
+        $error=$f3->get('GET.error');
+        $f3->set('error',isset($error));
+        //sinon on redirige vers un formulaire de connexion, qui créera l'id user de session et ensuite sur la fonction log in frame
+        $this->tpl['sync']='formulairelog.html';
+      }
+      
+    }    
+
+    public function loginInFrame($f3)
+    {
+      
+       $auth=$this->model->login(array('login'=>$f3->get('POST.login'),'password' => $f3->get('POST.password')));
+      if(!$auth){
+        $f3->reroute('/verifIdInFrame?error');
+      }
+      else{
+        $user=array(
+          'id'=>$auth->id_user,
+          'firstname'=>$auth->prenom,
+          'lastname'=>$auth->nom,
+          'ville'=>$auth->ville
+        );
+        $f3->set('SESSION',$user);
+        $f3->reroute('/verifIdInFrame');
+      }
+   }
   // public function searchUsers($f3){
   //   $f3->set('users',$this->model->searchUsers(array('keywords'=>$f3->get('POST.name'),'filter'=>$f3->get('POST.filter'))));
   //   $this->tpl['async']='partials/users.html';
