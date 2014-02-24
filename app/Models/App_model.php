@@ -247,7 +247,7 @@ class App_model extends Model{
   public function lastProduct($params)
   {  
      $lastIdSouhait = $this->dB->exec('SELECT MAX(id_souhait) AS id From souhait WHERE id_user='.$params['id_user'].' LIMIT 1');
-     return $this->dB->exec('SELECT * FROM souhait s LEFT JOIN article a ON s.id_article=a.id_article WHERE s.id_user='.$params['id_user'].' AND s.id_souhait='.$lastIdSouhait[0]['id']);
+     return $this->dB->exec('SELECT * FROM souhait s LEFT JOIN article a ON s.id_article=a.id_article WHERE s.id_user=?'.$params['id_user'].' AND s.id_souhait='.$lastIdSouhait[0]['id']);
      
   }
 

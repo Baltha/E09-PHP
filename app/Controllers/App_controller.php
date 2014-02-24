@@ -393,7 +393,7 @@ class App_controller extends Controller{
           'ville'=>$auth->ville
         );
         $f3->set('SESSION',$user);
-        $f3->reroute('/verifIdInFrame?url='.$url)
+        $f3->reroute('/verifIdInFrame?url='.$url);
       }
    }
   // public function searchUsers($f3){
