@@ -114,7 +114,7 @@ $('#category').on('change', function() {
 $('#tags li a').on('click', function(e){
 	e.preventDefault();
 	$('#tags li a').removeClass("active");
-	$(this).addClass("active");
+	$(this).toggleClass("active");
 });
 
 $(document).on({

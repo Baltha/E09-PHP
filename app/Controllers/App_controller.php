@@ -235,7 +235,7 @@ class App_controller extends Controller{
     $f3->set('ESCAPE',FALSE);
     $f3->set('product',$product);
     $f3->set('SESSION.product',$product);
-    if(!empty($f3->get('POST.newtag'))){
+    if(count($f3->get('POST.newtag'))==0){
       $date = date('Y-m-d H:i:s');
       $f3->set('product',$this->model->addTag(array('nom'=>$f3->get('POST.newtag'),'id_user'=>$f3->get('SESSION.id'),'date_tag'=>$date)));
       $f3->set('theTag', $f3->get('POST.newtag'));
@@ -274,14 +274,21 @@ class App_controller extends Controller{
      foreach ($f3->get('friends.data') as $i => $friend) {
        $isOnSite = $this->model->isOnSite(array('id_facebook'=>$friend["id"]));
        if($isOnSite){
+         print_r($friend);
+         print_r($isOnSite);
          array_push($ourServiceUsers, $friend["name"]);
        }
      }
-    $f3->set('ourServiceUsers', $ourServiceUsers);
+    $f3->set('FacebookFriendsUsers', $ourServiceUsers);
     $this->tpl['sync']='follow.html';
   }
 
-   public function getInfos($f3){
+  public function addFollow($f3){
+      
+  }
+
+
+  public function getInfos($f3){
     $f3->set('infos',$this->model->getUser(array('id_user'=>$f3->get('SESSION.id'))));
     $this->tpl['async']='partials/updateInfosForm.html';
 
@@ -318,7 +325,8 @@ class App_controller extends Controller{
           $f3->reroute("/wishlist");
         }
       }
-    }      
+    }
+
 
   // public function searchUsers($f3){
   //   $f3->set('users',$this->model->searchUsers(array('keywords'=>$f3->get('POST.name'),'filter'=>$f3->get('POST.filter'))));

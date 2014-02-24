@@ -6,8 +6,11 @@
     <div id="content">
         <div id="follow">
         	<h2>Amis Facebook présent sur le site</h2>
-        	<?php foreach ($ourServiceUsers as $friend) { ?>
-        		<p> <?php echo $friend ?> </p>
+        	<?php foreach ($FacebookFriendsUsers as $friend) { ?>
+        		<div class="friend">
+        			<p> <?php echo $friend ?> </p>
+        			<a href="addFollow/">Follow</a>
+        		</div>
         	<?php } ?>
         </div>
         <div class="clear"></div>
