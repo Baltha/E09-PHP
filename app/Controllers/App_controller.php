@@ -351,6 +351,7 @@ class App_controller extends Controller{
         $error=$f3->get('GET.error');
         $f3->set('error',isset($error));
         //sinon on redirige vers un formulaire de connexion, qui créera l'id user de session et ensuite sur la fonction log in frame
+        $f3->set('url',$f3->get('GET.url'));
         $this->tpl['sync']='formulairelog.html';
       }
       
@@ -360,8 +361,9 @@ class App_controller extends Controller{
     {
       
        $auth=$this->model->login(array('login'=>$f3->get('POST.login'),'password' => $f3->get('POST.password')));
+       $url=$f3->set('url',$f3->get('GET.url'));
       if(!$auth){
-        $f3->reroute('/verifIdInFrame?error');
+         $f3->reroute('/verifIdInFrame?error&url='.$url);
       }
       else{
         $user=array(
@@ -371,7 +373,7 @@ class App_controller extends Controller{
           'ville'=>$auth->ville
         );
         $f3->set('SESSION',$user);
-        $f3->reroute('/verifIdInFrame');
+        $f3->reroute('/verifIdInFrame?url='.$url)
       }
    }
   // public function searchUsers($f3){
