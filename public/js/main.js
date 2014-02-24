@@ -4,8 +4,9 @@ $( document ).ready(function() {
 	$("#leftSidebar").height(document_height);
 
 });
+
 function ouvre_popup(page) {
-   window.open(page,"halal","menubar=no, status=no, scrollbars=no, menubar=no, width=750, height=500");
+   window.open(page,"Api GiftMe","menubar=no, status=no, scrollbars=no, menubar=no, width=750, height=500");
 }
 //Isotope
 
