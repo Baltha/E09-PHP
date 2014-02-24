@@ -93,7 +93,7 @@ class App_controller extends Controller{
           'lastname'=>$auth->nom,
           'profil_picture'=>$auth->photo,
           'ville'=>$auth->ville,
-          'access_token'=>$facebook->getAccessToken()
+          'access_token'=>$facebook->getAccessToken(),
           'ville'=>$auth->ville
         );
 
