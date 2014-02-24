@@ -278,8 +278,8 @@ class App_controller extends Controller{
     $myfollowers = $this->model->getfollowers(array('id_user'=>$f3->get('SESSION.id')));
     $myfollowersuser = array();
     foreach ($myfollowers as $onefollower) {
-      $onefolloweruser = $this->model->getUser(array('id_user'=>$onefollow["fields"]["user_enfant"]["value"]));
-      array_push($myfollowsuser, $onefollowuser);
+      $onefolloweruser = $this->model->getUser(array('id_user'=>$onefollower["fields"]["user_parent"]["value"]));
+      array_push($myfollowersuser, $onefolloweruser);
     }
     $f3->set('myfollowers', $myfollowersuser);
 
