@@ -136,17 +136,6 @@ $(document).on({
     }
 }, '.wish');
 
-$('#leftSidebar #menu li').on('click', function(e){
-	e.preventDefault();
-	$('#leftSidebar #menu li').removeClass("actif");
-	$(this).addClass("actif");
-});
-
-$('#leftSidebar #menu a').on('click', function(e){
-	e.preventDefault();
-	$('#leftSidebar #menu a').removeClass("actif");
-	$(this).addClass("actif");
-});
 
 //.Wish Hover
 

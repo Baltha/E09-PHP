@@ -215,6 +215,7 @@ class App_controller extends Controller{
     }
     $f3->set('productTags' , $productTags);
     $f3->set('tags',$this->model->getUserTags(array('id_user'=>$f3->get('SESSION.id'))));
+    $f3->set('page', "wishlist");
     $this->tpl['sync']='wishlist.html';
   }
   public function getUserWishlist($f3){
@@ -266,20 +267,42 @@ class App_controller extends Controller{
       'allowSignedRequest' => false,
       'cookie' => true
    ));
+    $myfollows = $this->model->getfollows(array('id_user'=>$f3->get('SESSION.id')));
+    $myfollowsuser = array();
+    foreach ($myfollows as $onefollow) {
+      $onefollowuser = $this->model->getUser(array('id_user'=>$onefollow["fields"]["user_enfant"]["value"]));
+      array_push($myfollowsuser, $onefollowuser);
+    }
+    $f3->set('myfollows', $myfollowsuser);
+
+    $myfollowers = $this->model->getfollowers(array('id_user'=>$f3->get('SESSION.id')));
+    $myfollowersuser = array();
+    foreach ($myfollowers as $onefollower) {
+      $onefolloweruser = $this->model->getUser(array('id_user'=>$onefollow["fields"]["user_enfant"]["value"]));
+      array_push($myfollowsuser, $onefollowuser);
+    }
+    $f3->set('myfollowers', $myfollowersuser);
 
     $f3->set('friends',$facebook->api('/me/friends','GET',array('access_token'=>$f3->get('SESSION.access_token'))));
     $ourServiceUsers = array();
-     foreach ($f3->get('friends.data') as $i => $friend) {
-       $isOnSite = $this->model->isOnSite(array('id_facebook'=>$friend["id"]));
-       if($isOnSite){
-         print_r($friend);
-         print_r($isOnSite);
-         array_push($ourServiceUsers, $friend["name"]);
-       }
-     }
+    foreach ($f3->get('friends.data') as $i => $friend) {
+      $isOnSite = $this->model->isOnSite(array('id_facebook'=>$friend["id"]));
+      if($isOnSite){
+        $friend["id_user"] = $isOnSite["fields"]["id_user"]["value"];
+        array_push($ourServiceUsers, $friend);
+      }
+    }
     $f3->set('FacebookFriendsUsers', $ourServiceUsers);
+
+    $f3->set('page', "follow");
     $this->tpl['sync']='follow.html';
   }
+
+  public function addFollow($f3){
+      $f3->set('user',$this->model->addFollow(array('user_parent'=>$f3->get('SESSION.id'), 'user_enfant'=>$f3->get('PARAMS.id_user'))));
+      $f3->reroute("/myFollow");
+  } 
+
 
   public function getInfos($f3){
     $f3->set('infos',$this->model->getUser(array('id_user'=>$f3->get('SESSION.id'))));
@@ -320,9 +343,6 @@ class App_controller extends Controller{
     }
   } 
 
-    public function addFollow($f3){
-      
-    } 
 
     public function giveIframe($f3)
     {

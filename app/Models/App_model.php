@@ -50,6 +50,22 @@ class App_model extends Model{
     $map->save();
   }
 
+  public function addFollow($params){
+    $map=$this->getMapper('amis');
+    foreach($params as $key => $param){
+      $map->$key=$param;
+    }
+    $map->save();
+  }
+
+  public function getfollows($params){
+    return $this->getMapper('amis')->find(array('user_parent=?',$params['id_user']));
+  }
+  public function getfollowers($params){
+    return $this->getMapper('amis')->find(array('user_enfant=?',$params['id_user']));
+  }
+
+
   public function addDefaultTag($id_user){
     $insert=$this->getMapper('tag');
     $insert->id_user=$id_user;
