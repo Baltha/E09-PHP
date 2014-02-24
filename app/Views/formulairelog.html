@@ -2,7 +2,7 @@
 <?php if($error){?> 
 			<div class="error">Oops , vos identifians sont érronés. Veuillez réessayer</div>
 		<?php }?>
-<form action="loginInFrame" id="login" method="post">
+<form action="<?php echo 'loginInFrame?url='.$url; ?>" id="login" method="post">
 			<input type="text" name="login" placeholder="login" />
 			<input type="password" name="password" placeholder="password" />
 			<input type="submit" value="Sign in"/>

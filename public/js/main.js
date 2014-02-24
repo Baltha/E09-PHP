@@ -124,7 +124,7 @@ $('#category').on('change', function() {
 $('#tags li a').on('click', function(e){
 	e.preventDefault();
 	$('#tags li a').removeClass("active");
-	$(this).addClass("active");
+	$(this).toggleClass("active");
 });
 
 $(document).on({
@@ -138,17 +138,6 @@ $(document).on({
     }
 }, '.wish');
 
-$('#leftSidebar #menu li').on('click', function(e){
-	e.preventDefault();
-	$('#leftSidebar #menu li').removeClass("actif");
-	$(this).addClass("actif");
-});
-
-$('#leftSidebar #menu a').on('click', function(e){
-	e.preventDefault();
-	$('#leftSidebar #menu a').removeClass("actif");
-	$(this).addClass("actif");
-});
 
 //.Wish Hover
 

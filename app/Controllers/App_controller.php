@@ -215,6 +215,7 @@ class App_controller extends Controller{
     }
     $f3->set('productTags' , $productTags);
     $f3->set('tags',$this->model->getUserTags(array('id_user'=>$f3->get('SESSION.id'))));
+    $f3->set('page', "wishlist");
     $this->tpl['sync']='wishlist.html';
   }
   public function getUserWishlist($f3){
@@ -235,7 +236,7 @@ class App_controller extends Controller{
     $f3->set('ESCAPE',FALSE);
     $f3->set('product',$product);
     $f3->set('SESSION.product',$product);
-    if(!empty($f3->get('POST.newtag'))){
+    if($f3->get('POST.newtag')){
       $date = date('Y-m-d H:i:s');
       $f3->set('product',$this->model->addTag(array('nom'=>$f3->get('POST.newtag'),'id_user'=>$f3->get('SESSION.id'),'date_tag'=>$date)));
       $f3->set('theTag', $f3->get('POST.newtag'));
@@ -266,57 +267,83 @@ class App_controller extends Controller{
       'allowSignedRequest' => false,
       'cookie' => true
    ));
+    $myfollows = $this->model->getfollows(array('id_user'=>$f3->get('SESSION.id')));
+    $myfollowsuser = array();
+    foreach ($myfollows as $onefollow) {
+      $onefollowuser = $this->model->getUser(array('id_user'=>$onefollow["fields"]["user_enfant"]["value"]));
+      array_push($myfollowsuser, $onefollowuser);
+    }
+    $f3->set('myfollows', $myfollowsuser);
+
+    $myfollowers = $this->model->getfollowers(array('id_user'=>$f3->get('SESSION.id')));
+    $myfollowersuser = array();
+    foreach ($myfollowers as $onefollower) {
+      $onefolloweruser = $this->model->getUser(array('id_user'=>$onefollower["fields"]["user_parent"]["value"]));
+      array_push($myfollowersuser, $onefolloweruser);
+    }
+    $f3->set('myfollowers', $myfollowersuser);
 
     $f3->set('friends',$facebook->api('/me/friends','GET',array('access_token'=>$f3->get('SESSION.access_token'))));
     $ourServiceUsers = array();
     foreach ($f3->get('friends.data') as $i => $friend) {
       $isOnSite = $this->model->isOnSite(array('id_facebook'=>$friend["id"]));
       if($isOnSite){
-        array_push($ourServiceUsers, $friend["name"]);
+        $friend["id_user"] = $isOnSite["fields"]["id_user"]["value"];
+        array_push($ourServiceUsers, $friend);
       }
     }
-    $f3->set('ourServiceUsers', $ourServiceUsers);
+    $f3->set('FacebookFriendsUsers', $ourServiceUsers);
+
+    $f3->set('page', "follow");
     $this->tpl['sync']='follow.html';
   }
+
+  public function addFollow($f3){
+      $f3->set('user',$this->model->addFollow(array('user_parent'=>$f3->get('SESSION.id'), 'user_enfant'=>$f3->get('PARAMS.id_user'))));
+      $f3->reroute("/myFollow");
+  } 
+
 
   public function getInfos($f3){
     $f3->set('infos',$this->model->getUser(array('id_user'=>$f3->get('SESSION.id'))));
     $this->tpl['async']='partials/updateInfosForm.html';
 
   }
-    public function setInfos($f3){
+  public function setInfos($f3){
       //tableau php puis pousser f3
       $erreur = array();
 
-      foreach($f3->get('POST') as $key => $value){
-        if($f3->exists('POST.'.$key))
-          $f3->clean($f3->get('POST'.$key));
-        else
-          array_push($erreur, 'Champ manquant : '.$key);
+    foreach($f3->get('POST') as $key => $value){
+      if($f3->exists('POST.'.$key))
+        $f3->clean($f3->get('POST'.$key));
+      else
+        array_push($erreur, 'Champ manquant : '.$key);
+    }
+
+    if(count($erreur)==0){
+
+      if($f3->get('mdp')==$f3->get('mdp2')){
+           // pas d'erreur on envoie
+        // d'abord vérif si l'adresse mail est déjà présente dans la BDD dans ce cas on l'indique
+        $this->model->setInfos(array(
+          'id_user'=>$f3->get('SESSION.id'),
+          'mdp'=>$this->model->password($f3->get('POST.mdp')),
+          'mail'=>$f3->get('POST.mail'),
+          'adresse'=>$f3->get('POST.adresse'),
+          'ville'=>$f3->get('POST.ville'),
+          'code_postal'=>$f3->get('POST.cp')
+        ));
+
+        $auth=$this->model->getUserInfoAfterSignin(array(
+          'mail'=>$f3->get('POST.mail')
+        ));
+        $f3->set('SESSION.ville',$auth->ville);
+        $f3->reroute("/wishlist");
       }
+    }
+  } 
 
-      if(count($erreur)==0){
 
-        if($f3->get('mdp')==$f3->get('mdp2')){
-             // pas d'erreur on envoie
-          // d'abord vérif si l'adresse mail est déjà présente dans la BDD dans ce cas on l'indique
-          $this->model->setInfos(array(
-            'id_user'=>$f3->get('SESSION.id'),
-            'mdp'=>$this->model->password($f3->get('POST.mdp')),
-            'mail'=>$f3->get('POST.mail'),
-            'adresse'=>$f3->get('POST.adresse'),
-            'ville'=>$f3->get('POST.ville'),
-            'code_postal'=>$f3->get('POST.cp')
-          ));
-
-          $auth=$this->model->getUserInfoAfterSignin(array(
-            'mail'=>$f3->get('POST.mail')
-          ));
-          $f3->set('SESSION.ville',$auth->ville);
-          $f3->reroute("/wishlist");
-        }
-      }
-    }  
     public function giveIframe($f3)
     {
        $f3->set('url',$f3->get('GET.url'));
@@ -344,6 +371,7 @@ class App_controller extends Controller{
         $error=$f3->get('GET.error');
         $f3->set('error',isset($error));
         //sinon on redirige vers un formulaire de connexion, qui créera l'id user de session et ensuite sur la fonction log in frame
+        $f3->set('url',$f3->get('GET.url'));
         $this->tpl['sync']='formulairelog.html';
       }
       
@@ -353,8 +381,9 @@ class App_controller extends Controller{
     {
       
        $auth=$this->model->login(array('login'=>$f3->get('POST.login'),'password' => $f3->get('POST.password')));
+       $url=$f3->set('url',$f3->get('GET.url'));
       if(!$auth){
-        $f3->reroute('/verifIdInFrame?error');
+         $f3->reroute('/verifIdInFrame?error&url='.$url);
       }
       else{
         $user=array(
@@ -364,7 +393,7 @@ class App_controller extends Controller{
           'ville'=>$auth->ville
         );
         $f3->set('SESSION',$user);
-        $f3->reroute('/verifIdInFrame');
+        $f3->reroute('/verifIdInFrame?url='.$url);
       }
    }
   // public function searchUsers($f3){

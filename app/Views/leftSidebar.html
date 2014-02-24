@@ -23,10 +23,10 @@
 	</ul>
 	
 	<ul id="menu">
-		<li class="actif"><a class="actif" href="wishlist/">Ma wishlist</a></li>
-		<li><a href="myFollow/">Mes amis</a></li>
-		<li><a href="myContributions/">Mes contributions</a></li>
-		<li><a href="shareMyList/">Partager ma wishlist</a></li>
+		<li class="<?php if($page == 'wishlist'){ echo "actif";	} ?> "><a href="wishlist/">Ma wishlist</a></li>
+		<li class="<?php if($page == 'follow'){ echo "actif";	} ?> "><a href="myFollow/">Mes amis</a></li>
+		<li class="<?php if($page == 'contribution'){ echo "actif";	} ?> "><a href="myContributions/">Mes contributions</a></li>
+		<li class="<?php if($page == 'share'){ echo "actif";	} ?> "><a href="shareMyList/">Partager ma wishlist</a></li>
 	</ul>
 
 	<div id="updateForm">
