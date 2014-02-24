@@ -5,7 +5,9 @@ $( document ).ready(function() {
 
 });
 
-
+function ouvre_popup(page) {
+   window.open(page,"Api GiftMe","menubar=no, status=no, scrollbars=no, menubar=no, width=750, height=500");
+}
 //Isotope
 
 var $container = $('#wishlist');
@@ -13,7 +15,13 @@ var $container = $('#wishlist');
 $container.isotope({
   // options
   itemSelector : '.wish',
-  layoutMode : 'masonry'
+  layoutMode : 'masonry',
+  masonry: {
+  columnWidth: 200,
+  gutter: 25,
+  isFitWidth: true
+  }
+
 });
 
 $('#tags a').on('click', function(){

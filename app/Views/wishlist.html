@@ -6,12 +6,12 @@
         </h1>
 	<?php else: ?>  
         <form method="post" action='addProduct' id="addProduct">
-          <input type='text' name='product' placeholder="URL du produit à insérer dans votre wishlist">
+          <input type='text' name='product' placeholder="URL du produit à insérer dans votre wishlist" required="required">
           <select name="tag" id="category">
            <?php if(isset($tags))
           {
               foreach ($tags as $tag) { ?>
-                <option  value="<?php echo $tag['nom'];?>"><?php echo $tag['nom'];?> </option>
+                <option required="required"  value="<?php echo $tag['nom'];?>"><?php echo $tag['nom'];?> </option>
               <?php } 
           }
           ?> 
@@ -39,7 +39,7 @@
                         <img src="<?php echo $product['image'] ?>" alt="">
                         <div  class="wish_name"><p><a href="<?php echo $product['lien']; ?>" target="_blank"><?php echo $productName; ?></a></p></div>
                         <p class="wish_prix"><?php echo $product['prix']."€";  ?></p>
-                        <a class="delete" href="deleteProduct/<?php echo $product['id_souhait'];?>">SUPPRIMER</a>
+                        <a class="delete" href="deleteProduct/<?php echo $product['id_souhait'];?>"><img src="http://localhost:8888/E09-PHP/public/images/delete.png"></a>
                     </div>
                 <?php } 
             }
