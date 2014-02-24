@@ -15,7 +15,13 @@ var $container = $('#wishlist');
 $container.isotope({
   // options
   itemSelector : '.wish',
-  layoutMode : 'masonry'
+  layoutMode : 'masonry',
+  masonry: {
+  columnWidth: 200,
+  gutter: 25,
+  isFitWidth: true
+  }
+
 });
 
 $('#tags a').on('click', function(){
