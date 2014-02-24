@@ -40,7 +40,9 @@ $('#update > a').on('click', function(e){
 		$('#updateForm').addClass("hidden");
 		$('#leftSidebar .name').removeClass("hidden editing");
 		$('#leftSidebar .ville').removeClass("hidden editing");
+		$('.profilPicture').removeClass('profilPictureModif');
 	}else{
+		$('.profilPicture').addClass('profilPictureModif');
 		$('#update a').addClass("updateActive");
 		if($('#updateForm').hasClass("hidden")){
 			$('#updateForm').removeClass("hidden");
