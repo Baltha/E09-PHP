@@ -612,6 +612,7 @@ form[action="setInfos"] input[type="submit"]{
 	  	border-radius: 4px;
 	  	width: 28px;
 	  	top: 2px;
+	  	right: 1px;
 	  }
 
 	  .wish .wish_prix{
@@ -730,6 +731,95 @@ form[action="setInfos"] input[type="submit"]{
 	  	color: #222222;
 	  }
 
+	  #bannerTop img{
+	  	float: left;
+	  	width: 76px;
+	  	height: 76px;
+	  }
+
+	  #bannerTop h2{
+	  	font-family: "Varela Round";
+	  	letter-spacing: 1pt;
+	  	font-size: 2rem;
+	  	color: #222222;
+	  	margin-left: 100px;
+	  	margin-top: 28px;
+	  }
+
+	  #bannerTop a:last-child{
+	  	position: absolute;
+	  	margin-right: 22px;
+	  	padding: 10px 12px 10px 12px;
+	  	border-radius: 4px;
+	  	color: white;
+	  	background-color: #ef294a;
+	  	text-decoration: none;
+	  	font-family: "Exo 2";
+	  	font-weight: 200;
+	  	font-size: 1.2rem;
+	  	text-transform: uppercase;
+	  	letter-spacing: 0.3pt;
+	  	top: 22px;
+	  	right: 0;
+	  }
+
+	  .isFollowed{
+	  	position: absolute;
+	  	margin-right: 273px;
+	  	padding: 9px 8px 9px 8px;
+	  	border-radius: 4px;
+	  	color: #ef294a;
+	  	background-color: #F1F1F1;
+	  	text-decoration: none;
+	  	font-family: "Exo 2", "verdana", "sans-serif";
+	  	font-weight: 400;
+	  	font-size: 1rem;
+	  	text-transform: uppercase;
+	  	letter-spacing: 0.3pt;
+	  	top: 22px;
+	  	right: 0;
+	  	box-sizing: border-box;
+	  	border: 1px solid #ef294a;
+	  }
+
+	  	.isFollowed::after{
+	  	content:"";
+		width: 12px;
+		height: 10px;
+		display: inline-block;
+		background: url("../images/checkmark_rouge.svg") center center;
+		background-size: cover;
+		margin-left: 15px;
+	  }
+
+	  	.isFollow{
+	  	position: absolute;
+	  	margin-right: 273px;
+	  	padding: 9px 8px 9px 8px;
+	  	border-radius: 4px;
+	  	color: #222222;
+	  	background-color: #F1F1F1;
+	  	text-decoration: none;
+	  	font-family: "Exo 2", "verdana", "sans-serif";
+	  	font-weight: 200;
+	  	font-size: 1rem;
+	  	text-transform: uppercase;
+	  	letter-spacing: 0.3pt;
+	  	top: 22px;
+	  	right: 0;
+	  	box-sizing: border-box;
+	  	border: 1px solid #222222;
+	  }
+
+	  	.isFollow::after{
+	  	content:"";
+		width: 12px;
+		height: 10px;
+		display: inline-block;
+		background: url("../images/checkmark.svg") center center;
+		background-size: cover;
+		margin-left: 15px;
+	  }
 
 
 
