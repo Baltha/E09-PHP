@@ -22,9 +22,15 @@ class App_model extends Model{
   public function getUser($params){
     return $this->getMapper('users')->load(array('id_user=?', $params['id_user']));
   }
+
+  public function getAllUsers(){
+        return $this->dB->exec('SELECT * FROM users WHERE id_user NOT LIKE 0');
+  }
+
   public function verifNewUser($params){
      return $this->getMapper('users')->load(array('mail=?', $params['mail']));
   }
+
 
   public function setInfos($params){
   //Integrer le code déja fait de jerem ou louis, pour vérif si les deux mdp sont similaires, puis crypter si c'est le cas.

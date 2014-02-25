@@ -287,17 +287,21 @@ class App_controller extends Controller{
     }
     $f3->set('myfollowers', $myfollowersuser);
 
-    $f3->set('friends',$facebook->api('/me/friends','GET',array('access_token'=>$f3->get('SESSION.access_token'))));
     $ourServiceUsers = array();
+    $f3->set('friends',$facebook->api('/me/friends','GET',array('access_token'=>$f3->get('SESSION.access_token'))));
+    $f3->set('allusers', $this->model->getAllUsers());
     foreach ($f3->get('friends.data') as $i => $friend) {
-      $isOnSite = $this->model->getUser(array('id_facebook'=>$friend["id"]));
-      if($isOnSite){
-        $friend["id_user"] = $isOnSite["fields"]["id_user"]["value"];
-        array_push($ourServiceUsers, $friend);
+      foreach ($f3->get('allusers') as $user) {
+        if($friend["id"] == $user["id_facebook"]){
+          $friend["id_user"] = $user["id_user"];
+          array_push($ourServiceUsers, $friend);
+        }
       }
     }
     $f3->set('FacebookFriendsUsers', $ourServiceUsers);
-
+    $f3->set('stats.nbfollowers', count($this->model->getfollowers(array('id_user'=>$f3->get('SESSION.id')))));
+    $f3->set('stats.nbfollows', count($this->model->getfollows(array('id_user'=>$f3->get('SESSION.id')))));
+    $f3->set('stats.wishs', count($this->model->getProducts(array('id_user'=>$f3->get('SESSION.id')))));
     $f3->set('page', "follow");
     $this->tpl['sync']='follow.html';
   }
