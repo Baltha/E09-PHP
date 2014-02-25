@@ -1,0 +1,13 @@
+<?php require('header.html');?>
+    <br />
+    <br />
+    <br />
+
+  <form action="../../addContrib/2/<?php echo $PARAMS['id_user']; ?>" method="post">
+    <p><label for="nom">Nom</label><input type="text" name="nom" required /></p>
+    <p><label for="description">Description</label><textarea name="description" id="description" cols="30" rows="10"></textarea></p>
+    <p><label for="fin">Date de fin de la page</label><input type="date" name="fin" id="fin" required/></p>
+    <input type="submit" value="Créer">
+  </form>
+
+<?php require('footer.html');?>
