@@ -135,8 +135,6 @@ class App_controller extends Controller{
   }
 
   public function inscription($f3){
-
-
       //tableau php puis pousser f3
       $erreur = array();
 
@@ -215,6 +213,9 @@ class App_controller extends Controller{
     }
     $f3->set('productTags' , $productTags);
     $f3->set('tags',$this->model->getUserTags(array('id_user'=>$f3->get('SESSION.id'))));
+    $f3->set('stats.nbfollowers', count($this->model->getfollowers(array('id_user'=>$f3->get('SESSION.id')))));
+    $f3->set('stats.nbfollows', count($this->model->getfollows(array('id_user'=>$f3->get('SESSION.id')))));
+    $f3->set('stats.wishs', count($this->model->getProducts(array('id_user'=>$f3->get('SESSION.id')))));
     $f3->set('page', "wishlist");
     $this->tpl['sync']='wishlist.html';
   }
@@ -227,6 +228,9 @@ class App_controller extends Controller{
     }
     $f3->set('productTags' , $productTags);
     $f3->set('tags',$this->model->getUserTags(array('id_user'=>$f3->get('PARAMS.id_user'))));
+    $f3->set('stats.nbfollowers', count($this->model->getfollowers(array('id_user'=>$f3->get('SESSION.id')))));
+    $f3->set('stats.nbfollows', count($this->model->getfollows(array('id_user'=>$f3->get('SESSION.id')))));
+    $f3->set('stats.wishs', count($this->model->getProducts(array('id_user'=>$f3->get('SESSION.id')))));
     $this->tpl['sync']='wishlist.html';
   }
   
@@ -286,7 +290,7 @@ class App_controller extends Controller{
     $f3->set('friends',$facebook->api('/me/friends','GET',array('access_token'=>$f3->get('SESSION.access_token'))));
     $ourServiceUsers = array();
     foreach ($f3->get('friends.data') as $i => $friend) {
-      $isOnSite = $this->model->isOnSite(array('id_facebook'=>$friend["id"]));
+      $isOnSite = $this->model->getUser(array('id_facebook'=>$friend["id"]));
       if($isOnSite){
         $friend["id_user"] = $isOnSite["fields"]["id_user"]["value"];
         array_push($ourServiceUsers, $friend);

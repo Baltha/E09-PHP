@@ -26,10 +26,6 @@ class App_model extends Model{
      return $this->getMapper('users')->load(array('mail=?', $params['mail']));
   }
 
-  public function isOnSite($params){
-     return $this->getMapper('users')->load(array('id_facebook=?', $params['id_facebook']));
-  }
-
   public function setInfos($params){
   //Integrer le code déja fait de jerem ou louis, pour vérif si les deux mdp sont similaires, puis crypter si c'est le cas.
   //Je ne l'ai pas fait là mais en tps normal on peux aussi concaténer la chaine au fur et à mesure pour éviter de chercher à mettre à jour des champs que l'utilisateur n'a pas remplis, je fais plus simple en mettant en required les champs.
@@ -247,7 +243,7 @@ class App_model extends Model{
   public function lastProduct($params)
   {  
      $lastIdSouhait = $this->dB->exec('SELECT MAX(id_souhait) AS id From souhait WHERE id_user='.$params['id_user'].' LIMIT 1');
-     return $this->dB->exec('SELECT * FROM souhait s LEFT JOIN article a ON s.id_article=a.id_article WHERE s.id_user=?'.$params['id_user'].' AND s.id_souhait='.$lastIdSouhait[0]['id']);
+     return $this->dB->exec('SELECT * FROM souhait s LEFT JOIN article a ON s.id_article=a.id_article WHERE s.id_user='.$params['id_user'].' AND s.id_souhait='.$lastIdSouhait[0]['id']);
      
   }
 

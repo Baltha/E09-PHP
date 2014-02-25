@@ -74,6 +74,9 @@ $('.delete').on('click', function(e){
 	.done(function() {
 	    $container.isotope('remove', $this.parent());
 	    $container.isotope('layout');
+	    var nbWisg = $('#nbWish').text();
+		var nbWish = parseInt(nbWisg);
+		$('#nbWish').text(nbWish - 1);
 	})
 	.fail(function(a) {
 		console.log(a);
@@ -105,6 +108,9 @@ $('#addProduct').submit(function(e){
 		}
 		$('.newWish').addClass(classes);
 		$('.newWish').removeClass("newWish");
+		var nbWisg = $('#nbWish').text();
+		var nbWish = parseInt(nbWisg);
+		$('#nbWish').text(nbWish + 1);
 	})
 	.fail(function(a) {
 		console.log(a);
