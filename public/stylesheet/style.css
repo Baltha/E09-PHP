@@ -358,7 +358,7 @@ header{
 	transition: all 0.3s ease;
 }
 
-#leftSidebar #menu li.atif a, #leftSidebar #menu li.actif a:hover{
+#leftSidebar #menu li.actif a, #leftSidebar #menu li.actif a:hover{
 	color:#f0f0f0;
 	text-decoration: none;
 	height: 60px;
