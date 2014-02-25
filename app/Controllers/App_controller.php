@@ -155,6 +155,9 @@ class App_controller extends Controller{
             $f3->set('photo_url', $f3->get('UPLOADS').$_FILES['file']['name']);
         },true,true);
       }
+      else{
+        array_push($erreur, 'Photo manquante');
+      }
 
       if(count($erreur)==0){
 
@@ -169,7 +172,7 @@ class App_controller extends Controller{
               'naissance'=>$f3->get('POST.naissance'),
               'mail'=>$f3->get('POST.mail'),
               'sexe'=>$f3->get('POST.sexe'),
-              'photo' => $f3->get('POST.photo_url'),
+              'photo' => $f3->get('photo_url'),
               'adresse'=>$f3->get('POST.adresse'),
               'ville'=>$f3->get('POST.ville'),
               'code_postal'=>$f3->get('POST.cp')
@@ -193,15 +196,18 @@ class App_controller extends Controller{
           }
           else{
             array_push($erreur, 'Adresse mail déjà présente');
+            $f3->reroute("/");
             $f3->set('erreur', $erreur);
           }  
         }
         else{
           array_push($erreur, 'Les mots de passe ne sont pas identiques');
+          $f3->reroute("/");
           $f3->set('erreur', $erreur);
         }
       }
       else
+        $f3->reroute("/");
         $f3->set('erreur', $erreur);
   }
 
@@ -231,6 +237,8 @@ class App_controller extends Controller{
     $f3->set('stats.nbfollowers', count($this->model->getfollowers(array('id_user'=>$f3->get('SESSION.id')))));
     $f3->set('stats.nbfollows', count($this->model->getfollows(array('id_user'=>$f3->get('SESSION.id')))));
     $f3->set('stats.wishs', count($this->model->getProducts(array('id_user'=>$f3->get('SESSION.id')))));
+    $f3->set('followingUser', $this->model->getfollowing(array('user_parent'=>$f3->get('SESSION.id'), 'user_enfant'=>$f3->get('PARAMS.id_user'))));
+    $f3->set('page', "wishlist");
     $this->tpl['sync']='wishlist.html';
   }
   
