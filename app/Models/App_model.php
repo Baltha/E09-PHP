@@ -88,6 +88,10 @@ class App_model extends Model{
     $homepage = $request['body'];
 
     $homepage = utf8_encode($homepage); 
+    if(empty($url))
+    {
+      return; 
+    }
    
     if(preg_match('#amazon#',$url))
     {
@@ -143,7 +147,6 @@ class App_model extends Model{
     //RueDuCommerce
     else if(preg_match('#rueducommerce#', $url))
     {
-      preg_match('/mpid:([^#]*)/is',$url,$matcheId);
       preg_match('/moid:([^#]*)/is',$url,$matcheId);
       preg_match('/class="brandNameSpan"\>\s*\<a href=".*?"\>(.*?)\<\/a\>\s*<\/span\>\s*(.*?)\<\/h1\>/is', $homepage, $matchesName);
       preg_match('/class="newPrice"\>\s*(.*?)\<sup\>&euro;(.*?)\<\/sup\>/is', $homepage, $matchesPrice);
@@ -160,69 +163,88 @@ class App_model extends Model{
       $tabResult=array('nom'=>$nom,'price'=>$price,'describe'=>$describe,'picture'=>$picture, 'link'=>$url, 'qid'=>$id);
 
     }
+    else if(preg_match('#3suisses#', $url))
+    {
+      preg_match('/R=([^#]*)&fac/is',$url,$matcheId);
+      if(empty($matcheId[1]))
+      {
+        preg_match('/R=([^#]*)/is',$url,$matcheId);
+      }
+      
+      preg_match('/<h1 itemprop="name"\>\s*(.*?)\<\/h1\>/is', $homepage, $matchesName);
+      preg_match('/<meta itemprop="price" content="(.*?)"/is', $homepage, $matchesPrice1);
+      preg_match('/class="pLeft"\>\s*(.*?)([^\<br\>][^\<br \/>]*)\<\/div\>/is', $homepage, $matchesDescribe);
+      preg_match('/<img class="visuel" .*? src="(.*?)"/is', $homepage, $matchesPicture);
+      $id=$matcheId[1];
+      $nom =$matchesName[1];
+      $price=$matchesPrice1[1];
+      $describe=$matchesDescribe[1];
+      $picture=$matchesPicture[1];
+      $tabResult=array('nom'=>$nom,'price'=>$price,'describe'=>$describe,'picture'=>$picture, 'link'=>$url, 'qid'=>$id);
+
+    }
     return $tabResult;
   }
 
   public function addProduct($params)
   {
     //Requete de verif contre Duplicate Content.
-    $testQid=$this->dB->exec(
-      array(
-            'SELECT id_article As id FROM article WHERE qid LIKE ?'),
-      array(
-                array(1=>$params['product']['qid'])
-              )
-      );
-
-    if(!isset($testQid[0]['id']))
-    {
-      if(!isset($params['product']['like']))
-      {
-        $params['product']['like']=0;
-      }
-      $this->dB->exec(
+      $testQid=$this->dB->exec(
         array(
-              'INSERT INTO article (nom,description,prix,image,nblike,lien,qid) VALUES (?,?,?,?,?,?,?)'),
+              'SELECT id_article As id FROM article WHERE qid LIKE ?'),
         array(
-                  array(1=>$params['product']['nom'],2=>$params['product']['describe'],3=>$params['product']['price'],4=>$params['product']['picture'],5=>$params['product']['like'],6=>$params['product']['link'],7=>$params['product']['qid'])
+                  array(1=>$params['product']['qid'])
                 )
         );
-     $lastIdArticle=$this->dB->exec('SELECT LAST_INSERT_ID() AS id From article LIMIT 1');
-     $lastIdArticle=$lastIdArticle[0]['id'];
-    }
-    else
-    {
-      //Le produit existe déja en base, n'oublions pas de créer le souhait quand même, récupérations de l'id produit
-      $lastIdArticle=$testQid[0]['id'];
-    }
-   //Création d'un souhait
-   
-      $this->dB->exec(
-      array(
-            'INSERT INTO souhait (id_user,id_article) VALUES (?,?)'),
-      array(
-                array(1=>$params['id_user'],2=>$lastIdArticle)
-              )
-      );
 
-      $lastIdSouhait=$this->dB->exec('SELECT LAST_INSERT_ID() AS id_souhait From souhait LIMIT 1');
-      $lastIdSouhait=$lastIdSouhait[0]['id_souhait'];
-
-   // Ajout du tag
-    if(isset($params['tag']))
-    {
-      $idTag = $this->getMapper('tag')->load(array('nom=? && id_user=?', $params['tag'], $params['id_user']));
-      $idTag = $idTag["fields"]["id_tag"]["value"];
-      $this->dB->exec(
+       if(!isset($testQid[0]['id']))
+       {
+         if(!isset($params['product']['like']))
+         {
+           $params['product']['like']=0;
+         }
+         $this->dB->exec(
+          array(
+                'INSERT INTO article (nom,description,prix,image,nblike,lien,qid) VALUES (?,?,?,?,?,?,?)'),
+          array(
+                    array(1=>$params['product']['nom'],2=>$params['product']['describe'],3=>$params['product']['price'],4=>$params['product']['picture'],5=>$params['product']['like'],6=>$params['product']['link'],7=>$params['product']['qid'])
+                  )
+          );
+        $lastIdArticle=$this->dB->exec('SELECT LAST_INSERT_ID() AS id From article LIMIT 1');
+        $lastIdArticle=$lastIdArticle[0]['id'];
+       }
+       else
+       {
+         //Le produit existe déja en base, n'oublions pas de créer le souhait quand même, récupérations de l'id produit
+         $lastIdArticle=$testQid[0]['id'];
+       }
+       //Création d'un souhait
+     
+        $this->dB->exec(
         array(
-              'INSERT INTO appartenance (id_souhait,id_tag) VALUES (?,?)'),
+              'INSERT INTO souhait (id_user,id_article) VALUES (?,?)'),
         array(
-                  array(1=>$lastIdSouhait,2=>$idTag)
-             )
-      );
-    }
-    
+                  array(1=>$params['id_user'],2=>$lastIdArticle)
+                )
+        );
 
+        $lastIdSouhait=$this->dB->exec('SELECT LAST_INSERT_ID() AS id_souhait From souhait LIMIT 1');
+        $lastIdSouhait=$lastIdSouhait[0]['id_souhait'];
+
+     // Ajout du tag
+      if(isset($params['tag']))
+      {
+        $idTag = $this->getMapper('tag')->load(array('nom=? && id_user=?', $params['tag'], $params['id_user']));
+        $idTag = $idTag["fields"]["id_tag"]["value"];
+        $this->dB->exec(
+          array(
+                'INSERT INTO appartenance (id_souhait,id_tag) VALUES (?,?)'),
+          array(
+                    array(1=>$lastIdSouhait,2=>$idTag)
+               )
+        );
+      }
+      
     return $lastIdArticle;
   }
 
