@@ -291,15 +291,5 @@ class App_model extends Model{
     return '1';
   }
 
-  public function createContrib($params){
-    $page=$this->getMapper('users');
-    foreach($params as $key => $param){
-      $page->$key=$param;
-    }
-    $page->save();
-
-  }
-  
-
 }
 ?>

@@ -1,11 +1,11 @@
 <aside id="leftSidebar">
 	<div id="update"><a href="getInfos/">Modifier mes infos</a></div>
 	
-	<?php if(isset($SESSION['profil_picture'])): ?>
-		<img class="profilPicture" src="<?php echo $SESSION['profil_picture'] ?>" alt=""> 
+	<?php if(isset($_SESSION['profil_picture'])): ?>
+		<img class="profilPicture" src="<?php echo $_SESSION['profil_picture'] ?>" alt=""> 
 	<?php endif; ?>
-	<p class="name"><?php echo $SESSION['firstname'].' '.$SESSION['lastname'] ?></p>
-	<p class="ville"><?php echo $SESSION['ville']; ?> </p>
+	<p class="name"><?php echo $_SESSION['firstname'].' '.$_SESSION['lastname'] ?></p>
+	<p class="ville"><?php echo $_SESSION['ville']; ?> </p>
 
 	<ul id="userStats">
 		<li>
