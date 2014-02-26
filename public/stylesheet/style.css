@@ -259,10 +259,12 @@ header{
 #leftSidebar .ville{
 	color: #fff;
 	text-align: center;
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 	font-weight: 100;
 	font-style: italic;
-	margin-top: 5px;
+	margin-top: 7px;
+	margin-left: 10px;
+	letter-spacing: 0.3pt;
 }
 #leftSidebar .ville:before{
 	content:"";
@@ -516,10 +518,10 @@ form[action="setInfos"] input[type="submit"]{
 			#addProduct input[value="Ajouter"]{
 
 				width: 120px;
-				margin-left: 10px;
+				margin-left: 11px;
 				background-color: #288DFF;
 				border-radius: 4px;
-				height: 30px;
+				height: 29px;
 				color: white;
 				font-family: "Exo 2";
 				font-weight: 200;
@@ -743,7 +745,15 @@ form[action="setInfos"] input[type="submit"]{
 	  	font-size: 2rem;
 	  	color: #222222;
 	  	margin-left: 100px;
-	  	margin-top: 28px;
+	  	margin-top: 23px;
+	  }
+
+	  #bannerTop h2+p{
+	  margin-left: 101px;
+	  margin-top: 1px;
+	  font-family: "Exo 2";
+	  font-weight: 300;
+	  font-size: 1.3rem;
 	  }
 
 	  #bannerTop a:last-child{
