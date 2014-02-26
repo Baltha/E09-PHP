@@ -9,7 +9,7 @@
     <?php else:?>
       <a class="isFollowed" href="addFollow/<?php echo $user["id_user"] ?> ">Followed</a><br/>
     <?php endif; ?>
-      <a href="pagecontrib/">Créer une page de contribution</a>
+      <a href="/pagecontrib">Créer une page de contribution</a>
         </h2>
 	<?php else: ?>  
         <form method="post" action='addProduct' id="addProduct">
@@ -38,8 +38,8 @@
             {
                 foreach ($allProducts as $i => $product) { ?>
                     <?php $productName = $product['nom'];
-                    if(strlen($productName) > 40){
-                        $productName = substr($productName, 0, 35);
+                    if(strlen($productName) > 50){
+                        $productName = substr($productName, 0, 50);
                         $productName = $productName."...";
                     }?>
                     <div class="wish <?php if(isset($productTags[$i][0]['nom'])){ echo $productTags[$i][0]['nom'];} ?> " >
