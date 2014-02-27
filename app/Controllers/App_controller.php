@@ -230,6 +230,7 @@ class App_controller extends Controller{
     $f3->set('stats.nbfollowers', count($this->model->getfollowers(array('id_user'=>$f3->get('SESSION.id')))));
     $f3->set('stats.nbfollows', count($this->model->getfollows(array('id_user'=>$f3->get('SESSION.id')))));
     $f3->set('stats.wishs', count($this->model->getProducts(array('id_user'=>$f3->get('SESSION.id')))));
+    $f3->set('page', "wishlist");
     $this->tpl['sync']='wishlist.html';
   }
   
