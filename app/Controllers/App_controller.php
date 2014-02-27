@@ -423,6 +423,13 @@ class App_controller extends Controller{
   //     $this->tpl['async']='json/status.json';
   // }
 
+    public function paypal($f3){
+      $this->tpl['sync']='paypal.html';
+    }
+    public function ipn($f3){
+      $f3->reroute("/wishlist");
+      echo "coucou" ;
+    }
    
 
 }
