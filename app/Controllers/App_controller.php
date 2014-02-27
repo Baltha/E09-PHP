@@ -344,10 +344,10 @@ class App_controller extends Controller{
         if($_FILES['file']['error'] == 0){
           $photo = \Web::instance()->receive(function($file){
             $f3 = \Base::instance();
-            $params['photo']=$f3->get($f3->get('UPLOADS').$_FILES['file']['name']),
+            $params['photo']=$f3->get($f3->get('UPLOADS').$_FILES['file']['name']);
           },true,true);
         }
-        
+
         $this->model->setInfos($params);
 
         $auth=$this->model->getUserInfoAfterSignin(array(
