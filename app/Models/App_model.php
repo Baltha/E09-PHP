@@ -67,6 +67,10 @@ class App_model extends Model{
     return $this->getMapper('amis')->find(array('user_enfant=?',$params['id_user']));
   }
 
+  public function getfollowing($params){
+    return $this->getMapper('amis')->load(array('user_parent=? AND user_enfant=?',$params['user_parent'],$params['user_enfant']));
+  }
+
 
   public function addDefaultTag($id_user){
     $insert=$this->getMapper('tag');

@@ -102,7 +102,7 @@ header{
 	display: table;
 	width: calc(100% - 270px);
 	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
-	z-index: 10;
+	z-index: 100;
 	position: fixed;
 }
 
@@ -122,7 +122,7 @@ header{
 	width: 33.33%;
 	text-align: center;
 	color:#f0f0f0;
-	font-size: 1.6rem;
+	font-size: 1.4rem;
 	font-weight: 100;
 	font-style: italic;
 	text-decoration: none;
@@ -259,10 +259,12 @@ header{
 #leftSidebar .ville{
 	color: #fff;
 	text-align: center;
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 	font-weight: 100;
 	font-style: italic;
-	margin-top: 5px;
+	margin-top: 7px;
+	margin-left: 10px;
+	letter-spacing: 0.3pt;
 }
 #leftSidebar .ville:before{
 	content:"";
@@ -299,7 +301,7 @@ header{
 	text-align: center;
 	font-size: 1.6rem;
 	color:#fff;
-	margin-top: 8px;
+	margin-top: 12px;
 	font-family: "Varela Round";
 }
 
@@ -516,10 +518,10 @@ form[action="setInfos"] input[type="submit"]{
 			#addProduct input[value="Ajouter"]{
 
 				width: 120px;
-				margin-left: 10px;
+				margin-left: 11px;
 				background-color: #288DFF;
 				border-radius: 4px;
-				height: 30px;
+				height: 29px;
 				color: white;
 				font-family: "Exo 2";
 				font-weight: 200;
@@ -577,6 +579,7 @@ form[action="setInfos"] input[type="submit"]{
 	  	overflow: hidden;
 	  	background: white;
 	  	position: absolute;
+	  	z-index: 9;
 	  	bottom: 0;
 	  }
 	  .wish .wish_name a{
@@ -611,6 +614,7 @@ form[action="setInfos"] input[type="submit"]{
 	  	border-radius: 4px;
 	  	width: 28px;
 	  	top: 2px;
+	  	right: 1px;
 	  }
 
 	  .wish .wish_prix{
@@ -628,7 +632,7 @@ form[action="setInfos"] input[type="submit"]{
 	  	position: absolute;
 	  	top: 4px;
 	  	left: 5px;
-	  	z-index: 10;
+	  	z-index: 9;
 	  	text-align: center;
 	  	padding-top: 7px;
 	  	border-bottom-right-radius: 4px;
@@ -729,6 +733,103 @@ form[action="setInfos"] input[type="submit"]{
 	  	color: #222222;
 	  }
 
+	  #bannerTop img{
+	  	float: left;
+	  	width: 76px;
+	  	height: 76px;
+	  }
+
+	  #bannerTop h2{
+	  	font-family: "Varela Round";
+	  	letter-spacing: 1pt;
+	  	font-size: 2rem;
+	  	color: #222222;
+	  	margin-left: 100px;
+	  	margin-top: 23px;
+	  }
+
+	  #bannerTop h2+p{
+	  margin-left: 101px;
+	  margin-top: 1px;
+	  font-family: "Exo 2";
+	  font-weight: 300;
+	  font-size: 1.3rem;
+	  }
+
+	  #bannerTop a:last-child{
+	  	position: absolute;
+	  	margin-right: 22px;
+	  	padding: 10px 12px 10px 12px;
+	  	border-radius: 4px;
+	  	color: white;
+	  	background-color: #ef294a;
+	  	text-decoration: none;
+	  	font-family: "Exo 2";
+	  	font-weight: 200;
+	  	font-size: 1.2rem;
+	  	text-transform: uppercase;
+	  	letter-spacing: 0.3pt;
+	  	top: 22px;
+	  	right: 0;
+	  }
+
+	  .isFollowed{
+	  	position: absolute;
+	  	margin-right: 273px;
+	  	padding: 10px 8px 9px 8px;
+	  	border-radius: 4px;
+	  	color: #ef294a;
+	  	background-color: #F1F1F1;
+	  	text-decoration: none;
+	  	font-family: "Exo 2", "verdana", "sans-serif";
+	  	font-weight: 400;
+	  	font-size: 1rem;
+	  	text-transform: uppercase;
+	  	letter-spacing: 0.3pt;
+	  	top: 22px;
+	  	right: 0;
+	  	box-sizing: border-box;
+	  	border: 1px solid #ef294a;
+	  }
+
+	  	.isFollowed::after{
+	  	content:"";
+		width: 12px;
+		height: 10px;
+		display: inline-block;
+		background: url("../images/checkmark_rouge.svg") center center;
+		background-size: cover;
+		margin-left: 15px;
+	  }
+
+	  	.isFollow{
+	  	position: absolute;
+	  	margin-right: 273px;
+	  	padding: 10px 8px 9px 8px;
+	  	border-radius: 4px;
+	  	color: #222222;
+	  	background-color: #F1F1F1;
+	  	text-decoration: none;
+	  	font-family: "Exo 2", "verdana", "sans-serif";
+	  	font-weight: 200;
+	  	font-size: 1rem;
+	  	text-transform: uppercase;
+	  	letter-spacing: 0.3pt;
+	  	top: 22px;
+	  	right: 0;
+	  	box-sizing: border-box;
+	  	border: 1px solid #222222;
+	  }
+
+	  	.isFollow::after{
+	  	content:"";
+		width: 12px;
+		height: 10px;
+		display: inline-block;
+		background: url("../images/checkmark.svg") center center;
+		background-size: cover;
+		margin-left: 15px;
+	  }
 
 
 

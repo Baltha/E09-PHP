@@ -111,6 +111,7 @@ $('#addProduct').submit(function(e){
 		var nbWisg = $('#nbWish').text();
 		var nbWish = parseInt(nbWisg);
 		$('#nbWish').text(nbWish + 1);
+		$('#nowish').remove();
 	})
 	.fail(function(a) {
 		console.log(a);

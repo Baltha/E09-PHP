@@ -1,9 +1,16 @@
 <?php require('header.html');?>
     <div id="bannerTop">
     <?php if(isset($user)): ?>
-        <h1>
-		Wishlists de <?php echo $user['fields']['prenom']['value']; ?>
-        </h1>
+    <img src="<?php echo $user['fields']['photo']['value']; ?>" alt="<?php echo $user['fields']['prenom']['value']; ?>">
+		<h2><?php echo $user['fields']['prenom']['value']; ?> <?php echo $user['fields']['nom']['value']; ?></h2>
+    <p><?php echo $user['fields']['ville']['value']; ?></p>    
+    <?php if(!$followingUser): ?>
+      <a class="isFollow" href="addFollow/<?php echo $user["id_user"] ?> ">Follow</a><br/>
+    <?php else:?>
+      <a class="isFollowed" href="addFollow/<?php echo $user["id_user"] ?> ">Followed</a><br/>
+    <?php endif; ?>
+      <a href="/pagecontrib">Créer une page de contribution</a>
+        </h2>
 	<?php else: ?>  
         <form method="post" action='addProduct' id="addProduct">
           <input type='text' name='product' placeholder="URL du produit à insérer dans votre wishlist" required="required">
@@ -27,12 +34,12 @@
     <div id="content">
         <div id="wishlist">
             <?php
-            if(isset($allProducts))
+            if(count($allProducts) != 0)
             {
                 foreach ($allProducts as $i => $product) { ?>
                     <?php $productName = $product['nom'];
-                    if(strlen($productName) > 40){
-                        $productName = substr($productName, 0, 35);
+                    if(strlen($productName) > 50){
+                        $productName = substr($productName, 0, 50);
                         $productName = $productName."...";
                     }?>
                     <div class="wish <?php if(isset($productTags[$i][0]['nom'])){ echo $productTags[$i][0]['nom'];} ?> " >
@@ -42,8 +49,10 @@
                         <a class="delete" href="deleteProduct/<?php echo $product['id_souhait'];?>"><img src="http://localhost:8888/E09-PHP/public/images/delete.png"></a>
                     </div>
                 <?php } 
-            }
-            ?>
+            }else{ ?>
+            <p id="nowish"><?php if(isset($user)): ?> <?php echo $user['fields']['prenom']['value']; ?> n'a pas encore ajouté de wish. <?php else: ?> Vous n'avez pas encore ajouté de wish.</p>
+            <?php endif; ?>
+            <?php } ?>
             
         </div>
         <div class="clear"></div>
