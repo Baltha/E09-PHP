@@ -85,4 +85,36 @@ class Jerem_controller extends App_controller{
     }
     $this->tpl['sync']='addContrib.html';
   }
+
+  public function reWhishlister($f3){
+
+
+    // /!\ MANQUE INTEGRATION PUIS CODE DANS LE JS EN FONCTION DE LA CLASSE /!\ //
+
+
+    /*
+      If id article exist in URL
+      If article exist in database
+      If article doesn't exist in my wishlist
+      ==> Add in my whishlist
+      Else
+      ==> Nothing
+    */
+    if(!empty($f3->get('PARAMS.id_article'))){
+      $article=$this->model->getArticle(array('id_article'=>$f3->get('PARAMS.id_article')));
+      if(count($article)==1){
+        $exist=$this->model->articleInMyWishlist(array('id_article'=>$f3->get('PARAMS.id_article')));
+        if(count($exist)==0){
+          $this->model->reWhishlister(array('id_article'=>$f3->get('PARAMS.id_article'), 'id_user'=>$f3->get('SESSION.id'), 'date_souhait'=>date('Y-m-d H:i:s')));
+      }
+    }
+    $this->tpl['async']='json/status.json';  
+  }
+
+
+
+
+
+
+
 }

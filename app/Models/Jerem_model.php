@@ -22,4 +22,20 @@ class Jerem_model extends App_model{
     $page->save();
 
   }
+
+  public function getArticle($params){
+    return $this->getMapper('article')->find(array('id_article=?',$params['id_article']));
+  }
+
+  public function articleInMyWishlist($params){
+    return $this->getMapper('souhait')->find(array('id_article=?', $params['id_article']));
+  }
+
+  public function reWhishlister($params){
+    $mapper=$this->getMapper('souhait');
+    foreach($params as $key => $param){
+      $mapper->$key=$param;
+    }
+    $mapper->save();
+  }
 }
