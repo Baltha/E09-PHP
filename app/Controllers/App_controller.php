@@ -152,7 +152,6 @@ class App_controller extends Controller{
       if($_FILES['file']['error'] == 0){
         $photo = \Web::instance()->receive(function($file){
             $f3 = \Base::instance();
-            $f3->set('photo_url', $f3->get('UPLOADS').$_FILES['file']['name']);
         },true,true);
       }
 
@@ -169,7 +168,7 @@ class App_controller extends Controller{
               'naissance'=>$f3->get('POST.naissance'),
               'mail'=>$f3->get('POST.mail'),
               'sexe'=>$f3->get('POST.sexe'),
-              'photo' => $f3->get('POST.photo_url'),
+              'photo' => $f3->get($f3->get('UPLOADS').$_FILES['file']['name']),
               'adresse'=>$f3->get('POST.adresse'),
               'ville'=>$f3->get('POST.ville'),
               'code_postal'=>$f3->get('POST.cp')
@@ -331,16 +330,25 @@ class App_controller extends Controller{
     if(count($erreur)==0){
 
       if($f3->get('mdp')==$f3->get('mdp2')){
-           // pas d'erreur on envoie
-        // d'abord vérif si l'adresse mail est déjà présente dans la BDD dans ce cas on l'indique
-        $this->model->setInfos(array(
+
+        $params=array(
           'id_user'=>$f3->get('SESSION.id'),
           'mdp'=>$this->model->password($f3->get('POST.mdp')),
           'mail'=>$f3->get('POST.mail'),
           'adresse'=>$f3->get('POST.adresse'),
           'ville'=>$f3->get('POST.ville'),
+          'photo' => $f3->get($f3->get('UPLOADS').$_FILES['file']['name']),
           'code_postal'=>$f3->get('POST.cp')
-        ));
+        );
+
+        if($_FILES['file']['error'] == 0){
+          $photo = \Web::instance()->receive(function($file){
+            $f3 = \Base::instance();
+            $params['photo']=$f3->get($f3->get('UPLOADS').$_FILES['file']['name']),
+          },true,true);
+        }
+        
+        $this->model->setInfos($params);
 
         $auth=$this->model->getUserInfoAfterSignin(array(
           'mail'=>$f3->get('POST.mail')

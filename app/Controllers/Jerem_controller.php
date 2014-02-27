@@ -7,16 +7,16 @@ class Jerem_controller extends App_controller{
 
   public function updatePicFacebook($f3){
     /*
-      * Vérifie si l'id session existe
-      * Véfifie si l'id session est identique au get id_user
-      * Verifie si l'user existe dans la BDD
-      * Si user existe et qu'il a un id_facebook on effectue la requete pour le lien de sa photo de profil
-      * Si elle est identique à la précédente on ne fait rien sinon on la change
+      * If ID session exists
+      * If id session and id_user in url are the same
+      * If the user exists and id_facebook exists
+      * Facebook request
+      * Edit link picture if different with the previous
     */
     if($f3->exists('SESSION.id')){
       if($f3->get('SESSION.id')==$f3->get('PARAMS.id_user')){
         $user=$this->model->getUser(array('id_user'=>$f3->get('PARAMS.id_user')));
-        if(!empty($user) && !empty($user['id_facebook'])){
+        if(count($user)==1 && !empty($user['id_facebook'])){
           require_once('api/facebook.php');
           $facebook = new Facebook(array(
             'appId'  => '479303535507941',
@@ -93,8 +93,8 @@ class Jerem_controller extends App_controller{
 
 
     /*
-      If id article exist in URL
-      If article exist in database
+      If id article exists in URL
+      If article exists in database
       If article doesn't exist in my wishlist
       ==> Add in my whishlist
       Else
