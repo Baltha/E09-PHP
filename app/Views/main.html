@@ -5,17 +5,17 @@
   }?>
 
   <form action="inscription/" method="post" enctype="multipart/form-data">
-    <p><label for="mail">Mail</label><input type="email" name="mail"/></p>
-    <p><label for="mdp">Mot de passe</label><input type="password" name="mdp"/></p>
-    <p><label for="mdp2">Mot de passe</label><input type="password" name="mdp2"/></p>
-    <p><label for="nom">Nom</label><input type="text" name="nom"/></p>
-    <p><label for="prenom">Prénom</label><input type="text" name="prenom"/></p>
-    <p><label for="adresse">Adresse</label><input type="text" name="adresse"/></p>
-    <p><label for="ville">Ville</label><input type="text" name="ville"/></p>
-    <p><label for="cp">Code postal:</label><input type="text" name="cp"/></p>
-    <p><label for="Date de naissance">Date de naissance</label><input type="date" name="naissance"/></p>
-    <p><label for="Sexe">Sexe</label><input type="radio" name="sexe" value="homme">Homme<input type="radio" name="sexe" value="femme">Femmme</p><br>
-    <p><label for="file">Photo</label><input type="file" name="file"/><p>
+    <p><label for="mail">Mail</label><input type="email" name="mail" id="mail" required /></p>
+    <p><label for="mdp">Mot de passe</label><input type="password" name="mdp" id="mdp" required/></p>
+    <p><label for="mdp2">Mot de passe</label><input type="password" name="mdp2" id="mdp2" required/></p>
+    <p><label for="nom">Nom</label><input type="text" name="nom"id="nom" required /> </p>
+    <p><label for="prenom">Prénom</label><input type="text" name="prenom" id="prenom" required/></p>
+    <p><label for="adresse">Adresse</label><input type="text" name="adresse" id="adresse" required/></p>
+    <p><label for="ville">Ville</label><input type="text" name="ville" id="ville" required/></p>
+    <p><label for="cp">Code postal:</label><input type="text" name="cp" id="cp" required/></p>
+    <p><label for="naissance">Date de naissance</label><input type="date" name="naissance" id="naissance" required/></p>
+    <p><label for="sexe">Sexe</label><input type="radio" name="sexe" value="homme" required>Homme<input type="radio" name="sexe" id="sexe"value="femme" required>Femmme</p><br>
+    <p><label for="file">Photo</label><input type="file" required name="file"/><p>
     <input type="submit">
   </form>
 
