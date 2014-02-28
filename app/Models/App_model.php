@@ -283,8 +283,8 @@ class App_model extends Model{
   }
 
   public function getUserTags($params)
-  {  
-     return $this->dB->exec('SELECT * FROM tag WHERE id_user='.$params['id_user']);
+  {
+    return $this->getMapper('tag')->find(array('id_user=?',$params['id_user']));
   }
 
   public function getProductTags($params)

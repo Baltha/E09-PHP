@@ -13,6 +13,7 @@ class Jerem_model extends App_model{
     $pic->save();
   }
 
+  
 
   public function addContrib($params){
     $page=$this->getMapper('page');
@@ -20,7 +21,15 @@ class Jerem_model extends App_model{
       $page->$key=$param;
     }
     $page->save();
+    return $page->get('_id');
+  }
 
+  public function addTagContrib($params){
+    $page=$this->getMapper('tag_page');
+    foreach($params as $key => $param){
+      $page->$key=$param;
+    }
+    $page->save();
   }
 
   public function getArticle($params){
@@ -39,4 +48,6 @@ class Jerem_model extends App_model{
     $mapper->save();
     return '1';
   }
+
+
 }

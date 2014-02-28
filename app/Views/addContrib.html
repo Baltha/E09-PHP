@@ -7,6 +7,13 @@
     <p><label for="nom">Nom</label><input type="text" name="nom" required /></p>
     <p><label for="description">Description</label><textarea name="description" id="description" cols="30" rows="10"></textarea></p>
     <p><label for="fin">Date de fin de la page</label><input type="date" name="fin" id="fin" required/></p>
+    <p>Tags</p>
+    <?php
+    foreach($tags as $tag){
+    	echo'
+    	<label for="tag-'.$tag['id_tag'].'">'.$tag['nom'].'</label><input type="checkbox" name="tag[]" value="'.$tag['id_tag'].'" id="tag-'.$tag['id_tag'].'" />';
+    }
+    ?>
     <input type="submit" value="Créer">
   </form>
 

@@ -9,7 +9,7 @@
     <?php else:?>
       <a class="isFollowed" href="addFollow/<?php echo $user["id_user"] ?> ">Followed</a><br/>
     <?php endif; ?>
-      <a href="/pagecontrib">Créer une page de contribution</a>
+      <a href="../addContrib/1/<?php echo $user["id_user"] ?> ">Créer une page de contribution</a>
         </h2>
 	<?php else: ?>  
         <form method="post" action='addProduct' id="addProduct">

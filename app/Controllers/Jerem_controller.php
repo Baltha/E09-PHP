@@ -50,7 +50,7 @@ class Jerem_controller extends App_controller{
     $user=$this->model->getUser(array('id_user'=>$f3->get('PARAMS.id_user')));
     if(!empty($user)){
       /* STEP 1 
-      formulaire */
+      form with user tags */
 
       /* STEP 2
       Verifie si l'user à qui on veut faire une contrib existe
@@ -58,6 +58,7 @@ class Jerem_controller extends App_controller{
       */
 
       if($f3->get('PARAMS.step')=='1'){
+        $f3->set('tags', $this->model->getUserTags(array('id_user'=>$f3->get('PARAMS.id_user'))));
         $this->tpl['sync']='addContrib.html';
       }
       elseif($f3->get('PARAMS.step')=='2'){
@@ -72,7 +73,7 @@ class Jerem_controller extends App_controller{
 
 
         if(count($erreur)==0){
-          $this->model->addContrib(array(
+          $id=$this->model->addContrib(array(
             'nom'=>$f3->get('POST.nom'),
             'description'=>$f3->get('POST.description'),
             'clef_page'=>uniqid(),
@@ -80,6 +81,11 @@ class Jerem_controller extends App_controller{
             'user_referent'=>$f3->get('PARAMS.id_user'),
             'user_createur'=>$f3->get('SESSION.id')
           ));
+          var_dump($f3->get('POST.tag'));
+          foreach($f3->get('POST.tag') as $tag){
+            $this->model->addTagContrib(array('id_page'=>$id, 'id_tag'=>$tag));
+          }
+          
         }
       }
     }
@@ -87,10 +93,6 @@ class Jerem_controller extends App_controller{
   }
 
   public function reWhishlister($f3){
-
-
-    // /!\ MANQUE INTEGRATION PUIS CODE DANS LE JS EN FONCTION DE LA CLASSE /!\ //
-
 
     /*
       If id article exists in URL
