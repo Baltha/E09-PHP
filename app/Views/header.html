@@ -3,15 +3,22 @@
 	<?php if (!isset($SESSION['id'])){ ?>
 	<header class="home">
 		<?php if($error){?> 
-			<div class="error">Oops , vos identifians sont érronés. Veuillez réessayer</div>
+			<div class="error">Oops , vos identifiants sont érronés. Veuillez réessayer</div>
 		<?php }?>  
-		<form action="login/" id="login" method="post">
+		<!--<form action="login/" id="login" method="post">
 			<input type="text" name="login" placeholder="login" />
 			<input type="password" name="password" placeholder="password" />
 			<input type="submit" value="Sign in"/>
-		</form>
+		</form>-->
 
-	 	<a href="<?php echo $loginUrl; ?>">Login with Facebook</a>
+		<h1>FriendlyGift</h1>
+  		<h2>le cadeau idéal pour vos amis ? Nous l'avons !</h2>
+
+		<ul>
+			<li><a href="#">Inscription</a></li>
+			<li><a href="#">Log in</a></li>
+	 		<li><a href="<?php echo $loginUrl; ?>">Facebook connect</a></li>
+	 	</ul>
 	</header>
 
 	<?php }else{ ?>
