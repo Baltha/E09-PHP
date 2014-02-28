@@ -1,8 +1,5 @@
 $( document ).ready(function() {
-	var document_height = $(document).height();
-	var wishlist_width = $("#wishlist").width();
-	$("#leftSidebar").height(document_height);
-
+	gestionHeight();
 });
 
 function ouvre_popup(page) {
@@ -187,8 +184,19 @@ $(document).on({
 
 //.Wish Hover
 
+// Gestion de la hauteur
 
+function gestionHeight(){
+	var document_height = $(document).height();
+	var window_height = $(window).height();
+	var wishlist_width = $("#wishlist").width();
+	$("#leftSidebar").height(document_height);
+	$(".sectiontop, .discover").height(window_height);
+}
 
+//si windows=resize
 
-
+$(window).resize(function(){
+	gestionHeight();
+});
 
