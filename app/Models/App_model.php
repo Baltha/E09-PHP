@@ -157,7 +157,7 @@ class App_model extends Model{
     //RueDuCommerce
     else if(preg_match('#rueducommerce#', $url))
     {
-      preg_match('/moid:([^#]*)/is',$url,$matcheId);
+      preg_match('/itemprop="identifier" content="mpn:(.*?)"/is',$homepage,$matcheId);
       preg_match('/class="brandNameSpan"\>\s*\<a href=".*?"\>(.*?)\<\/a\>\s*<\/span\>\s*(.*?)\<\/h1\>/is', $homepage, $matchesName);
       preg_match('/class="newPrice"\>\s*(.*?)\<sup\>&euro;(.*?)\<\/sup\>/is', $homepage, $matchesPrice);
       preg_match('/class="ficheProduit_descriptionCourte"\>\s*(.*?)([^\<br\>][^\<br \/>]*)\<\/div\>/is', $homepage, $matchesDescribe);
@@ -175,6 +175,7 @@ class App_model extends Model{
     }
     else if(preg_match('#3suisses#', $url))
     {
+
       preg_match('/R=([^#]*)&fac/is',$url,$matcheId);
       if(empty($matcheId[1]))
       {
@@ -199,7 +200,7 @@ class App_model extends Model{
   public function addProduct($params)
   {
     //Requete de verif contre Duplicate Content.
-      var_dump($params);
+     
       $testQid=$this->dB->exec(
         array(
               'SELECT id_article As id FROM article WHERE qid LIKE ?'),
@@ -246,7 +247,7 @@ class App_model extends Model{
       if(isset($params['tag']))
       {
         $idTag = $this->getMapper('tag')->load(array('nom=? && id_user=?', $params['tag'], $params['id_user']));
-        var_dump( $idTag);
+        
         $idTag = $idTag["fields"]["id_tag"]["value"];
 
         $this->dB->exec(
