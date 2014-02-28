@@ -397,7 +397,7 @@ class App_controller extends Controller{
        $auth=$this->model->login(array('login'=>$f3->get('POST.login'),'password' => $f3->get('POST.password')));
        $url=$f3->set('url',$f3->get('GET.url'));
       if(!$auth){
-         $f3->reroute('/verifIdInFrame?error&url='.$url);
+         $f3->reroute('/verifIdInFrame?error&url='.urlencode($url));
       }
       else{
         $user=array(
@@ -407,7 +407,7 @@ class App_controller extends Controller{
           'ville'=>$auth->ville
         );
         $f3->set('SESSION',$user);
-        $f3->reroute('/verifIdInFrame?url='.$url);
+        $f3->reroute('/verifIdInFrame?url='.urlencode($url));
       }
    }
     public function paypal($f3){
@@ -426,7 +426,6 @@ class App_controller extends Controller{
     public function ProductHand($f3)
     {
       $product=array('nom'=>$f3->get('POST.nom'),'price'=>$f3->get('POST.price'),'describe'=>$f3->get('POST.describe'),'picture'=>$f3->get('POST.picture'),'link'=>$f3->get('POST.link'),'qid'=>$f3->get('POST.qid'));
-      var_dump($product);
       $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$product,'tag'=>$f3->get('POST.theTag'),'id_user'=>$f3->get('SESSION.id'))));
       $f3->reroute("/wishlist");
     }
