@@ -98,10 +98,10 @@ class App_model extends Model{
     $homepage = $request['body'];
 
     $homepage = utf8_encode($homepage); 
-    if(empty($url))
+    /*if(empty($url))
     {
       return; 
-    }
+    }*/
    
     if(preg_match('#amazon#',$url))
     {
@@ -117,7 +117,7 @@ class App_model extends Model{
       {
         preg_match('/id="btAsinTitle"\>(.*?)\<\/span\>/is', $homepage, $matchesName);
       }
-        $nom=$matchesName[1];
+      $nom=$matchesName[1];
 
       preg_match('/id="actualPriceValue"\>\s*\<b[^>]*\>EUR ([^<]*)\s*/is', $homepage, $matchesPrice); 
       if(!isset($matchesPrice[1]))
@@ -199,6 +199,7 @@ class App_model extends Model{
   public function addProduct($params)
   {
     //Requete de verif contre Duplicate Content.
+      var_dump($params);
       $testQid=$this->dB->exec(
         array(
               'SELECT id_article As id FROM article WHERE qid LIKE ?'),
@@ -245,7 +246,9 @@ class App_model extends Model{
       if(isset($params['tag']))
       {
         $idTag = $this->getMapper('tag')->load(array('nom=? && id_user=?', $params['tag'], $params['id_user']));
+        var_dump( $idTag);
         $idTag = $idTag["fields"]["id_tag"]["value"];
+
         $this->dB->exec(
           array(
                 'INSERT INTO appartenance (id_souhait,id_tag) VALUES (?,?)'),

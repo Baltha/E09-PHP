@@ -30,6 +30,31 @@ $('#tags a').on('click', function(){
   return false;
 });
 
+$('#hand > a').on('click', function(e){
+e.preventDefault();
+if($('#handForm').hasClass("hidden")){
+			$('#tagList').addClass("hidden");
+			$('#content').addClass("hidden");
+			$('#wishlist').addClass("hidden");
+			$('#handForm').removeClass("hidden");
+			var $this = $(this);
+			var lien = $(this).attr('href');
+			$.ajax({
+				url: lien
+			})
+			.done(function(data){
+				$('#handForm').html(data);
+			});
+		}
+else
+{
+	$('#handForm').addClass("hidden");
+	$('#tagList').removeClass("hidden");
+	$('#content').removeClass("hidden");
+	$('#wishlist').removeClass("hidden");
+}
+
+});
 
 $('#update > a').on('click', function(e){
 	e.preventDefault();

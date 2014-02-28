@@ -309,7 +309,6 @@ class App_controller extends Controller{
       $f3->reroute("/myFollow");
   } 
 
-
   public function getInfos($f3){
     $f3->set('infos',$this->model->getUser(array('id_user'=>$f3->get('SESSION.id'))));
     $this->tpl['async']='partials/updateInfosForm.html';
@@ -411,23 +410,25 @@ class App_controller extends Controller{
         $f3->reroute('/verifIdInFrame?url='.$url);
       }
    }
-
-  // public function searchUsers($f3){
-  //   $f3->set('users',$this->model->searchUsers(array('keywords'=>$f3->get('POST.name'),'filter'=>$f3->get('POST.filter'))));
-  //   $this->tpl['async']='partials/users.html';
-  // }
-  
-  // public function favorite($f3){
-  //      $f3->set('status',$this->model->favorite(array('favId'=>$f3->get('PARAMS.favId'),'logId'=>$f3->get('logId'))));
-  //     $this->tpl['async']='json/status.json';
-  // }
-
     public function paypal($f3){
       $this->tpl['sync']='paypal.html';
     }
     public function ipn($f3){
       $f3->reroute("/wishlist");
       echo "coucou" ;
+    }
+
+    public function HandAdd($f3)
+    {
+      $this->tpl['async']='partials/HandForm.html';
+    }
+
+    public function ProductHand($f3)
+    {
+      $product=array('nom'=>$f3->get('POST.nom'),'price'=>$f3->get('POST.price'),'describe'=>$f3->get('POST.describe'),'picture'=>$f3->get('POST.picture'),'link'=>$f3->get('POST.link'),'qid'=>$f3->get('POST.qid'));
+      var_dump($product);
+      $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$product,'tag'=>$f3->get('POST.theTag'),'id_user'=>$f3->get('SESSION.id'))));
+      $f3->reroute("/wishlist");
     }
    
 
