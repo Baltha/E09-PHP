@@ -46,7 +46,11 @@
                         <img src="<?php echo $product['image'] ?>" alt="">
                         <div  class="wish_name"><p><a href="<?php echo $product['lien']; ?>" target="_blank"><?php echo $productName; ?></a></p></div>
                         <p class="wish_prix"><?php echo $product['prix']."€";  ?></p>
-                        <a class="delete" href="deleteProduct/<?php echo $product['id_souhait'];?>"><img src="http://localhost:8888/E09-PHP/public/images/delete.png"></a>
+                        <?php if(isset($user)): ?>
+                          <a class="rewhishlister" href="../reWhishlister/<?php echo $product['id_article'];?>"><img src="http://localhost:8888/E09-PHP/public/images/delete.png"></a>
+                        <?php else: ?>
+                          <a class="delete" href="deleteProduct/<?php echo $product['id_souhait'];?>"><img src="http://localhost:8888/E09-PHP/public/images/delete.png"></a>
+                        <?php endif; ?>
                     </div>
                 <?php } 
             }else{ ?>

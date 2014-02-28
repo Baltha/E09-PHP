@@ -103,11 +103,13 @@ class Jerem_controller extends App_controller{
     if(!empty($f3->get('PARAMS.id_article'))){
       $article=$this->model->getArticle(array('id_article'=>$f3->get('PARAMS.id_article')));
       if(count($article)==1){
-        $exist=$this->model->articleInMyWishlist(array('id_article'=>$f3->get('PARAMS.id_article')));
-        if(count($exist)==0){
-          $this->model->reWhishlister(array('id_article'=>$f3->get('PARAMS.id_article'), 'id_user'=>$f3->get('SESSION.id'), 'date_souhait'=>date('Y-m-d H:i:s')));
+        $exist=$this->model->articleInMyWishlist(array('id_article'=>$f3->get('PARAMS.id_article'), 'id_user'=>$f3->get('SESSION.id')));
+        if(count($exist)==0)
+          $f3->set('status', $this->model->reWhishlister(array('id_article'=>$f3->get('PARAMS.id_article'), 'id_user'=>$f3->get('SESSION.id'), 'date_souhait'=>date('Y-m-d H:i:s'))));
       }
     }
+    if(!$f3->exists('status'))
+      $f3->set('status','0');
     $this->tpl['async']='json/status.json';  
   }
 

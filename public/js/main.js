@@ -84,6 +84,20 @@ $('.delete').on('click', function(e){
 	return false;
 });
 
+$('.rewhishlister').on('click', function(e){
+	e.preventDefault();
+	var lien = $(this).attr('href');
+	$.ajax({
+		url: lien
+	})
+	.done(function(status) {
+	    console.log('oui');
+	})
+	.fail(function(status) {
+		console.log(a);
+	});
+	return false;
+});
 
 $('#addProduct').submit(function(e){
 	e.preventDefault();

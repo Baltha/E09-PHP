@@ -28,7 +28,7 @@ class Jerem_model extends App_model{
   }
 
   public function articleInMyWishlist($params){
-    return $this->getMapper('souhait')->find(array('id_article=?', $params['id_article']));
+    return $this->getMapper('souhait')->find(array('id_article=? & id_user=?', $params['id_article'], $params['id_user']));
   }
 
   public function reWhishlister($params){
@@ -37,5 +37,6 @@ class Jerem_model extends App_model{
       $mapper->$key=$param;
     }
     $mapper->save();
+    return '1';
   }
 }
