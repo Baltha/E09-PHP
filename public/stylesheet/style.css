@@ -899,12 +899,13 @@ form[action="setInfos"] input[type="submit"]{
 .home li:last-child a:hover{
 	transition: all 0.3s ease;
 	background: rgba(0,0,0,0.6);
+	border: 1px solid rgba(255,255,255,0.3);
 }
 
 /*top*/
 .sectiontop{
 	background: url("../images/macbook_ok.png") no-repeat,url("../images/fondhome.jpg") no-repeat;
-	background-size: 76%, cover;
+	background-size: 960px, cover;
 	background-position: center bottom, right bottom;
 }
 .contenttop{
@@ -914,8 +915,8 @@ form[action="setInfos"] input[type="submit"]{
 }
 
 .headlines{
-	width: 400px;
-	margin-top: 65px;
+	width: 500px;
+	margin-top: 10%;
 }
 
 .headlines p{
@@ -925,7 +926,7 @@ form[action="setInfos"] input[type="submit"]{
 	letter-spacing: 0.6pt;
 	font-weight: 300;
 	color: #fFF;
-	margin-left: 2px;
+	margin-left: 107px;
 }
 
 .sectiontop h2{
@@ -934,10 +935,10 @@ form[action="setInfos"] input[type="submit"]{
 	font-family: "Varela Round", Verdana, sans-serif;
 	text-transform: uppercase;
 	letter-spacing: 0.8pt;
-	/*text-shadow: 1px 1px 1px rgba(0,0,0, 0.5);*/
 	display: inline-block;
 	float: left;
 	margin-top: 3px;
+	margin-left: 105px;
 }
 
 .sectiontop a:hover{
@@ -945,50 +946,142 @@ form[action="setInfos"] input[type="submit"]{
 	background: rgba(0,0,0,0.6);
 }
 
+#nowish{
+	text-align: center;
+	width: 180px;
+	line-height: 14pt;
+}
+
 /*middle*/
+.howitworks, .partners{
+	width: 960px;
+	margin: 0 auto;
+}
+
+.partners{
+	margin-top: 50px;
+}
+
 .discover{
 	background: url("../images/crosswords.jpg") top left repeat;
 }
 .discover h3{
 	color:#222222;
-	font-size: 1.15em;
-	font-family: "Varela Round", Verdana, sans-serif;
-	text-transform: uppercase;
+	font-size: 2em;
+	font-family: "Handlee", Verdana, sans-serif;
 	text-align: center;
+	letter-spacing: 0.3pt;
+	color: #222222;
+	text-shadow: 1px 1px white;
+	padding-top: 8%;
 }
-.partager h3, .offrir h3, .recevoir h3{
-	color:#fff;
-	font-size: 1.2em;
 
-	line-height: 80px;
-	margin-bottom: 30px;
-}
 .partager, .offrir, .recevoir{
-	display:inline-block;
-	width:230px;
-	margin-top: 80px;
+	display: inline-block;
+	width: 260px;
+}
 
-	height:80px;
-	border:4px solid #fff;
-	border-radius:2px;
-}
-.partager{
-	margin-right: 50px;
+.partager, .offrir{
 	float:left;
-	background:url("../images/partager.png") no-repeat;
+	margin-right: 45px;
 }
-.offrir{
-	background:url("../images/offrir.png") no-repeat;
+
+.partager{
+	margin-left: 46px;
 }
-.recevoir{
-	float:right;
-	background:url("../images/recevoir.png") no-repeat;
+
+.partager h3, .offrir h3, .recevoir h3{
+	font-family: "Varela Round", Verdana, sans-serif;
+	letter-spacing: 0.3pt;
+	text-transform: uppercase;
+	text-align: left;
+	font-size: 1.8rem;
+	color: #288DFF;
+	padding-top: 15%;
 }
 
 .partager p, .offrir p, .recevoir p{
-	text-align: justify;
+	padding-top: 10px;
 	font-family: "Exo 2", Verdana, sans-serif;
-	font-size: 0.9em;
+	letter-spacing: 0.3pt;
+	text-align: justify;
+	color: #222222;
+	font-weight: 200;
+	line-height: 16pt;
+}
+
+.partners .columns p{
+	
+	font-family: "Exo 2", Verdana, sans-serif;
+	letter-spacing: 0.3pt;
+	text-align: justify;
+	color: #222222;
+	font-weight: 200;
+	line-height: 16pt;
+	height: 200px;
+
+}
+
+.columns{	
+	padding-top: 4%;
+	-moz-columns: 2;
+	-webkit-columns: 2;
+	-ms-columns: 2;
+	-o-columns: 2;
+	columns: 2;
+	-webkit-column-gap : 45px;
+	-ms-column-gap : 45px;
+	-o-column-gap : 45px;
+	-moz-column-gap : 45px;
+	column-gap : 45px;
+}
+
+.api{
+	background: #f1f1f1;
+}
+
+.api_desc{
+	width: 960px;
+	margin: 0 auto;
+	padding-top: 4%;
+}
+
+.api h3{
+	text-align: center;
+	width: 100%;
+	height: 65px;
+	background: #288DFF;
+	font-family: "handlee", Verdana, sans-serif;
+	letter-spacing: 0.8pt;
+	font-weight: 200;
+	line-height: 53pt;
+	color: #f1f1F1;
+	font-size: 1.5rem;
+}
+
+.api_desc p{
+	font-family: "Exo 2", Verdana, sans-serif;
+	letter-spacing: 0.3pt;
+	text-align: justify;
+	color: #222222;
+	font-weight: 200;
+	line-height: 16pt;
+	height: 150px;
+	font-size: 1.5rem;
+}
+
+.code_api{
+	width: 100%;
+	height:200px;
+	border: 1px solid #cccccc;
+	box-shadow: 5px 5px 15px rgba(0,0,0,0.1) inset;
+	border-radius: 4px;
+	background: white;
+}
+
+
+.code_api p{
+	padding: 20px;
 }
 
 

@@ -191,7 +191,7 @@ function gestionHeight(){
 	var window_height = $(window).height();
 	var wishlist_width = $("#wishlist").width();
 	$("#leftSidebar").height(document_height);
-	$(".sectiontop, .discover").height(window_height);
+	$(".sectiontop, .discover, .api").height(window_height);
 }
 
 //si windows=resize
