@@ -953,7 +953,7 @@ form[action="setInfos"] input[type="submit"]{
 }
 
 /*middle*/
-.howitworks, .partners{
+.howitworks, .partners, .api_desc{
 	width: 960px;
 	margin: 0 auto;
 }
@@ -965,15 +965,15 @@ form[action="setInfos"] input[type="submit"]{
 .discover{
 	background: url("../images/crosswords.jpg") top left repeat;
 }
-.discover h3{
+.discover h3, .api h3{
 	color:#222222;
 	font-size: 2em;
 	font-family: "Handlee", Verdana, sans-serif;
-	text-align: center;
+	text-align: left;
 	letter-spacing: 0.3pt;
 	color: #222222;
 	text-shadow: 1px 1px white;
-	padding-top: 8%;
+	padding-top: 70px;
 }
 
 .partager, .offrir, .recevoir{
@@ -986,22 +986,18 @@ form[action="setInfos"] input[type="submit"]{
 	margin-right: 45px;
 }
 
-.partager{
-	margin-left: 46px;
-}
 
-.partager h3, .offrir h3, .recevoir h3{
+.partager p span, .offrir p span, .recevoir p span{
 	font-family: "Varela Round", Verdana, sans-serif;
 	letter-spacing: 0.3pt;
 	text-transform: uppercase;
 	text-align: left;
-	font-size: 1.8rem;
+	font-size: 1.3rem;
 	color: #288DFF;
-	padding-top: 15%;
 }
 
 .partager p, .offrir p, .recevoir p{
-	padding-top: 10px;
+	padding-top: 30px;
 	font-family: "Exo 2", Verdana, sans-serif;
 	letter-spacing: 0.3pt;
 	text-align: justify;
@@ -1010,7 +1006,7 @@ form[action="setInfos"] input[type="submit"]{
 	line-height: 16pt;
 }
 
-.partners .columns p{
+.partners h3+p{
 	
 	font-family: "Exo 2", Verdana, sans-serif;
 	letter-spacing: 0.3pt;
@@ -1018,45 +1014,11 @@ form[action="setInfos"] input[type="submit"]{
 	color: #222222;
 	font-weight: 200;
 	line-height: 16pt;
-	height: 200px;
-
-}
-
-.columns{	
-	padding-top: 4%;
-	-moz-columns: 2;
-	-webkit-columns: 2;
-	-ms-columns: 2;
-	-o-columns: 2;
-	columns: 2;
-	-webkit-column-gap : 45px;
-	-ms-column-gap : 45px;
-	-o-column-gap : 45px;
-	-moz-column-gap : 45px;
-	column-gap : 45px;
-}
-
-.api{
-	background: #f1f1f1;
+	padding-top: 30px;
 }
 
 .api_desc{
-	width: 960px;
-	margin: 0 auto;
-	padding-top: 4%;
-}
-
-.api h3{
-	text-align: center;
-	width: 100%;
-	height: 65px;
-	background: #288DFF;
-	font-family: "handlee", Verdana, sans-serif;
-	letter-spacing: 0.8pt;
-	font-weight: 200;
-	line-height: 53pt;
-	color: #f1f1F1;
-	font-size: 1.5rem;
+	padding-bottom: 70px;
 }
 
 .api_desc p{
@@ -1066,8 +1028,8 @@ form[action="setInfos"] input[type="submit"]{
 	color: #222222;
 	font-weight: 200;
 	line-height: 16pt;
-	height: 150px;
 	font-size: 1.5rem;
+	padding-top: 30px;
 }
 
 .code_api{
@@ -1077,8 +1039,8 @@ form[action="setInfos"] input[type="submit"]{
 	box-shadow: 5px 5px 15px rgba(0,0,0,0.1) inset;
 	border-radius: 4px;
 	background: white;
+	margin-top: 40px;
 }
-
 
 .code_api p{
 	padding: 20px;
