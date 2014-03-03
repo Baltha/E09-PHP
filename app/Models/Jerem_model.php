@@ -16,20 +16,20 @@ class Jerem_model extends App_model{
   
 
   public function addContrib($params){
-    $page=$this->getMapper('page');
+    $contrib=$this->getMapper('contrib');
     foreach($params as $key => $param){
-      $page->$key=$param;
+      $contrib->$key=$param;
     }
-    $page->save();
-    return $page->get('_id');
+    $contrib->save();
+    return $contrib->get('_id');
   }
 
   public function addTagContrib($params){
-    $page=$this->getMapper('tag_page');
+    $contrib=$this->getMapper('tag_contrib');
     foreach($params as $key => $param){
-      $page->$key=$param;
+      $contrib->$key=$param;
     }
-    $page->save();
+    $contrib->save();
   }
 
   public function getArticle($params){
@@ -37,7 +37,7 @@ class Jerem_model extends App_model{
   }
 
   public function articleInMyWishlist($params){
-    return $this->getMapper('souhait')->find(array('id_article=? & id_user=?', $params['id_article'], $params['id_user']));
+    return $this->getMapper('souhait')->find(array('id_article=? AND id_user=?', $params['id_article'], $params['id_user']));
   }
 
   public function reWhishlister($params){
@@ -47,6 +47,38 @@ class Jerem_model extends App_model{
     }
     $mapper->save();
     return '1';
+  }
+
+  public function getTagDefault($params){
+    return $this->getMapper('tag')->load(array('id_user=? AND user_enfant=?',$params['id_user'], 'Toutes'));
+  }
+
+  public function getContrib($params){
+    return $this->getMapper('contrib')->find(array('id_contrib=?',$params['id_contrib']));
+  }
+
+  public function getProductsContrib($params){
+    return $this->dB->exec('SELECT DISTINCT a.* FROM tag_contrib tc INNER JOIN appartenance app ON app.id_tag=tc.id_tag INNER JOIN souhait s ON s.id_souhait=app.id_souhait INNER JOIN article a ON a.id_article=s.id_article WHERE tc.id_contrib=?', $params['id_contrib']);
+  }
+
+  public function likeArticleContrib($params){
+    $map=$this->getMapper('like_souhait');
+    $like=$map->load(array('id_contrib=? AND id_article=? AND id_user=?', $params['id_contrib'], $params['id_article'],$params['id_user']));
+    if(!empty($like)){
+      $map->id_contrib=$params['id_contrib'];
+      $map->id_article=$params['id_article'];
+      $map->id_user=$params['id_user'];
+      $map->save();
+      return true;
+    }
+    else{
+      $like->erase();
+      return false;
+    }
+  }
+
+  public function getArticleContrib($params){
+    return $this->dB->exec('SELECT * FROM tag_contrib tc LEFT JOIN appartenance app ON app.id_tag=tc.id_tag LEFT JOIN souhait s ON s.id_souhait=app.id_souhait WHERE tc.id_contrib=? AND s.id_article=?', $params['id_contrib'], $params['id_article']);
   }
 
 

@@ -76,20 +76,49 @@ class Jerem_controller extends App_controller{
           $id=$this->model->addContrib(array(
             'nom'=>$f3->get('POST.nom'),
             'description'=>$f3->get('POST.description'),
-            'clef_page'=>uniqid(),
+            'clef'=>uniqid(),
             'date_fin'=>$f3->get('POST.fin'), 
             'user_referent'=>$f3->get('PARAMS.id_user'),
             'user_createur'=>$f3->get('SESSION.id')
           ));
-          var_dump($f3->get('POST.tag'));
-          foreach($f3->get('POST.tag') as $tag){
-            $this->model->addTagContrib(array('id_page'=>$id, 'id_tag'=>$tag));
+          if(!empty($f3->get('POST.tag'))){
+            foreach($f3->get('POST.tag') as $tag){
+              $this->model->addTagContrib(array('id_contrib'=>$id, 'id_tag'=>$tag));
+            }
           }
+          
           
         }
       }
     }
     $this->tpl['sync']='addContrib.html';
+  }
+
+  public function viewContrib($f3){
+    /*
+      View Contrib Page
+      If contrib exists in database
+      Show contrib's products 
+    */
+    $contrib=$this->model->getContrib(array('id_contrib'=>$f3->get('PARAMS.id_contrib')));
+    if(!empty($contrib)){
+      $products=$this->model->getProductsContrib(array('id_contrib'=>$f3->get('PARAMS.id_contrib')));
+      var_dump($products);
+    }
+    $this->tpl['sync']='newWishlist.html';
+  }
+
+  public function likeArticleContrib($f3){
+    /*
+      VERIFY !
+    */
+    $exist=getArticleContrib(array('id_contrib'=>$f3->get('PARAMS.id_contrib'), 'id_article'=>$f3->get('PARAMS.id_article')));
+    if(count($exist)!=0){
+      $f3->set('status',$this->model->favorite(array('id_contrib'=>$f3->get('PARAMS.id_contrib'),'id_article'=>$f3->get('id_article'),'id_user'=>$f3->get('SESSION.id'))));
+    }
+    else
+      $f3->set('status','0');
+    $this->tpl['async']='json/status.json';
   }
 
   public function reWhishlister($f3){
@@ -106,8 +135,11 @@ class Jerem_controller extends App_controller{
       $article=$this->model->getArticle(array('id_article'=>$f3->get('PARAMS.id_article')));
       if(count($article)==1){
         $exist=$this->model->articleInMyWishlist(array('id_article'=>$f3->get('PARAMS.id_article'), 'id_user'=>$f3->get('SESSION.id')));
-        if(count($exist)==0)
-          $f3->set('status', $this->model->reWhishlister(array('id_article'=>$f3->get('PARAMS.id_article'), 'id_user'=>$f3->get('SESSION.id'), 'date_souhait'=>date('Y-m-d H:i:s'))));
+        if(count($exist)==0){
+          $id_tag=$f3->model->getTagDefault(array('id_user'=>$f3->get('SESSION.id')));
+          $f3->set('status', $this->model->reWhishlister(array('id_article'=>$f3->get('PARAMS.id_article'), 'id_user'=>$f3->get('SESSION.id'), 'date_souhait'=>date('Y-m-d H:i:s')), $id_tag));
+        }
+         
       }
     }
     if(!$f3->exists('status'))

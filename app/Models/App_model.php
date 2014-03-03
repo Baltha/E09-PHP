@@ -24,7 +24,7 @@ class App_model extends Model{
   }
 
   public function getAllUsers(){
-        return $this->dB->exec('SELECT * FROM users WHERE id_user NOT LIKE 0');
+    return $this->dB->exec('SELECT * FROM users WHERE id_user NOT LIKE 0');
   }
 
   public function verifNewUser($params){
