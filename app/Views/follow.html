@@ -13,7 +13,7 @@
 			<?php foreach ($myfollowers as $onefollower) { ?>
    				<p> <a href="wishlist/<?php echo $onefollower["fields"]["id_user"]["value"]; ?>"><?php echo $onefollower["fields"]["prenom"]["value"]." ".$onefollower["fields"]["nom"]["value"]; ?></a> </p>
         	<?php } ?>
-        	<h2>Amis Facebook présent sur le site</h2>
+        	<h2>Amis Facebook présents sur le site non suivis</h2>
         	<?php foreach ($FacebookFriendsUsers as $friend) { ?>
         		<div class="friend">
         			<p> <?php echo $friend["name"] ?> </p>

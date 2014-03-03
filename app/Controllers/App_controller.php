@@ -290,7 +290,7 @@ class App_controller extends Controller{
     $f3->set('allusers', $this->model->getAllUsers());
     foreach ($f3->get('friends.data') as $i => $friend) {
       foreach ($f3->get('allusers') as $user) {
-        if($friend["id"] == $user["id_facebook"]){
+        if($friend["id"] == $user["id_facebook"] && !$this->model->getfollowing(array('user_parent'=>$f3->get('SESSION.id'), 'user_enfant'=>$user["id_user"]))){
           $friend["id_user"] = $user["id_user"];
           array_push($ourServiceUsers, $friend);
         }
@@ -392,8 +392,7 @@ class App_controller extends Controller{
     }    
 
     public function loginInFrame($f3)
-    {
-      
+    {     
        $auth=$this->model->login(array('login'=>$f3->get('POST.login'),'password' => $f3->get('POST.password')));
        $url=$f3->set('url',$f3->get('GET.url'));
       if(!$auth){
