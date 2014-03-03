@@ -1076,6 +1076,34 @@ form[action="setInfos"] input[type="submit"]{
 	padding: 20px;
 }
 
+.popup
+{
+	width:710px;
+	border-radius: 5px;
+	background-color: #fff;
+	margin: 20px auto;
+	padding: 20px;
+}
+.popupBackground
+{
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index: 101;
+	background-color: rgba(35,35,35,0.7);
+	width:100%;
+}
+.popupClose
+{
+	font-size: 25px;
+	line-height: 25px;
+	width: 25px;
+	height: 25px;
+	float: right;
+	cursor:pointer;
+	font-family: arial;
+
+}
 
 
 
