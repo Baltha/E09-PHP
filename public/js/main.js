@@ -137,6 +137,13 @@ $('#addProduct').submit(function(e){
 		url: "addProduct/"
 	})
 	.done(function(data) {
+		if(data==="0")
+		{	
+			$('#wishlist').isotope( 'remove', $('.newWish'));
+			$container.isotope('layout');	
+			PopUp("HandAdd");
+			return;
+		}
 		$('.newWish').html(data);
 		var classes = $("#tags_value").val();
 		if(classes != "Toutes"){
@@ -150,6 +157,9 @@ $('#addProduct').submit(function(e){
 		$('#nowish').remove();
 	})
 	.fail(function(a) {
+
+		$('#wishlist').isotope( 'remove', $('.newWish'));
+		$container.isotope('layout');		
 		console.log(a);
 	});
 
@@ -194,6 +204,21 @@ function gestionHeight(){
 	$(".sectiontop").height(window_height);
 }
 
+function PopUp(url){
+	var popup = $('<div class="popupBackground"></div>').hide().height($(document).height());
+	var content = $('<div class="popup"></div>');
+	popup.append(content);
+	$('body').append(popup);
+	content.load(url, function(){
+	    $('.popupBackground').fadeIn(200)
+	    .find('.popup').prepend('<div class="popupClose" onclick="PopUpClose()">&times;</div>');
+	});
+}
+
+function PopUpClose()
+{
+	$('.popupBackground').fadeOut(200, function(){$(this).remove()});
+}
 //si windows=resize
 
 $(window).resize(function(){

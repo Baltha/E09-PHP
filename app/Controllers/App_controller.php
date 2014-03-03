@@ -236,24 +236,31 @@ class App_controller extends Controller{
   
   
   public function addProduct($f3){
-    $product=$this->model->parseProduct(array('product'=>$f3->get('POST.product')));
-    $f3->set('ESCAPE',FALSE);
-    $f3->set('product',$product);
-    $f3->set('SESSION.product',$product);
-    if($f3->get('POST.newtag')){
-      $date = date('Y-m-d H:i:s');
-      $f3->set('product',$this->model->addTag(array('nom'=>$f3->get('POST.newtag'),'id_user'=>$f3->get('SESSION.id'),'date_tag'=>$date)));
-      $f3->set('theTag', $f3->get('POST.newtag'));
+    try
+    {
+      $product=$this->model->parseProduct(array('product'=>$f3->get('POST.product')));
+      $f3->set('ESCAPE',FALSE);
+      $f3->set('product',$product);
+      $f3->set('SESSION.product',$product);
+      if($f3->get('POST.newtag')){
+        $date = date('Y-m-d H:i:s');
+        $f3->set('product',$this->model->addTag(array('nom'=>$f3->get('POST.newtag'),'id_user'=>$f3->get('SESSION.id'),'date_tag'=>$date)));
+        $f3->set('theTag', $f3->get('POST.newtag'));
+      }
+      else{
+        $f3->set('theTag', $f3->get('POST.tag'));
+      }
+      $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$f3->get('SESSION.product'),'tag'=>$f3->get('theTag'),'id_user'=>$f3->get('SESSION.id'))));
+      $f3->set('SESSION.product',array());
+      $f3->set('lastProduct',$this->model->lastProduct(array('id_user'=>$f3->get('SESSION.id'))));
+      $lastProduct = $f3->get('lastProduct');
+      $f3->set('productTags' , $this->model->getProductTags(array('id_souhait'=>$lastProduct[0]["id_souhait"])));
+      $this->tpl['async']='partials/newItem.html';
     }
-    else{
-      $f3->set('theTag', $f3->get('POST.tag'));
+    catch(Exception $e)
+    {
+      $this->tpl['async']='partials/error.html';
     }
-    $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$f3->get('SESSION.product'),'tag'=>$f3->get('theTag'),'id_user'=>$f3->get('SESSION.id'))));
-    $f3->set('SESSION.product',array());
-    $f3->set('lastProduct',$this->model->lastProduct(array('id_user'=>$f3->get('SESSION.id'))));
-    $lastProduct = $f3->get('lastProduct');
-    $f3->set('productTags' , $this->model->getProductTags(array('id_souhait'=>$lastProduct[0]["id_souhait"])));
-    $this->tpl['async']='partials/newItem.html';
   }
 
   public function deleteProduct($f3){
@@ -425,7 +432,7 @@ class App_controller extends Controller{
 
     public function ProductHand($f3)
     {
-      $product=array('nom'=>$f3->get('POST.nom'),'price'=>$f3->get('POST.price'),'describe'=>$f3->get('POST.describe'),'picture'=>$f3->get('POST.picture'),'link'=>$f3->get('POST.link'),'qid'=>$f3->get('POST.qid'));
+      $product=array('nom'=>$f3->get('POST.nom'),'price'=>$f3->get('POST.price'),'describe'=>'','picture'=>$f3->get('POST.picture'),'link'=>$f3->get('POST.link'),'qid'=>printf("%u",crc32(uniqid().mt_rand())));
       $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$product,'tag'=>$f3->get('POST.theTag'),'id_user'=>$f3->get('SESSION.id'))));
       $f3->reroute("/wishlist");
     }
