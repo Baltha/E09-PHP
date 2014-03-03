@@ -100,12 +100,12 @@ class Jerem_controller extends App_controller{
       If contrib exists in database
       Show contrib's products 
     */
-    $contrib=$this->model->getContrib(array('id_contrib'=>$f3->get('PARAMS.id_contrib')));
+    $contrib=$this->model->getContrib(array('clef'=>$f3->get('PARAMS.clef'), 'id_user'=>$f3->get('SESSION.id')));
     if(!empty($contrib)){
-      $products=$this->model->getProductsContrib(array('id_contrib'=>$f3->get('PARAMS.id_contrib')));
-      var_dump($products);
+      $f3->set('allProducts', $this->model->getProductsContrib(array('id_contrib'=>$contrib[0]['id_contrib'])));
+      $f3->set('contrib', $contrib);
     }
-    $this->tpl['sync']='newWishlist.html';
+    $this->tpl['sync']='contrib.html';
   }
 
   public function likeArticleContrib($f3){
@@ -121,7 +121,7 @@ class Jerem_controller extends App_controller{
     $this->tpl['async']='json/status.json';
   }
 
-  public function reWhishlister($f3){
+  public function reWishlister($f3){
 
     /*
       If id article exists in URL
@@ -137,7 +137,7 @@ class Jerem_controller extends App_controller{
         $exist=$this->model->articleInMyWishlist(array('id_article'=>$f3->get('PARAMS.id_article'), 'id_user'=>$f3->get('SESSION.id')));
         if(count($exist)==0){
           $id_tag=$f3->model->getTagDefault(array('id_user'=>$f3->get('SESSION.id')));
-          $f3->set('status', $this->model->reWhishlister(array('id_article'=>$f3->get('PARAMS.id_article'), 'id_user'=>$f3->get('SESSION.id'), 'date_souhait'=>date('Y-m-d H:i:s')), $id_tag));
+          $f3->set('status', $this->model->reWishlister(array('id_article'=>$f3->get('PARAMS.id_article'), 'id_user'=>$f3->get('SESSION.id'), 'date_souhait'=>date('Y-m-d H:i:s')), $id_tag));
         }
          
       }
@@ -149,7 +149,7 @@ class Jerem_controller extends App_controller{
 
 
 
-
+  
 
 
 

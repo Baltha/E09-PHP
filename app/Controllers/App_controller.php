@@ -429,7 +429,6 @@ class App_controller extends Controller{
       $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$product,'tag'=>$f3->get('POST.theTag'),'id_user'=>$f3->get('SESSION.id'))));
       $f3->reroute("/wishlist");
     }
-   
 
 }
 

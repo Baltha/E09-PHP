@@ -40,7 +40,7 @@ class Jerem_model extends App_model{
     return $this->getMapper('souhait')->find(array('id_article=? AND id_user=?', $params['id_article'], $params['id_user']));
   }
 
-  public function reWhishlister($params){
+  public function reWishlister($params){
     $mapper=$this->getMapper('souhait');
     foreach($params as $key => $param){
       $mapper->$key=$param;
@@ -54,8 +54,9 @@ class Jerem_model extends App_model{
   }
 
   public function getContrib($params){
-    return $this->getMapper('contrib')->find(array('id_contrib=?',$params['id_contrib']));
+    return $this->dB->exec('SELECT * FROM contrib c INNER JOIN users u ON c.user_createur=u.id_user WHERE c.clef=:clef AND c.user_referent!=:id', array('clef'=>$params['clef'], 'id'=>$params['id_user']));
   }
+
 
   public function getProductsContrib($params){
     return $this->dB->exec('SELECT DISTINCT a.* FROM tag_contrib tc INNER JOIN appartenance app ON app.id_tag=tc.id_tag INNER JOIN souhait s ON s.id_souhait=app.id_souhait INNER JOIN article a ON a.id_article=s.id_article WHERE tc.id_contrib=?', $params['id_contrib']);
@@ -81,5 +82,8 @@ class Jerem_model extends App_model{
     return $this->dB->exec('SELECT * FROM tag_contrib tc LEFT JOIN appartenance app ON app.id_tag=tc.id_tag LEFT JOIN souhait s ON s.id_souhait=app.id_souhait WHERE tc.id_contrib=? AND s.id_article=?', $params['id_contrib'], $params['id_article']);
   }
 
+  public function getUsersContrib($params){
+    return $this->dB->exec('SELECT * FROM don d INNER JOIN users u ON d.id_user=u.id_user WHERE d.id_contrib', $params['id_contrib']);
+  }
 
 }
