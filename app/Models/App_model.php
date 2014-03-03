@@ -194,6 +194,10 @@ class App_model extends Model{
       $tabResult=array('nom'=>$nom,'price'=>$price,'describe'=>$describe,'picture'=>$picture, 'link'=>$url, 'qid'=>$id);
 
     }
+    if(empty($id))
+    {
+      throw new Exception("Url incorrecte", 1);  
+    }
     return $tabResult;
   }
 

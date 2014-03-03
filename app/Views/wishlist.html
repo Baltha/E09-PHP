@@ -29,9 +29,6 @@
 
           <input type='submit' value='Ajouter'>
         </form>
-        <div id="hand">
-          <a href="HandAdd">Ajout Manuel</a>
-        </div>
     <?php endif; ?>
     </div>
     <div id="content">
@@ -51,9 +48,9 @@
                         <div  class="wish_name"><p><a href="<?php echo $product['lien']; ?>" target="_blank"><?php echo $productName; ?></a></p></div>
                         <p class="wish_prix"><?php echo $product['prix']."€";  ?></p>
                         <?php if(isset($user)): ?>
-                          <a class="rewhishlister" href="../reWhishlister/<?php echo $product['id_article'];?>"><img src="http://localhost:8888/E09-PHP/public/images/delete.png"></a>
+                          <a class="rewhishlister" href="../reWhishlister/<?php echo $product['id_article'];?>"><img src="<?php echo $BASEDIR?>/public/images/delete.png"></a>
                         <?php else: ?>
-                          <a class="delete" href="deleteProduct/<?php echo $product['id_souhait'];?>"><img src="http://localhost:8888/E09-PHP/public/images/delete.png"></a>
+                          <a class="delete" href="deleteProduct/<?php echo $product['id_souhait'];?>"><img src="<?php echo $BASEDIR?>/public/images/delete.png"></a>
                         <?php endif; ?>
                     </div>
                 <?php } 
@@ -63,8 +60,6 @@
             <?php } ?>
             
         </div>
-        <div id="handForm">
-      </div>
         <div class="clear"></div>
     </div>
     <div id="tagList">

@@ -93,6 +93,11 @@ p{
 	font-size:1.4rem;
 }
 
+.main{
+	width: 960px;
+	margin: auto;
+}
+
  /* 3.0 - Header */
 
 header{
@@ -104,6 +109,10 @@ header{
 	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 	z-index: 100;
 	position: fixed;
+}
+
+.contrib{
+	width: 100%;
 }
 
 .messageBonjour{
@@ -128,11 +137,29 @@ header{
 	text-decoration: none;
 	vertical-align: middle;
 	letter-spacing: 0.4pt;
-
 }
-.logo span{
+
+.contrib .main{
+	margin-top: 10px;
+}
+.logo-contrib a{
+	color:#f0f0f0;
+	font-size: 1.4rem;
+	font-weight: 100;
+	font-style: italic;
+	text-decoration: none;
+	letter-spacing: 0.4pt;
+}
+
+.logo span,
+.logo-contrib span{
 	font-weight: 300;
 	font-style: italic;
+}
+
+.titre-contrib{
+	font: 1.3rem "Exo 2", "verdana", "sans-serif";
+	text-transform: uppercase;
 }
 #logout{
 	display: table-cell;
@@ -141,9 +168,11 @@ header{
 	cursor: pointer;
 }
 
-#logout a{
+#logout a, 
+.titre-contrib a{
 	float: right;
 	font-size: 1.1rem;
+	text-align: center;
 	color:#f0f0f0;
 	text-decoration: none;
 	margin-right: 14px;
@@ -151,7 +180,8 @@ header{
 	letter-spacing: 0.3pt;
 }
 
-#logout:hover{
+#logout:hover, 
+.titre-contrib:hover{
 	background: -webkit-gradient(
 		linear,
 		right top, left top,
@@ -1046,6 +1076,34 @@ form[action="setInfos"] input[type="submit"]{
 	padding: 20px;
 }
 
+.popup
+{
+	width:710px;
+	border-radius: 5px;
+	background-color: #fff;
+	margin: 20px auto;
+	padding: 20px;
+}
+.popupBackground
+{
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index: 101;
+	background-color: rgba(35,35,35,0.7);
+	width:100%;
+}
+.popupClose
+{
+	font-size: 25px;
+	line-height: 25px;
+	width: 25px;
+	height: 25px;
+	float: right;
+	cursor:pointer;
+	font-family: arial;
+
+}
 
 
 
@@ -1056,4 +1114,69 @@ form[action="setInfos"] input[type="submit"]{
 
 
 
+
+
+
+
+
+
+.top-contrib{
+	background-color: #ffffff;
+	padding-top:38px;
+	overflow: hidden;
+	border-radius:3px;
+}
+
+.info-contrib{
+	padding-top: 3rem;
+	padding-left: 3.5rem;
+	color:#222222;
+}
+
+	.info-contrib h1{
+		font:2.5rem "Varela Round", Verdana, sans-serif;
+	}
+
+	.info-contrib h2{
+		font:1.5rem "Exo 2", Verdana, sans-serif;
+	}
+
+.top-img{
+	float: right;
+	padding: 0.5rem 1rem;
+	border-left: 1px solid #dedede;
+}
+	.top-img img{
+		border-radius: 10px;
+	}
+
+.sous-info-contrib{
+	clear: both;
+	padding-top: 2rem;
+}
+.sous-info-contrib ul{
+	list-style: none;
+}
+
+.sous-info-contrib li{
+	width:33.2%;
+	float: left;
+	text-align: center;
+	text-transform: uppercase;
+	color: #222222;
+	font:1.5rem/4rem "Varela Round", Verdana, sans-serif;
+}
+
+.sous-info-contrib img{
+	vertical-align: middle;
+}
+
+.sous-info-contrib span{
+	color: #ff0000;
+}
+
+.sous-info-contrib li:nth-child(2){
+	border-left:1px solid #dedede;
+	border-right:1px solid #dedede;
+}
 
