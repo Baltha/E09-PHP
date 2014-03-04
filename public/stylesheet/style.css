@@ -1212,12 +1212,59 @@ form[action="setInfos"] input[type="file"]{
 		float: left;
 	}
 
+	.popupInsc{
+		width:520px;
+		border-radius: 5px;
+		background-color: #fff;
+		margin: 20px auto;
+		padding: 20px;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		margin-left: -260px;
+		margin-top: -275px;
+	}
+
+	.popupInsc form p:nth-of-type(1){
+		float: left;
+		width:100px;
+		margin-top: 10px;
+	}
+
+	.popupInsc form p:nth-of-type(2){
+		width:500px;
+		margin-top: 10px;
+	}
+
+	.popupInsc form input[name="ville"],.popupInsc form input[name="mdp"], .popupInsc form input[name="nom"]{
+		width: 173px;
+	}
+
+	.popupInsc form input[type="radio"]{
+		margin-bottom: 8px;
+	}
+
+	.popupInsc form input[name="cp"],.popupInsc form input[name="mdp2"], .popupInsc form input[name="prenom"] {
+		width: 150px;
+		margin-left: 10px;
+	}
+
+	.popupInsc form input[name="file"]{
+		border: none !important;
+		margin-left: 0 !important;
+		padding-left: 0 !important;
+	}
+
 	.popup h1+p{
 		margin-top: 5px;
 		margin-left: 180px;
 		font-family: "exo 2";
 		font-weight: 200;
 		font-size: 1.3rem;
+	}
+
+	.meaningInscription{
+		margin-left: 150px !important;
 	}
 
 	.popup h1+p+form{

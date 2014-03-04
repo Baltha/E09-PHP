@@ -166,6 +166,7 @@ $('#addProduct').submit(function(e){
 $('#inscription').on('click', function(e){
 	e.preventDefault();
 	PopUp("callForm");
+	$('.popup').addClass('popupInsc');
 });
 
 $('#category').on('change', function() {
