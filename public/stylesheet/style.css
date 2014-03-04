@@ -614,6 +614,7 @@ form[action="setInfos"] input[type="file"]{
 	  }
 	  
 	  .wish .wish_name{
+	  	width: auto;
 	  	height: 38px;
 	  	padding: 10px;
 	  	padding-left: 14px;
@@ -623,6 +624,7 @@ form[action="setInfos"] input[type="file"]{
 	  	position: absolute;
 	  	z-index: 9;
 	  	bottom: 0;
+	  	text-align: center;
 	  }
 	  .wish .wish_name a{
 	  	font-family: "Exo 2", "verdana", "sans-serif";
@@ -684,6 +686,21 @@ form[action="setInfos"] input[type="file"]{
 
 	  .wish .active{
 		display: block;
+	  }
+
+	  .wish .rewhishlister{
+	  	position: absolute;
+		top: 0;
+		right: 0;
+		background: white;
+		text-decoration: none;
+		border-bottom-left-radius: 4px;
+		text-transform: uppercase;
+		font-family: "open sans";
+		font-size: 1rem;
+		color: #222222;
+		padding: 10px 10px 10px 10px;
+		display: none;
 	  }
 
 	  #newtag{
