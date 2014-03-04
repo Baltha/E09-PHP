@@ -136,8 +136,9 @@ class Jerem_controller extends App_controller{
       if(count($article)==1){
         $exist=$this->model->articleInMyWishlist(array('id_article'=>$f3->get('PARAMS.id_article'), 'id_user'=>$f3->get('SESSION.id')));
         if(count($exist)==0){
-          $id_tag=$f3->model->getTagDefault(array('id_user'=>$f3->get('SESSION.id')));
-          $f3->set('status', $this->model->reWishlister(array('id_article'=>$f3->get('PARAMS.id_article'), 'id_user'=>$f3->get('SESSION.id'), 'date_souhait'=>date('Y-m-d H:i:s')), $id_tag));
+          $id_tag=$this->model->getTagDefault(array('id_user'=>$f3->get('SESSION.id')));
+          echo $id_tag['id_tag'];
+          $f3->set('status', $this->model->reWishlister(array('id_article'=>$f3->get('PARAMS.id_article'), 'id_user'=>$f3->get('SESSION.id'), 'date_souhait'=>date('Y-m-d H:i:s')), $id_tag['id_tag']));
         }
          
       }

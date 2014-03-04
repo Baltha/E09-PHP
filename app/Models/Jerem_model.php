@@ -40,17 +40,22 @@ class Jerem_model extends App_model{
     return $this->getMapper('souhait')->find(array('id_article=? AND id_user=?', $params['id_article'], $params['id_user']));
   }
 
-  public function reWishlister($params){
+  public function reWishlister($params, $id_tag){
     $mapper=$this->getMapper('souhait');
     foreach($params as $key => $param){
       $mapper->$key=$param;
     }
     $mapper->save();
+    $id_souhait=$mapper->get('_id');
+    $map=$this->getMapper('appartenance');
+    $map->id_tag=$id_tag;
+    $map->id_souhait=$id_souhait;
+    $map->save();
     return '1';
   }
 
   public function getTagDefault($params){
-    return $this->getMapper('tag')->load(array('id_user=? AND user_enfant=?',$params['id_user'], 'Toutes'));
+    return $this->getMapper('tag')->load(array('id_user=? AND nom="Toutes"', $params['id_user']));
   }
 
   public function getContrib($params){
