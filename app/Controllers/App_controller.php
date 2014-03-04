@@ -419,6 +419,7 @@ class App_controller extends Controller{
 
     public function HandAdd($f3)
     {
+      $f3->set('tags',$this->model->getUserTags(array('id_user'=>$f3->get('SESSION.id'))));
       $this->tpl['async']='partials/HandForm.html';
     }
     public function callForm($f3)
@@ -429,7 +430,7 @@ class App_controller extends Controller{
     public function ProductHand($f3)
     {
       $product=array('nom'=>$f3->get('POST.nom'),'price'=>$f3->get('POST.price'),'describe'=>'','picture'=>$f3->get('POST.picture'),'link'=>$f3->get('POST.link'),'qid'=>printf("%u",crc32(uniqid().mt_rand())));
-      $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$product,'tag'=>$f3->get('POST.theTag'),'id_user'=>$f3->get('SESSION.id'))));
+      $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$product,'tag'=>$f3->get('POST.tag'),'id_user'=>$f3->get('SESSION.id'))));
       $f3->reroute("/wishlist");
     }
 

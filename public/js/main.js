@@ -218,6 +218,12 @@ function PopUp(url){
 	    $('.popupBackground').fadeIn(200)
 	    .find('.popup').prepend('<div class="popupClose" onclick="PopUpClose()">&times;</div>');
 	});
+	$('.popupBackground').on('click', function(e){
+		var $target = $(event.target);
+	    if($target.is('.popupBackground')) {
+	        PopUpClose();
+	    }
+	});
 }
 
 function PopUpClose()

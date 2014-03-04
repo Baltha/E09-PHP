@@ -5,6 +5,14 @@
 	<label>Prix</label><input type="text" name="price" required/ placeholder="Prix"><br>
 	<label>Url image</label><input type="url" name="picture" required/ placeholder="Url de l'image du produit"><br>
 	<label>Url produit</label><input type="url" name="link" required/ placeholder="Url de la fiche produit"><br>
-	<label>Tag</label><input type="text" name="theTag" required/ placeholder="Tag"><br>
+	 <select name="tag" id="category">
+           <?php if(isset($tags))
+          {
+              foreach ($tags as $tag) { ?>
+                <option required="required"  value="<?php echo $tag['nom'];?>"><?php echo $tag['nom'];?> </option>
+              <?php } 
+          }
+          ?> 
+    </select><br>
 	<input type="submit"></input>
 </form>
