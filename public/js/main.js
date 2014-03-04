@@ -182,10 +182,12 @@ $(document).on({
     mouseenter: function () {
         $(this).find('.wish_prix').fadeIn(0);
         $(this).find('.delete').fadeIn(0);
+        $(this).find('.rewishlister').fadeIn(0);
     },
     mouseleave: function () {
         $(this).find('.wish_prix').fadeOut(0);
         $(this).find('.delete').fadeOut(0);
+        $(this).find('.rewishlister').fadeOut(0);
     }
 }, '.wish');
 
