@@ -417,14 +417,13 @@ class App_controller extends Controller{
       }
    }
 
-    public function ipn($f3){
-      $f3->reroute("/wishlist");
-      echo "coucou" ;
-    }
-
     public function HandAdd($f3)
     {
       $this->tpl['async']='partials/HandForm.html';
+    }
+    public function callForm($f3)
+    {
+      $this->tpl['async']='partials/inscription.html'; 
     }
 
     public function ProductHand($f3)

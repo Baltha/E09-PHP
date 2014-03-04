@@ -163,6 +163,11 @@ $('#addProduct').submit(function(e){
 
 });
 
+$('#inscription').on('click', function(e){
+	e.preventDefault();
+	PopUp("callForm");
+});
+
 $('#category').on('change', function() {
   if(this.value == "newtag"){
   	$("#newtag").addClass("active");
