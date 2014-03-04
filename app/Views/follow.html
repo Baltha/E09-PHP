@@ -7,15 +7,18 @@
         <div id="follow">
         	<h2>Amis que vous suivez</h2>
         	<?php foreach ($myfollows as $onefollow) { ?>
+                <img src="<?php echo $onefollow["fields"]["photo"]["value"]; ?>" alt="<?php echo $onefollow["fields"]["prenom"]["value"]; ?>">
    				<p> <a href="wishlist/<?php echo $onefollow["fields"]["id_user"]["value"]; ?>"><?php echo $onefollow["fields"]["prenom"]["value"]." ".$onefollow["fields"]["nom"]["value"]; ?></a> </p>
         	<?php } ?>
         	<h2>Amis qui vous suivent</h2>
 			<?php foreach ($myfollowers as $onefollower) { ?>
+                <img src="<?php echo $onefollow["fields"]["photo"]["value"]; ?>" alt="<?php echo $onefollow["fields"]["prenom"]["value"]; ?>">
    				<p> <a href="wishlist/<?php echo $onefollower["fields"]["id_user"]["value"]; ?>"><?php echo $onefollower["fields"]["prenom"]["value"]." ".$onefollower["fields"]["nom"]["value"]; ?></a> </p>
         	<?php } ?>
         	<h2>Amis Facebook présents sur le site non suivis</h2>
         	<?php foreach ($FacebookFriendsUsers as $friend) { ?>
         		<div class="friend">
+                    <img src="<?php echo $friend["photo"]; ?> " alt="<?php echo $friend["name"]; ?>">
         			<p> <?php echo $friend["name"] ?> </p>
         			<a href="addFollow/<?php echo $friend["id_user"] ?> ">Follow</a>
         		</div>

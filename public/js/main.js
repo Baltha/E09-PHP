@@ -183,6 +183,8 @@ $('#tags li a').on('click', function(e){
 	$(this).toggleClass("active");
 });
 
+//.Wish Hover
+
 $(document).on({
     mouseenter: function () {
         $(this).find('.wish_prix').fadeIn(0);
@@ -196,8 +198,17 @@ $(document).on({
     }
 }, '.wish');
 
+//.Mycontrib li Hover
 
-//.Wish Hover
+$(".myContributions ul li a").on({
+    mouseenter: function () {
+        $(this).parent().addClass("hover");
+    },
+    mouseleave: function () {
+    	$(this).parent().removeClass("hover");
+    }
+});
+
 
 // Gestion de la hauteur
 

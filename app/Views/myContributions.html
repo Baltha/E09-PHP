@@ -5,11 +5,16 @@
         <div class="myContributions">
           <ul>
               <?php if($myContributions){ ?>
-                <?php foreach ($myContributions as $key => $contrib) { ?>
-                  <li><?php echo $contrib["nom"] ?></li>
+                <?php foreach ($myContributions as $i => $contrib) { ?>
+                  <li>
+                    <a href=""></a>
+                    <img src="<?php echo $contribUsers[$i]["fields"]["photo"]["value"] ?>" alt="<?php echo $contribUsers[$i]["fields"]["prenom"]["value"] ?> ">
+                    <h5><?php echo $contribUsers[$i]["fields"]["prenom"]["value"]." ".$contribUsers[$i]["fields"]["nom"]["value"]; ?><span> - Jusqu'au <?php echo $dates[$i]; ?></span> </h5>
+                    <h4><?php echo $contrib["nom"]; ?></h4>
+                 </li>
                 <?php } ?>
               <?php }else{ ?>
-              <p> Vous ne participez à aucune page de contribution</p>
+              <p class="noItems"> Vous ne participez à aucune page de contribution</p>
               <?php } ?>
           </ul>
         </div>

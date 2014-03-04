@@ -299,6 +299,8 @@ class App_controller extends Controller{
       foreach ($f3->get('allusers') as $user) {
         if($friend["id"] == $user["id_facebook"] && !$this->model->getfollowing(array('user_parent'=>$f3->get('SESSION.id'), 'user_enfant'=>$user["id_user"]))){
           $friend["id_user"] = $user["id_user"];
+          $getUser = $this->model->getUser(array('id_user'=>$user["id_user"]));
+          $friend["photo"] = $getUser["fields"]["photo"]["value"];
           array_push($ourServiceUsers, $friend);
         }
       }
@@ -436,6 +438,15 @@ class App_controller extends Controller{
 
     public function myContributions($f3){
         $f3->set('myContributions', $this->model->getMycContribution(array('id_user'=>$f3->get('SESSION.id'))));
+        $users = array();
+        $dates = array();
+        foreach ($f3->get('myContributions') as $contrib) {
+            $newdate = str_replace("-", "/", $contrib["date_fin"]);
+            array_push($dates, $newdate);
+            array_push($users, $this->model->getUser(array('id_user'=>$contrib['user_referent'])));
+        }
+        $f3->set('contribUsers', $users);
+        $f3->set('dates', $dates);
         $this->tpl['sync']='myContributions.html';
         $f3->set('stats.nbfollowers', count($this->model->getfollowers(array('id_user'=>$f3->get('SESSION.id')))));
         $f3->set('stats.nbfollows', count($this->model->getfollows(array('id_user'=>$f3->get('SESSION.id')))));
