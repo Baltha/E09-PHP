@@ -416,9 +416,7 @@ class App_controller extends Controller{
         $f3->reroute('/verifIdInFrame?url='.urlencode($url));
       }
    }
-    public function paypal($f3){
-      $this->tpl['sync']='paypal.html';
-    }
+
     public function ipn($f3){
       $f3->reroute("/wishlist");
       echo "coucou" ;
@@ -434,6 +432,15 @@ class App_controller extends Controller{
       $product=array('nom'=>$f3->get('POST.nom'),'price'=>$f3->get('POST.price'),'describe'=>'','picture'=>$f3->get('POST.picture'),'link'=>$f3->get('POST.link'),'qid'=>printf("%u",crc32(uniqid().mt_rand())));
       $f3->set('product',$this->model->addProduct(array('nom'=>$f3->get('POST.nom'),'product'=>$product,'tag'=>$f3->get('POST.theTag'),'id_user'=>$f3->get('SESSION.id'))));
       $f3->reroute("/wishlist");
+    }
+
+    public function myContributions($f3){
+        $f3->set('myContributions', $this->model->getMycContribution(array('id_user'=>$f3->get('SESSION.id'))));
+        $this->tpl['sync']='myContributions.html';
+        $f3->set('stats.nbfollowers', count($this->model->getfollowers(array('id_user'=>$f3->get('SESSION.id')))));
+        $f3->set('stats.nbfollows', count($this->model->getfollows(array('id_user'=>$f3->get('SESSION.id')))));
+        $f3->set('stats.wishs', count($this->model->getProducts(array('id_user'=>$f3->get('SESSION.id')))));
+        $f3->set('page', 'contribution');
     }
 
 }
