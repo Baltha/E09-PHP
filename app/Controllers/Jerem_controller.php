@@ -73,20 +73,23 @@ class Jerem_controller extends App_controller{
 
 
         if(count($erreur)==0){
+          $clef=uniqid();
           $id=$this->model->addContrib(array(
             'nom'=>$f3->get('POST.nom'),
             'description'=>$f3->get('POST.description'),
-            'clef'=>uniqid(),
+            'clef'=>$clef,
             'date_fin'=>$f3->get('POST.fin'), 
             'user_referent'=>$f3->get('PARAMS.id_user'),
             'user_createur'=>$f3->get('SESSION.id')
           ));
+          $f3->set('clef', $clef);
           if(!empty($f3->get('POST.tag'))){
             foreach($f3->get('POST.tag') as $tag){
               $this->model->addTagContrib(array('id_contrib'=>$id, 'id_tag'=>$tag));
             }
           }
           
+          $f3->reroute('/contrib/'.$clef.'');
           
         }
       }
@@ -146,6 +149,10 @@ class Jerem_controller extends App_controller{
     if(!$f3->exists('status'))
       $f3->set('status','0');
     $this->tpl['async']='json/status.json';  
+  }
+
+  public function getContrib($f3){
+
   }
 
 

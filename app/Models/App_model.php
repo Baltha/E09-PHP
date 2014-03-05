@@ -304,7 +304,7 @@ class App_model extends Model{
   }
 
   public function getMycContribution($params){
-    return $this->dB->exec('SELECT DISTINCT c.* FROM don d LEFT JOIN contrib c ON c.id_contrib=d.id_contrib WHERE d.id_user=:id OR c.user_createur=:id', array('id'=>$params['id_user']));
+    return $this->dB->exec('SELECT DISTINCT c.* FROM contrib c LEFT JOIN don d ON d.id_contrib=c.id_contrib WHERE d.id_user=:id OR c.user_createur=:id', array('id'=>$params['id_user']));
   }
 
 }
