@@ -58,6 +58,7 @@ class Jerem_controller extends App_controller{
       */
 
       if($f3->get('PARAMS.step')=='1'){
+        $f3->set('list_contrib',$this->model->getContribUser(array('user_referent'=>$f3->get('PARAMS.id_user'))));
         $f3->set('tags', $this->model->getUserTags(array('id_user'=>$f3->get('PARAMS.id_user'))));
         $this->tpl['sync']='addContrib.html';
       }
@@ -73,20 +74,23 @@ class Jerem_controller extends App_controller{
 
 
         if(count($erreur)==0){
+          $clef=uniqid();
           $id=$this->model->addContrib(array(
             'nom'=>$f3->get('POST.nom'),
             'description'=>$f3->get('POST.description'),
-            'clef'=>uniqid(),
+            'clef'=>$clef,
             'date_fin'=>$f3->get('POST.fin'), 
             'user_referent'=>$f3->get('PARAMS.id_user'),
             'user_createur'=>$f3->get('SESSION.id')
           ));
+          $f3->set('clef', $clef);
           if(!empty($f3->get('POST.tag'))){
             foreach($f3->get('POST.tag') as $tag){
               $this->model->addTagContrib(array('id_contrib'=>$id, 'id_tag'=>$tag));
             }
           }
           
+          $f3->reroute('/contrib/'.$clef.'');
           
         }
       }
@@ -147,7 +151,6 @@ class Jerem_controller extends App_controller{
       $f3->set('status','0');
     $this->tpl['async']='json/status.json';  
   }
-
 
 
   

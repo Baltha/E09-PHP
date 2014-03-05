@@ -1,0 +1,63 @@
+<?php require('headerBase.html');?>
+
+  <?php if(isset($erreur)){
+    print_r($erreur);
+  }?>
+
+<header class="contrib">
+  <div class="main">
+    <span class="logo-contrib">
+      <a href="">Friendly<span>Gift</span> </a>
+    </span>
+    <span class="titre-contrib">
+      <a href="">Page de contribution</a>
+    </span>
+  </div>
+  
+</header>
+
+<div class="main">
+  <div class="top-contrib">
+    <div class="top-img">
+      <img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/t1/c50.50.621.621/s160x160/297812_4078453251125_1203919782_n.jpg" width="100" height="100" alt="" />
+    </div>
+    <div class="info-contrib">
+      <h1><?php echo stripslashes($contrib[0]['nom_contrib']); ?></h1>
+      <h2>Crée par <?php echo stripslashes($contrib[0]['prenom']).' '.stripslashes($contrib[0]['nom']); ?></h2>
+    </div>
+    <div class="sous-info-contrib">
+      <ul>
+        <li>jusqu’au 16/02/15</li>
+        <li><span>10€</span> déjà récoltés</li>
+        <li><img src="../public/images/participer.png" alt="" /> je veux participer</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="wishlist">
+            <?php
+            if(count($allProducts) != 0)
+            {
+                foreach ($allProducts as $i => $product) { ?>
+                    <?php $productName = $product['nom'];
+                    if(strlen($productName) > 50){
+                        $productName = substr($productName, 0, 50);
+                        $productName = $productName."...";
+                    }?>
+                    <div class="wish" >
+                        <img src="<?php echo $product['image'] ?>" alt="">
+                        <div  class="wish_name"><p><a href="<?php echo $product['lien']; ?>" target="_blank"><?php echo $productName; ?></a></p></div>
+                        <p class="wish_prix"><?php echo $product['prix']."€";  ?></p>
+                        <a class="like" href="../reWishlister/<?php echo $product['id_article'];?>"><img src="<?php echo $BASEDIR?>/public/images/thumb_bleu.svg" width="10" height="10" alt=""></a>
+                    </div>
+                <?php
+                 } 
+            }?>
+            
+            
+        </div>
+</div>
+
+
+
+<?php require('footer.html');?>

@@ -1,14 +1,17 @@
+<h1>Inscription</h1>
+<p class="meaningInscription">Merci de remplir ce formulaire</p>
 <form action="inscription/" method="post" enctype="multipart/form-data" id="test">
-    <label for="mail">Mail</label><input type="email" name="mail"/><br/>
-    <label for="mdp">Mot de passe</label><input type="password" name="mdp"/><br/>
-    <label for="mdp2">Mot de passe</label><input type="password" name="mdp2"/><br/>
-    <label for="nom">Nom</label><input type="text" name="nom"/><br/>
-    <label for="prenom">Prénom</label><input type="text" name="prenom"/><br/>
-    <label for="adresse">Adresse</label><input type="text" name="adresse"/><br/>
-    <label for="ville">Ville</label><input type="text" name="ville"/><br/>
-    <label for="cp">Code postal:</label><input type="text" name="cp"/><br/>
-    <label for="Date de naissance">Date de naissance</label><input type="date" name="naissance"/><br/>
-    <label for="Sexe">Sexe</label><input type="radio" name="sexe" value="homme">Homme<input type="radio" name="sexe" value="femme"><br/>Femmme</p><br/>
-    <label for="file">Photo</label><input type="file" name="file"/><br/>
+    <input type="email" name="mail" placeholder="Adresse mail"/><br/>
+    <input type="password" name="mdp" placeholder="Mot de passe"/>
+    <input type="password" name="mdp2" placeholder="Confirmation"/><br/>
+    <input type="text" name="nom" placeholder="Nom"/>
+    <input type="text" name="prenom" placeholder="Prénom"/><br/>
+    <input type="text" name="adresse" placeholder="N°de voie, rue"/><br/>
+    <input type="text" name="ville" placeholder="Ville"/>
+    <input type="text" name="cp" placeholder="Code postal"/><br/>
+    <input type="date" name="naissance"  placeholder="Date de naissance"/><br/>
+    <p><span>Homme</span><input type="radio" name="sexe" value="homme"></p>
+    <p><span>Femme</span><input type="radio" name="sexe" value="femme"></p><br/>
+    <input type="file" name="file"/><br/>
     <input type="submit">
 </form>
