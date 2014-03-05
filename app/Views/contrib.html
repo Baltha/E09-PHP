@@ -48,11 +48,9 @@
                         <img src="<?php echo $product['image'] ?>" alt="">
                         <div  class="wish_name"><p><a href="<?php echo $product['lien']; ?>" target="_blank"><?php echo $productName; ?></a></p></div>
                         <p class="wish_prix"><?php echo $product['prix']."€";  ?></p>
-                        <?php if(isset($user)): ?>
-                          <a class="rewhishlister" href="../reWhishlister/<?php echo $product['id_article'];?>"><img src="http://localhost:8888/E09-PHP/public/images/delete.png"></a>
+                        <a class="like" href="../reWishlister/<?php echo $product['id_article'];?>"><img src="<?php echo $BASEDIR?>/public/images/thumb_bleu.svg" width="10" height="10" alt=""></a>
                     </div>
                 <?php
-                endif;
                  } 
             }?>
             

@@ -7,8 +7,8 @@
               <?php if($myContributions){ ?>
                 <?php foreach ($myContributions as $i => $contrib) { ?>
                   <li>
-                    <a href=""></a>
-                    <img src="<?php echo $contribUsers[$i]["fields"]["photo"]["value"] ?>" alt="<?php echo $contribUsers[$i]["fields"]["prenom"]["value"] ?> ">
+                    <a href="<?php echo $BASEDIR.'/contrib/'.$contrib['clef']; ?>"></a>
+                    <img src="<?php echo $contribUsers[$i]["fields"]["photo"]["value"];?>" alt="<?php echo $contribUsers[$i]["fields"]["prenom"]["value"];?> ">
                     <h5><?php echo $contribUsers[$i]["fields"]["prenom"]["value"]." ".$contribUsers[$i]["fields"]["nom"]["value"]; ?><span> - Jusqu'au <?php echo $dates[$i]; ?></span> </h5>
                     <h4><?php echo $contrib["nom"]; ?></h4>
                  </li>

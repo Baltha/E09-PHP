@@ -50,7 +50,7 @@
                         <?php if(isset($user)): ?>
                           <a class="rewishlister" href="../reWishlister/<?php echo $product['id_article'];?>">I wish</a>
                         <?php else: ?>
-                          <a class="delete" href="deleteProduct/<?php echo $product['id_souhait'];?>"><img src="<?php echo $BASEDIR?>/public/images/delete.png"></a>
+                          <a class="delete" href="deleteProduct/<?php echo $product['id_souhait'];?>"><img src="<?php echo $BASEDIR;?>/public/images/delete.png"></a>
                         <?php endif; ?>
                     </div>
                 <?php } 

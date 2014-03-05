@@ -610,7 +610,8 @@ form[action="setInfos"] input[type="file"]{
 		display: block;
 	  }
 
-	  .wish .rewishlister{
+	  .wish .rewishlister,
+	  .wish .like{
 	  	position: absolute;
 		top: 0;
 		right: 0;

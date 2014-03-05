@@ -58,6 +58,7 @@ class Jerem_controller extends App_controller{
       */
 
       if($f3->get('PARAMS.step')=='1'){
+        $f3->set('list_contrib',$this->model->getContribUser(array('user_referent'=>$f3->get('PARAMS.id_user'))));
         $f3->set('tags', $this->model->getUserTags(array('id_user'=>$f3->get('PARAMS.id_user'))));
         $this->tpl['sync']='addContrib.html';
       }
@@ -150,11 +151,6 @@ class Jerem_controller extends App_controller{
       $f3->set('status','0');
     $this->tpl['async']='json/status.json';  
   }
-
-  public function getContrib($f3){
-
-  }
-
 
 
   
