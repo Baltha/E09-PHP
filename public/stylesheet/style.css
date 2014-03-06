@@ -186,7 +186,7 @@ header{
 }
 
 .contrib .main{
-	margin-top: 10px;
+	margin-top: 12px;
 }
 .logo-contrib a{
 	color:#f0f0f0;
@@ -214,16 +214,16 @@ header{
 	cursor: pointer;
 }
 
-#logout a, 
 .titre-contrib a{
 	float: right;
-	font-size: 1.1rem;
+	font-size: 1rem;
 	text-align: center;
 	color:#f0f0f0;
 	text-decoration: none;
-	margin-right: 14px;
 	font-weight: 300;
 	letter-spacing: 0.3pt;
+	margin-top: 2px;
+	margin-right: 2px;
 }
 
 #logout a{
@@ -1060,7 +1060,7 @@ form[action="setInfos"] input[type="file"]{
 		border: 1px solid rgba(255,255,255,0.15);
 	}
 
-	.home li:last-child a:hover{
+	.home li:last-child a:hover, #login input[type="submit"]:hover{
 		transition: all 0.3s ease;
 		background: rgba(0,0,0,0.6);
 		border: 1px solid rgba(255,255,255,0.3);
@@ -1359,9 +1359,9 @@ form[action="setInfos"] input[type="file"]{
 	}
 
 	.info-contrib{
-		padding-top: 3rem;
-		padding-left: 3.5rem;
 		color:#222222;
+		height: 78px;
+		border-bottom: 1px solid #f0f0f0;
 	}
 
 		.info-contrib h1{
@@ -1372,13 +1372,12 @@ form[action="setInfos"] input[type="file"]{
 			font:1.5rem "Exo 2", Verdana, sans-serif;
 		}
 
-	.top-img{
-		float: right;
-		padding: 0.5rem 1rem;
-		border-left: 1px solid #dedede;
-	}
-		.top-img img{
-			border-radius: 10px;
+		.info-contrib img{
+			border-top-left-radius: 4px;
+			border-bottom-left-radius: 4px;
+			float: right;
+			width: 78px;
+			height: 78px;
 		}
 
 	.sous-info-contrib{
