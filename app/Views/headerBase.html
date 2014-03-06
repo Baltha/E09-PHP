@@ -4,20 +4,22 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   
-  <?php if ($page == "wishlist"){ ?>
-	<title>Ma wishlist</title>
-  	<meta name="robots" content="noindex,nofollow"/>
-  <?php }else if($page == "follow"){ ?>
-	<title>Mes amis</title>
-  	<meta name="robots" content="noindex,nofollow"/>
-  <?php }else if($page == "contribution"){ ?>
-	<title>Mes contributions</title>
-  	<meta name="robots" content="noindex,nofollow"/>
-  <?php }else{ ?>
-  <title>FriendlyGift</title>
-  <meta name="description" content="offrez des cadeaux à vos amis, partagez votre liste de souhaits">
+  <?php if(isset($page)) { ?> 
+    <?php if ($page == "wishlist"){ ?>
+  	   <title>Ma whishlist</title>
+    	 <meta name="robots" content="noindex,nofollow"/>
+    <?php }else if($page == "follow"){ ?>
+  	   <title>Mes amis</title>
+    	 <meta name="robots" content="noindex,nofollow"/>
+    <?php }else if($page == "contribution"){ ?>
+  	   <title>Mes contributions</title>
+    	 <meta name="robots" content="noindex,nofollow"/>
+    <?php } else if($page == "home"){ ?>
+        <title>FriendlyGift</title>
+        <meta name="description" content="offrez des cadeaux à vos amis, partagez votre liste de souhaits">
+    <?php } ?>
   <?php } ?>
-  
+
   <link href="<?php echo $BASEDIR;?>/public/stylesheet/style.css" rel="stylesheet" type="text/css" /> 
   <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Exo+2:400,100,100italic,200,200italic,300italic,300,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>

@@ -68,7 +68,7 @@
           if(isset($tags))
           {
               foreach ($tags as $tag) { ?>
-                  <li><a href="#" data-filter="<?php echo ".".$tag['nom'];?>"><?php echo $tag['nom'];?></a></li>
+                  <li><a href="#" <?php if($tag['nom'] == "Toutes"){ ?> class="active" <?php } ?> data-filter="<?php echo ".".$tag['nom'];?>"><?php echo $tag['nom'];?></a></li>
               <?php } 
           }
           ?> 
