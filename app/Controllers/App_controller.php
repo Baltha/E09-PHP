@@ -366,7 +366,6 @@ class App_controller extends Controller{
     }
   } 
 
-
     public function giveIframe($f3)
     {
        $f3->set('url',$f3->get('GET.url'));
