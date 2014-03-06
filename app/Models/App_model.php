@@ -306,5 +306,13 @@ class App_model extends Model{
     return $this->dB->exec('SELECT DISTINCT c.* FROM contrib c LEFT JOIN don d ON d.id_contrib=c.id_contrib WHERE d.id_user=:id OR c.user_createur=:id', array('id'=>$params['id_user']));
   }
 
+  public function addDon($params){
+    $map=$this->getMapper('don');
+    foreach($params as $key => $param){
+      $map->$key=$param;
+    }
+    $map->save();
+  }
+
 }
 ?>
