@@ -5,6 +5,12 @@
     <div class="clear"></div>
     <div id="content">
         <div id="follow">
+            <form action="searchUser/" method="post">
+                <input type="text" name="name" placeholder="Recherche..." autocomplete="off"/>
+            </form>
+            <ul class="users">
+                <?php require('partials/users.html'); ?>
+            </ul>
         	<h2>Amis que vous suivez</h2>
         	<?php foreach ($myfollows as $onefollow) { ?>
                 <img src="<?php echo $onefollow["fields"]["photo"]["value"]; ?>" alt="<?php echo $onefollow["fields"]["prenom"]["value"]; ?>">

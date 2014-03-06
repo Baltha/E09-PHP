@@ -106,6 +106,23 @@ $('.delete').on('click', function(e){
 	return false;
 });
 
+$('input[name="name"]').on('keyup',function(e){
+	var $this=$(this);
+	var $parent=$this.parent('form');
+	var name=$this.val();
+	if(name.length > 2){
+		var datas={'name':name};
+		$.ajax({
+			url:$parent.attr('action'),
+			method:$parent.attr('method'),
+			data:datas
+		})
+		.success(function(data){
+			$('.users').html(data);
+		})
+	}
+})
+
 $('.rewishlister').on('click', function(e){
 	e.preventDefault();
 	var lien = $(this).attr('href');
