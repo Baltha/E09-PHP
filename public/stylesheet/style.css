@@ -207,6 +207,7 @@ header{
 	font: 1.3rem "Exo 2", "verdana", "sans-serif";
 	text-transform: uppercase;
 }
+
 #logout{
 	display: table-cell;
 	width: 33.33%;
@@ -229,6 +230,17 @@ header{
 #logout a{
 	padding-top: 13px;
 	padding-bottom: 13px;
+	text-decoration: none;
+	float: right;
+	font-family: "exo 2";
+	font-size: 0.9rem;
+	color:#f0f0f0;
+	font-size: 1.1rem;
+	vertical-align: middle;
+	padding-left: 14px;
+	font-weight: 300;
+	letter-spacing: 0.3pt;
+	margin-right: 15px;
 }
 
 #logout:hover, 
@@ -1366,23 +1378,28 @@ form[action="setInfos"] input[type="file"]{
 
 		.info-contrib h1{
 			font:2.5rem "Varela Round", Verdana, sans-serif;
+			padding-top: 20px;
+			margin-left: 30px;
+			font-size: 2rem;
 		}
 
 		.info-contrib h2{
 			font:1.5rem "Exo 2", Verdana, sans-serif;
+			margin-left: 30px;
+			font-weight: 200;
+			font-size: 1.4rem;
 		}
 
 		.info-contrib img{
-			border-top-left-radius: 4px;
-			border-bottom-left-radius: 4px;
+			border-radius: 4px;
 			float: right;
-			width: 78px;
-			height: 78px;
+			width: 68px;
+			height: 68px;
+			margin: 5px;
 		}
 
 	.sous-info-contrib{
 		clear: both;
-		padding-top: 2rem;
 	}
 	.sous-info-contrib ul{
 		list-style: none;
@@ -1394,7 +1411,7 @@ form[action="setInfos"] input[type="file"]{
 		text-align: center;
 		text-transform: uppercase;
 		color: #222222;
-		font:1.5rem/4rem "Varela Round", Verdana, sans-serif;
+		font:1.2rem/4rem "Varela Round", Verdana, sans-serif;
 	}
 
 	.sous-info-contrib img{
@@ -1406,8 +1423,8 @@ form[action="setInfos"] input[type="file"]{
 	}
 
 	.sous-info-contrib li:nth-child(2){
-		border-left:1px solid #dedede;
-		border-right:1px solid #dedede;
+		border-left:1px solid #f0f0f0;
+		border-right:1px solid #f0f0f0;
 	}
 
 
