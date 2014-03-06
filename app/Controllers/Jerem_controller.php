@@ -60,6 +60,7 @@ class Jerem_controller extends App_controller{
       if($f3->get('PARAMS.step')=='1'){
         $f3->set('list_contrib',$this->model->getContribUser(array('user_referent'=>$f3->get('PARAMS.id_user'))));
         $f3->set('tags', $this->model->getUserTags(array('id_user'=>$f3->get('PARAMS.id_user'))));
+        $f3->set('page', "follow");
         $this->tpl['sync']='addContrib.html';
       }
       elseif($f3->get('PARAMS.step')=='2'){
@@ -95,7 +96,9 @@ class Jerem_controller extends App_controller{
         }
       }
     }
+    $f3->set('page', "follow");
     $this->tpl['sync']='addContrib.html';
+
   }
 
   public function viewContrib($f3){
@@ -110,6 +113,7 @@ class Jerem_controller extends App_controller{
       $f3->set('dons', $this->model->getDonsContrib(array('id_contrib'=>$contrib[0]['id_contrib'])));
       $f3->set('contrib', $contrib);
     }
+    $f3->set('page', "follow");
     $this->tpl['sync']='contrib.html';
   }
 
