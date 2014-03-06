@@ -631,7 +631,27 @@ form[action="setInfos"] input[type="file"]{
 	  	border-bottom-left-radius: 4px;
 	  }
 
+	  .wish .like{
+	  	width: 31px;
+	  	height: 31px;
+	  	display: visible;
+	  	background: white;
+	  	position: absolute;
+	  	top: 0px;
+	  	right: 0px;
+	  	z-index: 10;
+	  	border-bottom-left-radius: 4px;
+	  	padding: 0 !important;
+	  }
+
 	  .wish .delete img{
+	  	border-radius: 4px;
+	  	width: 28px;
+	  	top: 2px;
+	  	right: 1px;
+	  }
+
+	  .wish .like img{
 	  	border-radius: 4px;
 	  	width: 28px;
 	  	top: 2px;

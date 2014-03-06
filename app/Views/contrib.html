@@ -19,7 +19,7 @@
 <div class="main">
   <div class="top-contrib">
     <div class="info-contrib">
-      <img src="<?php echo $contrib[0]['photo_referent'];?>" width="100" height="100" alt="" />
+      <img src="<?php echo $contrib[0]['photo_referent'];?>" alt="" />
       <h1><?php echo stripslashes($contrib[0]['nom_contrib']); ?></h1>
       <h2>Crée par <?php echo stripslashes($contrib[0]['prenom']).' '.stripslashes($contrib[0]['nom']); ?></h2>
     </div>
@@ -62,7 +62,7 @@
                         <img src="<?php echo $product['image'] ?>" alt="">
                         <div  class="wish_name"><p><a href="<?php echo $product['lien']; ?>" target="_blank"><?php echo $productName; ?></a></p></div>
                         <p class="wish_prix"><?php echo $product['prix']."€";  ?></p>
-                        <a class="like" href="../reWishlister/<?php echo $product['id_article'];?>"><img src="<?php echo $BASEDIR?>/public/images/thumb_bleu.svg" width="10" height="10" alt=""></a>
+                        <a class="like" href="../reWishlister/<?php echo $product['id_article'];?>"><img src="<?php echo $BASEDIR?>/public/images/thumb.svg" width="10" height="10" alt=""></a>
                     </div>
                 <?php
                  } 
