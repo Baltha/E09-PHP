@@ -106,6 +106,7 @@ class App_controller extends Controller{
     $error=$f3->get('GET.error');
     $f3->set('error',isset($error));
     $this->tpl['sync']='main.html';
+    $f3->set('page',"home");
 
   }
 
