@@ -1,5 +1,5 @@
 <aside id="leftSidebar">
-	<div id="update"><a href="getInfos/">Modifier mes infos</a></div>
+	<div id="update"><a href="<?php echo $BASEDIR.'/getInfos/';?>">Modifier mes infos</a></div>
 	
 	<?php if(isset($_SESSION['profil_picture'])): ?>
 		<img class="profilPicture" src="<?php echo $_SESSION['profil_picture'] ?>" alt=""> 
