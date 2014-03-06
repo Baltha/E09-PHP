@@ -19,7 +19,7 @@
 <div class="main">
   <div class="top-contrib">
     <div class="info-contrib">
-      <img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/t1/c50.50.621.621/s160x160/297812_4078453251125_1203919782_n.jpg" width="100" height="100" alt="" />
+      <img src="<?php echo $contrib[0]['photo_referent'];?>" width="100" height="100" alt="" />
       <h1><?php echo stripslashes($contrib[0]['nom_contrib']); ?></h1>
       <h2>Crée par <?php echo stripslashes($contrib[0]['prenom']).' '.stripslashes($contrib[0]['nom']); ?></h2>
     </div>
