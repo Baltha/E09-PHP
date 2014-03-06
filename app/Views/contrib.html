@@ -7,7 +7,7 @@
 <header class="contrib">
   <div class="main">
     <span class="logo-contrib">
-      <a href="">Friendly<span>Gift</span> </a>
+      <a href="<?php echo $BASEDIR;?>">Friendly<span>Gift</span> </a>
     </span>
     <span class="titre-contrib">
       <a href="">Page de contribution</a>
@@ -18,17 +18,20 @@
 
 <div class="main">
   <div class="top-contrib">
-    <div class="top-img">
-      <img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/t1/c50.50.621.621/s160x160/297812_4078453251125_1203919782_n.jpg" width="100" height="100" alt="" />
-    </div>
     <div class="info-contrib">
+      <img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/t1/c50.50.621.621/s160x160/297812_4078453251125_1203919782_n.jpg" width="100" height="100" alt="" />
       <h1><?php echo stripslashes($contrib[0]['nom_contrib']); ?></h1>
       <h2>Crée par <?php echo stripslashes($contrib[0]['prenom']).' '.stripslashes($contrib[0]['nom']); ?></h2>
     </div>
     <div class="sous-info-contrib">
       <ul>
-        <li>jusqu’au 16/02/15</li>
-        <li><span>10€</span> déjà récoltés</li>
+        <li>Jusqu'au <?php echo date('d/m/Y', strtotime($contrib[0]['date_fin']));?></li>
+        <?php 
+        if(!empty($dons[0]['prix_total']))
+          echo'<li><span>'.$dons[0]['prix_total'].'€</span> déjà récoltés</li>';
+        else
+          echo'<li>Soyez le premier à donner</li>';
+        ?>
         <li>
     <?php $custom =  $contrib[0]['id_contrib'].'|'.$_SESSION['id']; ?>
 
@@ -38,8 +41,7 @@
       <input type="image" src="https://www.sandbox.paypal.com/fr_FR/FR/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !">
       <input type="hidden" name="custom" value="<?php echo $custom ?>"/>
       <img alt="" border="0" src="https://www.sandbox.paypal.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
-    </form>
-    
+    </form>  
   </div>
 </li>
       </ul>
