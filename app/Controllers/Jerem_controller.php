@@ -59,7 +59,6 @@ class Jerem_controller extends App_controller{
 
       if($f3->get('PARAMS.step')=='1'){
         $f3->set('list_contrib',$this->model->getContribUser(array('user_referent'=>$f3->get('PARAMS.id_user'))));
-        $f3->set('tags', $this->model->getUserTags(array('id_user'=>$f3->get('PARAMS.id_user'))));
         $this->tpl['sync']='addContrib.html';
       }
       elseif($f3->get('PARAMS.step')=='2'){
@@ -106,7 +105,7 @@ class Jerem_controller extends App_controller{
     */
     $contrib=$this->model->getContrib(array('clef'=>$f3->get('PARAMS.clef'), 'id_user'=>$f3->get('SESSION.id')));
     if(count($contrib)>0){
-      $f3->set('allProducts', $this->model->getProductsContrib(array('id_contrib'=>$contrib[0]['id_contrib'])));
+      $f3->set('allProducts', $this->model->getProductsContrib(array('id_user'=>$f3->get('SESSION.id'), 'id_contrib'=>$contrib[0]['id_contrib'])));
       $f3->set('dons', $this->model->getDonsContrib(array('id_contrib'=>$contrib[0]['id_contrib'])));
       $f3->set('contrib', $contrib);
     }
@@ -153,4 +152,9 @@ class Jerem_controller extends App_controller{
     $this->tpl['async']='json/status.json';  
   }
 
+  public function partialAddContrib($f3)
+  {
+    //$f3->set('tags', $this->model->getUserTags(array('id_user'=>$f3->get('PARAMS.id_user'))));
+    $this->tpl['async']='partials/addContrib.html'; 
+  }
 }

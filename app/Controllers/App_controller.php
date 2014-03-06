@@ -169,7 +169,7 @@ class App_controller extends Controller{
               'naissance'=>$f3->get('POST.naissance'),
               'mail'=>$f3->get('POST.mail'),
               'sexe'=>$f3->get('POST.sexe'),
-              'photo' => '',
+              'photo' => $f3->get($f3->get('UPLOADS').$_FILES['file']['name']),
               'adresse'=>$f3->get('POST.adresse'),
               'ville'=>$f3->get('POST.ville'),
               'code_postal'=>$f3->get('POST.cp')
@@ -179,7 +179,7 @@ class App_controller extends Controller{
             $auth=$this->model->getUserInfoAfterSignin(array(
               'mail'=>$f3->get('POST.mail')
             ));
-            //$f3->get($f3->get('UPLOADS').$_FILES['file']['name'])
+
             $user=array(
               'id'=>$auth->id_user,
               'firstname'=>$auth->prenom,

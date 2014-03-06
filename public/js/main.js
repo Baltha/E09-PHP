@@ -182,6 +182,11 @@ $('#inscription').on('click', function(e){
 	$('.popup').addClass('popupInsc');
 });
 
+$('#addContrib').on('click', function(e){
+	e.preventDefault();
+	PopUp("addContrib");
+});
+
 $('#category').on('change', function() {
   if(this.value == "newtag"){
   	$("#newtag").addClass("active");
