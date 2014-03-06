@@ -119,6 +119,19 @@ $('.rewishlister').on('click', function(e){
 	return false;
 });
 
+$('.like').on('click', function(e){
+	e.preventDefault();
+	var lien = $(this).attr('href');
+	$.ajax({
+		url: lien
+	})
+	.done(function(status) {
+	})
+	.fail(function(status) {
+	});
+	return false;
+});
+
 $('#addProduct').submit(function(e){
 	e.preventDefault();
 	data = '<div class="newWish wish"> </div>'

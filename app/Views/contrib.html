@@ -62,7 +62,7 @@
                         <img src="<?php echo $product['image'] ?>" alt="">
                         <div  class="wish_name"><p><a href="<?php echo $product['lien']; ?>" target="_blank"><?php echo $productName; ?></a></p></div>
                         <p class="wish_prix"><?php echo $product['prix']."€";  ?></p>
-                        <a class="like" href="../reWishlister/<?php echo $product['id_article'];?>"><img src="<?php echo $BASEDIR?>/public/images/thumb_bleu.svg" width="10" height="10" alt=""></a>
+                        <a class="like" href="../like/<?php echo $product['id_contrib'].'/'.$product['id_article'];?>"><img src="<?php echo $BASEDIR?>/public/images/thumb_bleu.svg" width="10" height="10" alt=""></a>
                     </div>
                 <?php
                  } 

@@ -64,13 +64,13 @@ class Jerem_model extends App_model{
 
 
   public function getProductsContrib($params){
-    return $this->dB->exec('SELECT DISTINCT a.* FROM tag_contrib tc INNER JOIN appartenance app ON app.id_tag=tc.id_tag INNER JOIN souhait s ON s.id_souhait=app.id_souhait INNER JOIN article a ON a.id_article=s.id_article WHERE tc.id_contrib=?', $params['id_contrib']);
+    return $this->dB->exec('SELECT DISTINCT a.*, tc.id_contrib FROM tag_contrib tc INNER JOIN appartenance app ON app.id_tag=tc.id_tag INNER JOIN souhait s ON s.id_souhait=app.id_souhait INNER JOIN article a ON a.id_article=s.id_article WHERE tc.id_contrib=?', $params['id_contrib']);
   }
 
   public function likeArticleContrib($params){
-    $map=$this->getMapper('like_souhait');
-    $like=$map->load(array('id_contrib=? AND id_article=? AND id_user=?', $params['id_contrib'], $params['id_article'],$params['id_user']));
-    if(!empty($like)){
+    $map=$this->getMapper('like_contrib');
+    $like=$map->load(array('id_contrib=? AND id_article=? AND id_user=?', $params['id_contrib'], $params['id_article'], $params['id_user']));
+    if(empty($like)){
       $map->id_contrib=$params['id_contrib'];
       $map->id_article=$params['id_article'];
       $map->id_user=$params['id_user'];
@@ -84,7 +84,7 @@ class Jerem_model extends App_model{
   }
 
   public function getArticleContrib($params){
-    return $this->dB->exec('SELECT * FROM tag_contrib tc LEFT JOIN appartenance app ON app.id_tag=tc.id_tag LEFT JOIN souhait s ON s.id_souhait=app.id_souhait WHERE tc.id_contrib=? AND s.id_article=?', $params['id_contrib'], $params['id_article']);
+    return $this->dB->exec('SELECT * FROM tag_contrib tc LEFT JOIN appartenance app ON app.id_tag=tc.id_tag LEFT JOIN souhait s ON s.id_souhait=app.id_souhait WHERE tc.id_contrib=:contrib AND s.id_article=:article', array('contrib'=>$params['id_contrib'], 'article'=>$params['id_article']));
   }
 
   public function getUsersContrib($params){
