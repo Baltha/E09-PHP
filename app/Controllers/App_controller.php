@@ -478,6 +478,11 @@ try {
     exit(0);
 }
 
+$result_event = $_POST['custom'];
+list($id_contrib, $id_user) =  explode('|', $result_event);
+$montant = $_POST['mc_gross'];
+$date = date('Y-m-d H:i:s');
+$this->model->addDon(array('id_contrib'=>$id_contrib, 'id_user'=>$id_user, 'prix'=>$montant, 'date_don'=>$date));
 
 // Si le IPN est valide
 if ($verified) {
