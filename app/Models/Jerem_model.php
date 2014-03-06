@@ -92,7 +92,7 @@ class Jerem_model extends App_model{
   }
 
   public function getContribUser($params){
-    return $this->dB->exec('SELECT * FROM contrib c INNER JOIN users u ON u.id_user=c.user_createur WHERE c.user_referent=:id', array('id'=>$params['user_referent']));
+    return $this->dB->exec('SELECT *, c.nom AS contrib_nom FROM contrib c INNER JOIN users u ON u.id_user=c.user_createur WHERE c.user_referent=:id', array('id'=>$params['user_referent']));
   }
 
 }

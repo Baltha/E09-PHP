@@ -17,16 +17,16 @@
 			<p><?php print_r($stats["nbfollows"]); ?></p>
 		</li>
 		<li>
-			<h4>Whishes</h4>
+			<h4>Wishes</h4>
 			<p id="nbWish"><?php print_r($stats["wishs"]); ?></p>
 		</li>
 	</ul>
 	
 	<ul id="menu">
-		<li class="<?php if($page == 'wishlist'){ echo "actif";	} ?> "><a href="wishlist/">Ma wishlist</a></li>
-		<li class="<?php if($page == 'follow'){ echo "actif";	} ?> "><a href="myFollow/">Mes amis</a></li>
-		<li class="<?php if($page == 'contribution'){ echo "actif";	} ?> "><a href="myContributions/">Mes contributions</a></li>
-		<li class="<?php if($page == 'share'){ echo "actif";	} ?> "><a href="shareMyList/">Partager ma wishlist</a></li>
+		<li class="<?php if($page == 'wishlist'){ echo "actif";	} ?> "><a href="<?php echo $BASEDIR.'/wishlist';?>"/>Ma wishlist</a></li>
+		<li class="<?php if($page == 'follow'){ echo "actif";	} ?> "><a href="<?php echo $BASEDIR.'/myFollow/';?>"/>Mes amis</a></li>
+		<li class="<?php if($page == 'contribution'){ echo "actif";	} ?> "><a href="<?php echo $BASEDIR.'/myContributions';?>/">Mes contributions</a></li>
+		<li class="<?php if($page == 'share'){ echo "actif";	} ?> "><a href="<?php echo $BASEDIR.'/shareMyList';?>/">Partager ma wishlist</a></li>
 	</ul>
 
 	<div id="updateForm">
