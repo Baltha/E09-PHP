@@ -48,7 +48,7 @@ class Jerem_controller extends App_controller{
   public function addContrib($f3){
     self::getMyWishlist($f3);
     $user=$this->model->getUser(array('id_user'=>$f3->get('PARAMS.id_user')));
-    if(!empty($user)){
+    if(count($user)>0){
       /* STEP 1 
       form with user tags */
 
@@ -105,8 +105,9 @@ class Jerem_controller extends App_controller{
       Show contrib's products 
     */
     $contrib=$this->model->getContrib(array('clef'=>$f3->get('PARAMS.clef'), 'id_user'=>$f3->get('SESSION.id')));
-    if(!empty($contrib)){
+    if(count($contrib)>0){
       $f3->set('allProducts', $this->model->getProductsContrib(array('id_contrib'=>$contrib[0]['id_contrib'])));
+      $f3->set('dons', $this->model->getDonsContrib(array('id_contrib'=>$contrib[0]['id_contrib'])));
       $f3->set('contrib', $contrib);
     }
     $this->tpl['sync']='contrib.html';
