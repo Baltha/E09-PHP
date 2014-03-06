@@ -317,6 +317,11 @@ class App_controller extends Controller{
   public function addFollow($f3){
       $f3->set('user',$this->model->addFollow(array('user_parent'=>$f3->get('SESSION.id'), 'user_enfant'=>$f3->get('PARAMS.id_user'))));
       $f3->reroute("/myFollow");
+  }
+
+  public function searchUser($f3){
+    $f3->set('userSearch',$this->model->searchUser(array('keywords'=>$f3->get('POST.name'))));
+    $this->tpl['async']='partials/users.html';
   } 
 
   public function getInfos($f3){

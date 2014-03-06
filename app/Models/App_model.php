@@ -314,5 +314,10 @@ class App_model extends Model{
     $map->save();
   }
 
+  function searchUser($params){
+    $query='(nom like "%'.$params['keywords'].'%" or prenom like "%'.$params['keywords'].'%")';
+    return $this->getMapper('users')->find($query);
+  }
+
 }
 ?>

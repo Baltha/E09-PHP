@@ -1,0 +1,11 @@
+<?php 
+if(isset($userSearch)):
+foreach($userSearch as $user): 
+?>
+<li><a href="user/<?php echo $user->id ?>"><?php echo $user->firstname." ".$user->lastname; ?></a>
+  <a href="favorite/<?php echo $user->id ?>"></a>
+  </li>
+<?php 
+endforeach; 
+endif;
+?>

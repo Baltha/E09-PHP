@@ -4,6 +4,12 @@
     <div class="clear"></div>
     <div id="content">
         <div id="follow">
+            <form action="searchUser/" method="post">
+                <input type="text" name="name" placeholder="Recherche..." autocomplete="off"/>
+            </form>
+            <ul class="users">
+                <?php require('partials/users.html'); ?>
+            </ul>
 
             <div class="amis1">
             	<h2>Amis que vous suivez</h2>
@@ -35,7 +41,6 @@
             		</div>
             	<?php } ?>
             </div>
-
         </div>
         <div class="clear"></div>
     </div>
