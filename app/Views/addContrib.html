@@ -12,7 +12,7 @@
                 <a href="<?php echo $BASEDIR.'/contrib/'.$contrib['clef']; ?>"></a>
                 <img src="<?php echo $contrib['photo'];?>" alt="<?php echo $contrib['prenom'];?>">
                 <h5><?php echo $contrib["prenom"]." ".$contrib["nom"]; ?><span> - Jusqu'au <?php echo $contrib['date_fin']; ?></span> </h5>
-                <h4><?php echo $contrib["nom"]; ?></h4>
+                <h4><?php echo stripslashes($contrib['contrib_nom']); ?></h4>
              </li>
             <?php } ?>
           <?php }else{ ?>
