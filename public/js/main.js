@@ -201,7 +201,7 @@ $('#inscription').on('click', function(e){
 
 $('#addContrib').on('click', function(e){
 	e.preventDefault();
-	PopUp("addContrib");
+	PopUp("../../addContrib");
 });
 
 $('#category').on('change', function() {

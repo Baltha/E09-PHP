@@ -59,6 +59,7 @@ class Jerem_controller extends App_controller{
 
       if($f3->get('PARAMS.step')=='1'){
         $f3->set('list_contrib',$this->model->getContribUser(array('user_referent'=>$f3->get('PARAMS.id_user'))));
+        $f3->set('SESSION.id_user', $f3->get('PARAMS.id_user'));
         $this->tpl['sync']='addContrib.html';
       }
       elseif($f3->get('PARAMS.step')=='2'){
@@ -154,7 +155,7 @@ class Jerem_controller extends App_controller{
 
   public function partialAddContrib($f3)
   {
-    //$f3->set('tags', $this->model->getUserTags(array('id_user'=>$f3->get('PARAMS.id_user'))));
+    $f3->set('tags', $this->model->getUserTags(array('id_user'=>$f3->get('SESSION.id_user'))));
     $this->tpl['async']='partials/addContrib.html'; 
   }
 }

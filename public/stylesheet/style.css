@@ -1451,7 +1451,9 @@ form[action="setInfos"] input[type="file"]{
 
 
 
-
+.label-tag{
+	display: inline !important;
+}
 
 
 
