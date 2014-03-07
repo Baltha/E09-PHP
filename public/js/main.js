@@ -130,6 +130,22 @@ $('.rewishlister').on('click', function(e){
 		url: lien
 	})
 	.done(function(status) {
+		var nbWisg = $('#nbWish').text();
+		var nbWish = parseInt(nbWisg);
+		$('#nbWish').text(nbWish + 1);
+	})
+	.fail(function(status) {
+	});
+	return false;
+});
+
+$('.like').on('click', function(e){
+	e.preventDefault();
+	var lien = $(this).attr('href');
+	$.ajax({
+		url: lien
+	})
+	.done(function(status) {
 	})
 	.fail(function(status) {
 	});
@@ -180,10 +196,16 @@ $('#addProduct').submit(function(e){
 
 });
 
+
 $('#inscription').on('click', function(e){
 	e.preventDefault();
 	PopUp("callForm");
 	$('.popup').addClass('popupInsc');
+});
+
+$('#addContrib').on('click', function(e){
+	e.preventDefault();
+	PopUp("../../addContrib");
 });
 
 $('#category').on('change', function() {

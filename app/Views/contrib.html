@@ -34,7 +34,7 @@
         ?>
         <li>
 
-    <?php $custom =  $contrib[0]['id_contrib'].'|'.$_SESSION['id']; print_r($custom);  ?>
+    <?php $custom =  $contrib[0]['id_contrib'].'|'.$_SESSION['id']; ?>
 
     <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
       <input type="hidden" name="cmd" value="_s-xclick">
@@ -61,11 +61,15 @@
                         $productName = substr($productName, 0, 50);
                         $productName = $productName."...";
                     }?>
-                    <div class="wish" >
+                    <div class="wish">
                         <img src="<?php echo $product['image'] ?>" alt="">
                         <div  class="wish_name"><p><a href="<?php echo $product['lien']; ?>" target="_blank"><?php echo $productName; ?></a></p></div>
                         <p class="wish_prix"><?php echo $product['prix']."€";  ?></p>
-                        <a class="like" href="../reWishlister/<?php echo $product['id_article'];?>"><img src="<?php echo $BASEDIR?>/public/images/thumb.svg" width="10" height="10" alt=""></a>
+                        <?php if(!empty($product['id_like'])){?>
+                          <a class="like" href="../like/<?php echo $product['id_contrib'].'/'.$product['id_article'];?>"><img src="<?php echo $BASEDIR?>/public/images/thumb.svg" width="10" height="10" alt=""></a>
+                        <?php }else{ ?>
+                          <a class="like" href="../like/<?php echo $product['id_contrib'].'/'.$product['id_article'];?>"><img src="<?php echo $BASEDIR?>/public/images/thumb_bleu.svg" width="10" height="10" alt=""></a>
+                        <?php } ?>
                     </div>
                 <?php
                  } 
