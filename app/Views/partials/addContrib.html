@@ -1,6 +1,6 @@
 <h1>Créer une page de contribution </h1>
-<p class="clear meaningInscription">Merci de remplir ce formulaire</p>
-<form action="<?php $BASEDIR.'addContrib/2/'.$_SESSION['id_user']; ?>" method="post" id="test">
+<p class="clear meaningInscription"></p>
+<form action="<?php echo $BASEDIR.'/viewContribs/2/'.$_SESSION['id_user']; ?>" method="post" id="test">
     <p><input type="text" name="nom" placeholder="Saisir votre nom" required/></p>
     <p><label for="fin">Date de fin de la page</label><input type="date" name="fin" id="fin" required/></p>
     <p>Tags</p>

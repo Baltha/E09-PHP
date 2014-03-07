@@ -114,20 +114,18 @@ $('body').on('keyup', function(e){
 });
 
 
-	$('.banner-top form').unbind();
-
 $('input[name="name"]').bind('keyup',function(e){
-	console.log(e.keyCode);
-	if(e.keyCode == 13) {
+/*	if(e.keyCode == 13) {
 		e.preventDefault();
 		e.stopPropagation();
-	}
+		return false;
+	}*/
     	
 	var $this=$(this);
 	var $parent=$this.parent('form');
 	var name=$this.val();
 	if(name.length > 2){
-		var datas={'name':name};
+		var datas={'name':name};w
 		$.ajax({
 			url:$parent.attr('action'),
 			method:$parent.attr('method'),

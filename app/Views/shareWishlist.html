@@ -1,9 +1,10 @@
 <?php require('header.html');?>
 
-    <div id="content">   
-        <input type="text" name="page" value="<?php echo $BASEDIR.'/wishlist/'.$_SESSION['id'];?>">
-    </div>
-
+    <div id="content">
+        <form action="searchUser/" method="post">
+            <input type="text" name="name" value="<?php echo $BASEDIR.'/wishlist/'.$_SESSION['id'];?>" autocomplete="off"/>
+        </form>
+    </div>  
 
 <?php require('footer.html');?>
 
