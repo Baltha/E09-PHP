@@ -457,20 +457,20 @@ class App_controller extends Controller{
         $f3->set('page', 'contribution');
     }
 
-public function ipn($f3){
+    public function ipn($f3){
 
-  $result_event = $_POST['custom'];
-  list($id_contrib, $id_user) =  explode('|', $result_event);
-  $montant = $_POST['mc_gross'];
-  $date = date('Y-m-d H:i:s');
-  $this->model->addDon(array('id_contrib'=>$id_contrib, 'id_user'=>$id_user, 'prix'=>$montant, 'date_don'=>$date));
+    $result_event = $_POST['custom'];
+    list($id_contrib, $id_user) =  explode('|', $result_event);
+    $montant = $_POST['mc_gross'];
+    $date = date('Y-m-d H:i:s');
+    $this->model->addDon(array('id_contrib'=>$id_contrib, 'id_user'=>$id_user, 'prix'=>$montant, 'date_don'=>$date));
+
+
+    }
+
 
 
 }
-
-
-
-
 
 
 
