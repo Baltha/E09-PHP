@@ -1,0 +1,5 @@
+ALTER TABLE  `don` ADD  `id_contrib` INT NOT NULL AFTER  `id_don` ;
+ALTER TABLE  `don` ADD INDEX (  `id_contrib` ) ;
+ALTER TABLE  `don` ADD FOREIGN KEY (  `id_contrib` ) REFERENCES  `wishlist`.`contrib` (
+`id_contrib`
+) ON DELETE RESTRICT ON UPDATE CASCADE ;
