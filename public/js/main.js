@@ -155,11 +155,15 @@ $('.rewishlister').on('click', function(e){
 
 $('.like').on('click', function(e){
 	e.preventDefault();
+	var img = $(this).children('img').eq(0);
 	var lien = $(this).attr('href');
 	$.ajax({
 		url: lien
 	})
 	.done(function(status) {
+		var old = img.attr('src');
+		img.attr('src',img.data('off'));
+		img.data('off', old);
 	})
 	.fail(function(status) {
 	});
@@ -244,13 +248,11 @@ $(document).on({
         $(this).find('.wish_prix').fadeIn(0);
         $(this).find('.delete').fadeIn(0);
         $(this).find('.rewishlister').fadeIn(0);
-        $(this).find('.like').fadeIn(0);
     },
     mouseleave: function () {
         $(this).find('.wish_prix').fadeOut(0);
         $(this).find('.delete').fadeOut(0);
         $(this).find('.rewishlister').fadeOut(0);
-        $(this).find('.like').fadeOut(0);
     }
 }, '.wish');
 

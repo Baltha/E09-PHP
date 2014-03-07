@@ -651,7 +651,7 @@ form[action="setInfos"] input[type="file"]{
 	  .wish .like{
 	  	width: 31px;
 	  	height: 31px;
-	  	display: visible;
+	  	display: inline;
 	  	background: white;
 	  	position: absolute;
 	  	top: 0px;
@@ -698,12 +698,34 @@ form[action="setInfos"] input[type="file"]{
 	  	letter-spacing: 0.3pt;
 	  }
 
+	  .wish .contrib_prix{
+	  	font-family: "Open Sans", "verdana", "sans-serif";
+	  	font-size: 1.2rem;
+	  	font-weight: 300;
+	  	width: auto;
+	  	padding-left: 2px;
+	  	padding-right: 6px;
+	  	padding-bottom: 2px;
+	  	min-width: 50px;
+	  	height: 18px;
+	  	display: inline;
+	  	background: white;
+	  	position: absolute;
+	  	top: 4px;
+	  	left: 5px;
+	  	z-index: 9;
+	  	text-align: center;
+	  	padding-top: 7px;
+	  	border-bottom-right-radius: 4px;
+	  	transition: all 0.3s ease;
+	  	letter-spacing: 0.3pt;
+	  }
+
 	  .wish .active{
 		display: block;
 	  }
 
-	  .wish .rewishlister,
-	  .wish .like{
+	  .wish .rewishlister{
 	  	position: absolute;
 		top: 0;
 		right: 0;
@@ -1001,7 +1023,7 @@ form[action="setInfos"] input[type="file"]{
 	  }
 
 
-	  .friendFollowed, .friendFollowing, .friendFacebook{
+	  .friendFollowed, .friendFollowing, .friendFacebook, .userSearched{
 	  	margin-top: 25px;
 	  	display: inline-block;
 	  	height: 50px;
@@ -1013,13 +1035,13 @@ form[action="setInfos"] input[type="file"]{
 	  	margin-right: 25px;
 	  }
 
-	  .friendFollowed img, .friendFollowing img, .friendFacebook img{
+	  .friendFollowed img, .friendFollowing img, .friendFacebook img, .userSearched img{
 	  	width: 50px;
 	  	height: 50px;
 	  	float: left;
 	  }
 
-	  .friendFollowed img+p a, .friendFollowing img+p a, .friendFacebook img+p a{
+	  .friendFollowed img+p a, .friendFollowing img+p a, .friendFacebook img+p a, .userSearched img+p a{
 	  	text-decoration: none;
 	  	font-family: "varela round";
 	  	font-size: 1.5rem;
@@ -1029,11 +1051,11 @@ form[action="setInfos"] input[type="file"]{
 	  	transition: 0.3s all ease;
 	  }
 
-	  	.friendFollowed img+p a:hover, .friendFollowing img+p a:hover, .friendFacebook img+p a:hover{
+	  	.friendFollowed img+p a:hover, .friendFollowing img+p a:hover, .friendFacebook img+p a:hover, .userSearched img+p a:hover{
 	  	color: #288DFF
 	  }
 
-	  .friendFollowed img+p, .friendFollowing img+p, .friendFacebook img+p{
+	  .friendFollowed img+p, .friendFollowing img+p, .friendFacebook img+p, .userSearched img+p{
 	  	margin-top: 8px;
 	  	text-decoration: none;
 	  	font-family: "varela round";
@@ -1042,6 +1064,10 @@ form[action="setInfos"] input[type="file"]{
 	  	line-height: 27pt;
 	  	margin-left: 12px;
 	  	transition: 0.3s all ease;
+	  }
+
+	  .resultsSearch{
+	  	margin-bottom: 50px;
 	  }
 
 	  /* 5.4 - Contribution Page */ 
@@ -1149,7 +1175,7 @@ form[action="setInfos"] input[type="file"]{
 
 	.home h1{
 		font-family: "Exo 2", Verdana, sans-serif;
-		font-weight: 400;
+		font-weight: 200;
 		font-size: 1.8rem;
 		font-style: italic;
 		letter-spacing: 0.3pt;
@@ -1157,8 +1183,18 @@ form[action="setInfos"] input[type="file"]{
 		display: inline-block;
 		margin: 21px 20px 0px 0px;
 	}
-	.home h1 span{
+
+	.home h1 a{
+		letter-spacing: 0.3pt;
+		font-weight: inherit;
+		font-size: inherit;
+		text-decoration: inherit;
+		text-transform: inherit;
 		font-weight: 200;
+	}
+
+	.home h1 a span{
+		font-weight: 300;
 		font-size: 1.8rem;
 	}
 
@@ -1184,6 +1220,7 @@ form[action="setInfos"] input[type="file"]{
 		text-decoration: none;
 		text-transform: uppercase;
 	}
+
 	.home li:last-child a{
 		background: rgba(0,0,0,0.3);
 		border-radius: 3px;
