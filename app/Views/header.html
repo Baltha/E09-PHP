@@ -2,9 +2,6 @@
 <div id="globalContainer">
 	<?php if (!isset($SESSION['id'])){ ?>
 	<header class="home">
-		<?php if($error){?> 
-			<div class="error">Oops , vos identifiants sont érronés. Veuillez réessayer</div>
-		<?php }?>  
 		<div class="fix_center">
 			<h1><span>Friendly</span>Gift</h1>
 			<form action="<?php echo $BASEDIR.'/login';?>" id="login" method="post">
