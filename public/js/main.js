@@ -106,7 +106,23 @@ $('body').on('click', '.delete', function(e){
 	return false;
 });
 
-$('input[name="name"]').on('keyup',function(e){
+$('body').on('keyup', function(e){
+	if(e.keyCode == 13) {
+		e.preventDefault();
+		e.stopPropagation();
+	}
+});
+
+
+	$('.banner-top form').unbind();
+
+$('input[name="name"]').bind('keyup',function(e){
+	console.log(e.keyCode);
+	if(e.keyCode == 13) {
+		e.preventDefault();
+		e.stopPropagation();
+	}
+    	
 	var $this=$(this);
 	var $parent=$this.parent('form');
 	var name=$this.val();

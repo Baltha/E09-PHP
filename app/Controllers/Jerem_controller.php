@@ -14,8 +14,7 @@ class Jerem_controller extends App_controller{
       * Edit link picture if different with the previous
     */
     if($f3->exists('SESSION.id')){
-      if($f3->get('SESSION.id')==$f3->get('PARAMS.id_user')){
-        $user=$this->model->getUser(array('id_user'=>$f3->get('PARAMS.id_user')));
+        $user=$this->model->getUser(array('id_user'=>$f3->get('SESSION.id')));
         if(count($user)==1 && !empty($user['id_facebook'])){
           require_once('api/facebook.php');
           $facebook = new Facebook(array(
@@ -40,7 +39,6 @@ class Jerem_controller extends App_controller{
             }
           }
         }
-      }
     }
     $f3->reroute("/wishlist");
   }
@@ -143,12 +141,8 @@ class Jerem_controller extends App_controller{
       $article=$this->model->getArticle(array('id_article'=>$f3->get('PARAMS.id_article')));
       if(count($article)==1){
         $exist=$this->model->articleInMyWishlist(array('id_article'=>$f3->get('PARAMS.id_article'), 'id_user'=>$f3->get('SESSION.id')));
-        if(count($exist)==0){
-          $id_tag=$this->model->getTagDefault(array('id_user'=>$f3->get('SESSION.id')));
-          echo $id_tag['id_tag'];
-          $f3->set('status', $this->model->reWishlister(array('id_article'=>$f3->get('PARAMS.id_article'), 'id_user'=>$f3->get('SESSION.id'), 'date_souhait'=>date('Y-m-d H:i:s')), $id_tag['id_tag']));
-        }
-         
+        $id_tag=$this->model->getTagDefault(array('id_user'=>$f3->get('SESSION.id')));
+        $f3->set('status', $this->model->reWishlister(array('id_article'=>$f3->get('PARAMS.id_article'), 'id_user'=>$f3->get('SESSION.id'), 'date_souhait'=>date('Y-m-d H:i:s')), $id_tag['id_tag'])); 
       }
     }
     if(!$f3->exists('status'))
@@ -156,9 +150,17 @@ class Jerem_controller extends App_controller{
     $this->tpl['async']='json/status.json';  
   }
 
-  public function partialAddContrib($f3)
-  {
+  public function partialAddContrib($f3){
     $f3->set('tags', $this->model->getUserTags(array('id_user'=>$f3->get('SESSION.id_user'))));
     $this->tpl['async']='partials/addContrib.html'; 
+  }
+
+  public function shareWishlist($f3){
+    $f3->set('page', 'share');
+    $f3->set('stats.nbfollowers', count($this->model->getfollowers(array('id_user'=>$f3->get('SESSION.id')))));
+    $f3->set('stats.nbfollows', count($this->model->getfollows(array('id_user'=>$f3->get('SESSION.id')))));
+    $f3->set('stats.wishs', count($this->model->getProducts(array('id_user'=>$f3->get('SESSION.id')))));
+
+    $this->tpl['sync']='shareWishlist.html';
   }
 }
