@@ -1623,4 +1623,21 @@ form[action="setInfos"] input[type="file"]{
 	padding: 18px 25px 18px 25px;
 }
 
+a[title="Modifier sa photo de profil facebook"]{
+		width: 190px;
+		background: white;
+		border-radius: 4px;
+		font-size: 1rem;
+		margin-left: 40px;
+		text-decoration: none;
+		color: #288DFF;
+		padding: 10px 17px 10px 17px;
+
+}
+
+
+form input[name="ville"]+p{
+	margin-top: 8px;
+
+}
 
