@@ -1550,6 +1550,11 @@ form[action="setInfos"] input[type="file"]{
 
 /* autres */
 
+
+.paypal{
+	padding-top: 6px;
+}
+
 .noItems{
 
 	position: absolute;
@@ -1566,6 +1571,7 @@ form[action="setInfos"] input[type="file"]{
 	margin-left: -35px;
 	margin-top: -10px;
 }
+
 
 
 
