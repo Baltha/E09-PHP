@@ -86,7 +86,7 @@ $('#update > a').on('click', function(e){
 
 });
 
-$('.delete').on('click', function(e){
+$('body').on('click', '.delete', function(e){
 	e.preventDefault();
 	var $this = $(this);
 	var lien = $(this).attr('href');
