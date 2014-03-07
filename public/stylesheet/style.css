@@ -1485,10 +1485,31 @@ form[action="setInfos"] input[type="file"]{
 	display: inline !important;
 }
 
+/* autres */
+
 
 .paypal{
 	padding-top: 6px;
 }
+
+.noItems{
+
+	position: absolute;
+	background: white;
+	width: 320px;
+	text-align: center;
+	font-weight: 200;
+	padding: 10px;
+	border-radius: 4px;
+	border: 1px solid #dddddd;
+	line-height: 16pt;
+	top: 50%;
+	left: 50%;
+	margin-left: -35px;
+	margin-top: -10px;
+}
+
+
 
 
 
