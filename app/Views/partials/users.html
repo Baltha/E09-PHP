@@ -2,10 +2,10 @@
 if(isset($userSearch)):
 foreach($userSearch as $user): 
 ?>
-<li>
+<div class="userSearched">
 <img src="<?php echo $user["fields"]["photo"]["value"]; ?>" alt="<?php echo $user["fields"]["prenom"]["value"]; ?>">
 <p> <a href="wishlist/<?php echo $user["fields"]["id_user"]["value"]; ?>"><?php echo $user["fields"]["prenom"]["value"]." ".$user["fields"]["nom"]["value"]; ?></a> </p>
-  </li>
+</div>
 <?php 
 endforeach; 
 endif;

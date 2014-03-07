@@ -4,44 +4,52 @@
         <form action="searchUser/" method="post">
             <input type="text" name="name" placeholder="Rechercher un amis" autocomplete="off"/>
         </form>
-        <ul class="users">
-            <?php require('partials/users.html'); ?>
-        </ul>
     </div>
     
     <div class="clear"></div>
     <div id="content">
         <div id="follow">
+            
+
+            <div class="resultsSearch">
+                <?php require('partials/users.html'); ?>
+            </div>
 
             <div class="amis1">
-            	<h2>Amis que vous suivez</h2>
-            	<?php foreach ($myfollows as $onefollow) { ?>
-                    <div class="friendFollowed">
-                    <img src="<?php echo $onefollow["fields"]["photo"]["value"]; ?>" alt="<?php echo $onefollow["fields"]["prenom"]["value"]; ?>">
-       				<p> <a href="wishlist/<?php echo $onefollow["fields"]["id_user"]["value"]; ?>"><?php echo $onefollow["fields"]["prenom"]["value"]." ".$onefollow["fields"]["nom"]["value"]; ?></a> </p>
-                    </div>
-            	<?php } ?>
+                <h2>Amis que vous suivez</h2>
+                <?php if(count($myfollows) > 0){ ?>
+                    <?php foreach ($myfollows as $onefollow) { ?>
+                        <div class="friendFollowed">
+                        <img src="<?php echo $onefollow["fields"]["photo"]["value"]; ?>" alt="<?php echo $onefollow["fields"]["prenom"]["value"]; ?>">
+                        <p> <a href="wishlist/<?php echo $onefollow["fields"]["id_user"]["value"]; ?>"><?php echo $onefollow["fields"]["prenom"]["value"]." ".$onefollow["fields"]["nom"]["value"]; ?></a> </p>
+                        </div>
+                    <?php } ?>
+                <?php }else{ ?> <p> Vous ne suivez personne. </p> <?php } ?>
             </div>
 
             <div class="amis2">
-            	<h2>Amis qui vous suivent</h2>
-        			<?php foreach ($myfollowers as $onefollower) { ?>
+                <h2>Amis qui vous suivent</h2>
+                <?php if(count($myfollowers) > 0){ ?>
+                    <?php foreach ($myfollowers as $onefollower) { ?>
                         <div class="friendFollowing">
-                        <img src="<?php echo $onefollow["fields"]["photo"]["value"]; ?>" alt="<?php echo $onefollow["fields"]["prenom"]["value"]; ?>">
-           				<p> <a href="wishlist/<?php echo $onefollower["fields"]["id_user"]["value"]; ?>"><?php echo $onefollower["fields"]["prenom"]["value"]." ".$onefollower["fields"]["nom"]["value"]; ?></a> </p>
+                        <img src="<?php echo $onefollower["fields"]["photo"]["value"]; ?>" alt="<?php echo $onefollower["fields"]["prenom"]["value"]; ?>">
+                        <p> <a href="wishlist/<?php echo $onefollower["fields"]["id_user"]["value"]; ?>"><?php echo $onefollower["fields"]["prenom"]["value"]." ".$onefollower["fields"]["nom"]["value"]; ?></a> </p>
                         </div>
-                	<?php } ?>
+                    <?php } ?>
+                <?php }else{ ?> <p> Vous ne suivez personne. </p> <?php } ?>
             </div>
 
             <div class="amis3">
-            	<h2>Amis Facebook présents sur le site non suivis</h2>
-            	<?php foreach ($FacebookFriendsUsers as $friend) { ?>
-            		<div class="friendFacebook">
-                        <img src="<?php echo $friend["photo"]; ?> " alt="<?php echo $friend["name"]; ?>">
-            			<p> <?php echo $friend["name"] ?> </p>
-            			<a href="addFollow/<?php echo $friend["id_user"] ?> ">Follow</a>
-            		</div>
-            	<?php } ?>
+                <h2>Amis Facebook présents sur le site non suivis</h2>
+                <?php if(count($FacebookFriendsUsers) > 0){ ?>
+                    <?php foreach ($FacebookFriendsUsers as $friend) { ?>
+                        <div class="friendFacebook">
+                            <img src="<?php echo $friend["photo"]; ?> " alt="<?php echo $friend["name"]; ?>">
+                            <p> <?php echo $friend["name"] ?> </p>
+                            <a href="addFollow/<?php echo $friend["id_user"] ?> ">Follow</a>
+                        </div>
+                    <?php } ?>
+                <?php }else{ ?> <p> Vous n'avez pas d'amis présents sur le site. </p> <?php } ?>
             </div>
         </div>
         <div class="clear"></div>

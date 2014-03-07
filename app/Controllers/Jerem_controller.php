@@ -82,7 +82,7 @@ class Jerem_controller extends App_controller{
             'user_createur'=>$f3->get('SESSION.id')
           ));
           $f3->set('clef', $clef);
-          if(!empty($f3->get('POST.tag'))){
+          if(count($f3->get('POST.tag')) > 0){
             foreach($f3->get('POST.tag') as $tag){
               $this->model->addTagContrib(array('id_contrib'=>$id, 'id_tag'=>$tag));
             }
@@ -137,7 +137,7 @@ class Jerem_controller extends App_controller{
       Else
       ==> Nothing
     */
-    if(!empty($f3->get('PARAMS.id_article'))){
+    if(count($f3->get('PARAMS.id_article')) > 0){
       $article=$this->model->getArticle(array('id_article'=>$f3->get('PARAMS.id_article')));
       if(count($article)==1){
         $exist=$this->model->articleInMyWishlist(array('id_article'=>$f3->get('PARAMS.id_article'), 'id_user'=>$f3->get('SESSION.id')));
