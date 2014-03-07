@@ -10,8 +10,15 @@
     <input placeholder="Numéro de rue, voie" type="text" name="adresse" value="<?php echo $infos['adresse'];?>" required/>
     <input placeholder="Code postal" type="text" name="cp" value="<?php echo $infos['code_postal'];?>" required/>
     <input placeholder="Ville" type="text" name="ville" value="<?php echo $infos['ville'];?>" required/>
-    <input placeholder="" type="file" name="photo" />
+    <?php
+    if(!empty($infos['id_facebook'])){
+        echo'
+        <p><a href="'.$BASEDIR.'/updatePicture" title="Modifier sa photo de profil facebook">Modifier sa photo de profil Facebook</a></p>';
+    }
+    else{
+        echo'
+        <input placeholder="" type="file" name="photo" />';
+    }?>  
     <input type="submit">
   </form>
 
-<p><a href="<?php echo $BASEDIR.'/updatePicture';?>" title="Modifier sa photo de profil facebook">Modifier sa photo de profil Facebook</a></p>

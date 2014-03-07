@@ -5,9 +5,9 @@
 		<h2><?php echo $user['fields']['prenom']['value']; ?> <?php echo $user['fields']['nom']['value']; ?></h2>
     <p><?php echo $user['fields']['ville']['value']; ?></p>    
     <?php if(!isset($followingUser)): ?>
-      <a class="isFollow" href="<?php echo $BASEDIR.'addFollow/'.$user["id_user"];?> ">Follow</a><br/>
+      <a class="isFollow" href="<?php echo $BASEDIR.'/addFollow/'.$user["id_user"];?> ">Follow</a><br/>
     <?php else:?>
-      <a class="isFollowed" href="<?php echo $BASEDIR.'addFollow/'.$user["id_user"];?> ">Followed</a><br/>
+      <a class="isFollowed" href="<?php echo $BASEDIR.'/addFollow/'.$user["id_user"];?> ">Followed</a><br/>
     <?php endif; ?>
       <a href="<?php echo $BASEDIR.'/viewContribs/1/'.$user["id_user"];?>">Voir ses pages de contribution</a>
         </h2>
