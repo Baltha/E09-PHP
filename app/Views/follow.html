@@ -9,8 +9,6 @@
     <div class="clear"></div>
     <div id="content">
         <div id="follow">
-            
-
             <div class="resultsSearch">
                 <?php require('partials/users.html'); ?>
             </div>
@@ -41,12 +39,11 @@
 
             <div class="amis3">
                 <h2>Amis Facebook présents sur le site non suivis</h2>
-                <?php if(count($FacebookFriendsUsers) > 0){ ?>
+                <?php if(count($FacebookFriendsUsers) > 0 && isset($_SESSION['id_facebook'])){ ?>
                     <?php foreach ($FacebookFriendsUsers as $friend) { ?>
                         <div class="friendFacebook">
                             <img src="<?php echo $friend["photo"]; ?> " alt="<?php echo $friend["name"]; ?>">
-                            <p> <?php echo $friend["name"] ?> </p>
-                            <a href="addFollow/<?php echo $friend["id_user"] ?> ">Follow</a>
+                            <p><a href="wishlist/<?php echo $friend["id_user"] ?> "><?php echo $friend["name"] ?></a></p>
                         </div>
                     <?php } ?>
                 <?php }else{ ?> <p class="nothingHere"> Vous n'avez pas d'amis présents sur le site que vous ne suivez pas. </p> <?php } ?>
