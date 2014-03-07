@@ -60,8 +60,9 @@ class App_model extends Model{
   }
 
   public function getfollows($params){
-    return $this->getMapper('amis')->find(array('user_parent=?',$params['id_user']));
+    return $this->getMapper('amis')->find(array('user_parent=? ',$params['id_user']));
   }
+  
   public function getfollowers($params){
     return $this->getMapper('amis')->find(array('user_enfant=?',$params['id_user']));
   }
