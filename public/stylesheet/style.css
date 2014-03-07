@@ -1394,7 +1394,7 @@ form[action="setInfos"] input[type="file"]{
 		top: 50%;
 		left: 50%;
 		margin-left: -260px;
-		margin-top: -275px;
+		margin-top: -225px;
 	}
 
 	.popupInsc form p:nth-of-type(1){
@@ -1470,7 +1470,7 @@ form[action="setInfos"] input[type="file"]{
 		letter-spacing: 0.3pt;
 		font-weight: 200;
 		font-size: 1.2rem;
-		margin-top:  15px;
+		margin-top:  6px;
 		cursor: pointer;
 	}
 
@@ -1562,7 +1562,7 @@ form[action="setInfos"] input[type="file"]{
 	width: auto;
 	text-align: center;
 	font-weight: 200;
-	padding: 10px;
+	padding: 10px 15px 10px 15px;
 	border-radius: 4px;
 	border: 1px solid #dddddd;
 	line-height: 16pt;
@@ -1570,6 +1570,7 @@ form[action="setInfos"] input[type="file"]{
 	left: 50%;
 	margin-left: -35px;
 	margin-top: -10px;
+	min-width: 400px;
 }
 
 
