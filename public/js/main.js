@@ -144,6 +144,9 @@ $('.rewishlister').on('click', function(e){
 		url: lien
 	})
 	.done(function(status) {
+		var nbWisg = $('#nbWish').text();
+		var nbWish = parseInt(nbWisg);
+		$('#nbWish').text(nbWish + 1);
 	})
 	.fail(function(status) {
 	});
