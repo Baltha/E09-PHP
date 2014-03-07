@@ -75,11 +75,11 @@ class Jerem_model extends App_model{
       $map->id_article=$params['id_article'];
       $map->id_user=$params['id_user'];
       $map->save();
-      return true;
+      return 'save';
     }
     else{
       $like->erase();
-      return false;
+      return 'erase';
     }
   }
 

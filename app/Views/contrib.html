@@ -62,12 +62,12 @@
                     }?>
                     <div class="wish">
                         <img src="<?php echo $product['image'] ?>" alt="">
-                        <div  class="wish_name"><p><a href="<?php echo $product['lien']; ?>" target="_blank"><?php echo $productName; ?></a></p></div>
-                        <p class="wish_prix"><?php echo $product['prix']."€";  ?></p>
+                        <div class="wish_name"><p><a href="<?php echo $product['lien']; ?>" target="_blank"><?php echo $productName; ?></a></p></div>
+                        <p class="contrib_prix"><?php echo $product['prix']."€";  ?></p>
                         <?php if(!empty($product['id_like'])){?>
-                          <a class="like" href="../like/<?php echo $product['id_contrib'].'/'.$product['id_article'];?>"><img src="<?php echo $BASEDIR?>/public/images/thumb.svg" width="10" height="10" alt=""></a>
+                          <a class="like" href="../like/<?php echo $product['id_contrib'].'/'.$product['id_article'];?>"><img src="<?php echo $BASEDIR?>/public/images/thumb.svg" data-off="<?php echo $BASEDIR?>/public/images/thumb_bleu.svg" width="10" height="10" alt=""></a>
                         <?php }else{ ?>
-                          <a class="like" href="../like/<?php echo $product['id_contrib'].'/'.$product['id_article'];?>"><img src="<?php echo $BASEDIR?>/public/images/thumb_bleu.svg" width="10" height="10" alt=""></a>
+                          <a class="like" href="../like/<?php echo $product['id_contrib'].'/'.$product['id_article'];?>"><img src="<?php echo $BASEDIR?>/public/images/thumb_bleu.svg" data-off="<?php echo $BASEDIR?>/public/images/thumb.svg" width="10" height="10" alt=""></a>
                         <?php } ?>
                     </div>
                 <?php
