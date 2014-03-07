@@ -146,18 +146,13 @@ class App_controller extends Controller{
           array_push($erreur, 'Champ manquant : '.$key);
       }
 
-      // $f3->set('file', \Web::instance()->receive(function($file){
-      //       print_r($file["name"]);
-      //  },true,true));
+      $f3->set('file', \Web::instance()->receive(function($file){
+       },true,true));
 
-      if($_FILES['file']['error'] == 0){
-        $photo = \Web::instance()->receive(function($file){
-            $f3 = \Base::instance();
-        },true,true);
-      }
+
+      $filename = array_keys($f3->get('file'));
 
       if(count($erreur)==0){
-
         if($f3->get('mdp')==$f3->get('mdp2')){
              // pas d'erreur on envoie
           // d'abord vérif si l'adresse mail est déjà présente dans la BDD dans ce cas on l'indique
@@ -169,7 +164,7 @@ class App_controller extends Controller{
               'naissance'=>$f3->get('POST.naissance'),
               'mail'=>$f3->get('POST.mail'),
               'sexe'=>$f3->get('POST.sexe'),
-              'photo' => $f3->get($f3->get('UPLOADS').$_FILES['file']['name']),
+              'photo' => $filename[0],
               'adresse'=>$f3->get('POST.adresse'),
               'ville'=>$f3->get('POST.ville'),
               'code_postal'=>$f3->get('POST.cp')
@@ -189,7 +184,7 @@ class App_controller extends Controller{
             );
             $f3->set('SESSION',$user);
             $this->model->addDefaultTag($auth->id_user);
-            $f3->reroute("/wishlist");
+            $f3->reroute('/wishlist');
           }
           else{
             array_push($erreur, 'Adresse mail déjà présente');
@@ -203,6 +198,7 @@ class App_controller extends Controller{
       }
       else
         $f3->set('erreur', $erreur);
+        $f3->reroute('/');
   }
 
   public function getMyWishlist($f3){
@@ -231,7 +227,7 @@ class App_controller extends Controller{
     $f3->set('stats.nbfollowers', count($this->model->getfollowers(array('id_user'=>$f3->get('SESSION.id')))));
     $f3->set('stats.nbfollows', count($this->model->getfollows(array('id_user'=>$f3->get('SESSION.id')))));
     $f3->set('stats.wishs', count($this->model->getProducts(array('id_user'=>$f3->get('SESSION.id')))));
-    $f3->set('page', "wishlist");
+    $f3->set('page', "follow");
     $this->tpl['sync']='wishlist.html';
   }
   
