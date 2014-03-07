@@ -125,7 +125,7 @@ $('input[name="name"]').bind('keyup',function(e){
 	var $parent=$this.parent('form');
 	var name=$this.val();
 	if(name.length > 2){
-		var datas={'name':name};w
+		var datas={'name':name};
 		$.ajax({
 			url:$parent.attr('action'),
 			method:$parent.attr('method'),

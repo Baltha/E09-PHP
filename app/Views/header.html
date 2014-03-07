@@ -3,7 +3,9 @@
 	<?php if (!isset($SESSION['id'])){ ?>
 	<header class="home">
 		<div class="fix_center">
-			<h1><span>Friendly</span>Gift</h1>
+			<h1 class="logo-contrib">
+		      <a href="<?php echo $BASEDIR;?>">Friendly<span>Gift</span> </a>
+		    </h1>
 			<form action="<?php echo $BASEDIR.'/login';?>" id="login" method="post">
 				<input type="text" name="login" placeholder="Login" />
 				<input type="password" name="password" placeholder="Password" />
