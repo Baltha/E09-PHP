@@ -1035,6 +1035,13 @@ form[action="setInfos"] input[type="file"]{
 
 	  .friendFollowed img+p, .friendFollowing img+p, .friendFacebook img+p{
 	  	margin-top: 8px;
+	  	text-decoration: none;
+	  	font-family: "varela round";
+	  	font-size: 1.5rem;
+	  	color: #222222;
+	  	line-height: 27pt;
+	  	margin-left: 12px;
+	  	transition: 0.3s all ease;
 	  }
 
 	  /* 5.4 - Contribution Page */ 
@@ -1568,14 +1575,52 @@ form[action="setInfos"] input[type="file"]{
 	line-height: 16pt;
 	top: 50%;
 	left: 50%;
-	margin-left: -35px;
+	margin-left: -65px;
 	margin-top: -10px;
 	min-width: 400px;
 }
 
+.scrollIt{
+	position: absolute;
+	bottom: 50px;
+	right: 70px;
+	width: 40px;
+	height: 45px;
+	background: url("../images/scroll.png");
+	background-size: 40px;
+}
 
+.centerThing{
+	margin: 0 auto;
+	width: 480px;
+	text-align: center;
+	margin-top: 13%;
+}
 
+.centerThing img{
+	width: 200px;
 
+}
 
+.centerThing p{
+	font-size: 1.8rem;
+	font-weight: 200;
+	line-height: 20pt;
+	margin-top: 35px;
+}
+
+.centerThing form{
+	margin-top: 35px;
+}
+
+.nothingHere{
+	background: white;
+	width: auto;
+	max-width: 450px;
+	border-radius: 4px;
+	border: 1px solid #dddddd;
+	margin-top: 25px;
+	padding: 18px 25px 18px 25px;
+}
 
 

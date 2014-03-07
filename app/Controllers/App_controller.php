@@ -227,7 +227,9 @@ class App_controller extends Controller{
     $f3->set('stats.nbfollowers', count($this->model->getfollowers(array('id_user'=>$f3->get('SESSION.id')))));
     $f3->set('stats.nbfollows', count($this->model->getfollows(array('id_user'=>$f3->get('SESSION.id')))));
     $f3->set('stats.wishs', count($this->model->getProducts(array('id_user'=>$f3->get('SESSION.id')))));
+    $f3->set('followingUser', $this->model->getfollowing(array('user_parent'=>$f3->get('SESSION.id'), 'user_enfant'=>$f3->get('PARAMS.id_user'))));
     $f3->set('page', "follow");
+
     $this->tpl['sync']='wishlist.html';
   }
   
