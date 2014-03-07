@@ -972,6 +972,36 @@ form[action="setInfos"] input[type="file"]{
 		margin-left: 15px;
 	  }
 
+	  #follow h2{
+	  	font-size: 1.4rem;
+		font-family: "exo 2";
+		text-transform: uppercase;
+		font-weight: 200;
+	  }
+
+	  .friendFollowed{
+	  	width: auto;
+	  	text-align: center;
+	  	margin-top: 40px;
+	  	padding: 0px 10px 0px 10px;
+	  	max-width: 300px;
+	  }
+
+	  .friendFollowed img{
+	  	border-radius: 50%;
+	  }
+
+	  .friendFollowed img+p a{
+	  	text-decoration: none;
+	  	font-family: "varela round";
+	  	font-size: 1.8rem;
+	  	color: #222222;
+	  }
+
+	  .friendFollowed img+p{
+	  	margin-top: 8px;
+	  }
+
 	  /* 5.4 - Contribution Page */ 
 
 		.myContributions ul{
@@ -1451,7 +1481,9 @@ form[action="setInfos"] input[type="file"]{
 
 
 
-
+.label-tag{
+	display: inline !important;
+}
 
 
 

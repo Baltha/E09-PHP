@@ -446,6 +446,7 @@ class App_controller extends Controller{
         $users = array();
         $dates = array();
         foreach ($f3->get('myContributions') as $contrib) {
+            $newdate = str_replace("-", "/", $contrib["date_fin"]);
             array_push($dates, $newdate);
             array_push($users, $this->model->getUser(array('id_user'=>$contrib['user_referent'])));
         }
