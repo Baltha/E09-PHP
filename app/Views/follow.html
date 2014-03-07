@@ -24,7 +24,7 @@
                         <p> <a href="wishlist/<?php echo $onefollow["fields"]["id_user"]["value"]; ?>"><?php echo $onefollow["fields"]["prenom"]["value"]." ".$onefollow["fields"]["nom"]["value"]; ?></a> </p>
                         </div>
                     <?php } ?>
-                <?php }else{ ?> <p> Vous ne suivez personne. </p> <?php } ?>
+                <?php }else{ ?> <p class="nothingHere"> Vous ne suivez personne. </p> <?php } ?>
             </div>
 
             <div class="amis2">
@@ -36,7 +36,7 @@
                         <p> <a href="wishlist/<?php echo $onefollower["fields"]["id_user"]["value"]; ?>"><?php echo $onefollower["fields"]["prenom"]["value"]." ".$onefollower["fields"]["nom"]["value"]; ?></a> </p>
                         </div>
                     <?php } ?>
-                <?php }else{ ?> <p> Vous ne suivez personne. </p> <?php } ?>
+                <?php }else{ ?> <p class="nothingHere"> Vous ne suivez personne. </p> <?php } ?>
             </div>
 
             <div class="amis3">
@@ -49,7 +49,7 @@
                             <a href="addFollow/<?php echo $friend["id_user"] ?> ">Follow</a>
                         </div>
                     <?php } ?>
-                <?php }else{ ?> <p> Vous n'avez pas d'amis présents sur le site. </p> <?php } ?>
+                <?php }else{ ?> <p class="nothingHere"> Vous n'avez pas d'amis présents sur le site. </p> <?php } ?>
             </div>
         </div>
         <div class="clear"></div>
