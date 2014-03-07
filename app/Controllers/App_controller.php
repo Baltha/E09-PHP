@@ -94,7 +94,7 @@ class App_controller extends Controller{
           'profil_picture'=>$auth->photo,
           'ville'=>$auth->ville,
           'access_token'=>$facebook->getAccessToken(),
-          'ville'=>$auth->ville
+          'id_facebook'=>$f3->get('user')
         );
 
         $f3->set('SESSION',$user);

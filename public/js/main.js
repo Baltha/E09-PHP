@@ -120,7 +120,7 @@ $('input[name="name"]').bind('keyup',function(e){
 		e.stopPropagation();
 		return false;
 	}*/
-    	
+
 	var $this=$(this);
 	var $parent=$this.parent('form');
 	var name=$this.val();
@@ -132,7 +132,7 @@ $('input[name="name"]').bind('keyup',function(e){
 			data:datas
 		})
 		.success(function(data){
-			$('.users').html(data);
+			$('.resultsSearch').html(data);
 		})
 	}
 })
