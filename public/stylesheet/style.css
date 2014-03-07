@@ -1023,7 +1023,7 @@ form[action="setInfos"] input[type="file"]{
 	  }
 
 
-	  .friendFollowed, .friendFollowing, .friendFacebook{
+	  .friendFollowed, .friendFollowing, .friendFacebook, .userSearched{
 	  	margin-top: 25px;
 	  	display: inline-block;
 	  	height: 50px;
@@ -1035,13 +1035,13 @@ form[action="setInfos"] input[type="file"]{
 	  	margin-right: 25px;
 	  }
 
-	  .friendFollowed img, .friendFollowing img, .friendFacebook img{
+	  .friendFollowed img, .friendFollowing img, .friendFacebook img, .userSearched img{
 	  	width: 50px;
 	  	height: 50px;
 	  	float: left;
 	  }
 
-	  .friendFollowed img+p a, .friendFollowing img+p a, .friendFacebook img+p a{
+	  .friendFollowed img+p a, .friendFollowing img+p a, .friendFacebook img+p a, .userSearched img+p a{
 	  	text-decoration: none;
 	  	font-family: "varela round";
 	  	font-size: 1.5rem;
@@ -1051,11 +1051,11 @@ form[action="setInfos"] input[type="file"]{
 	  	transition: 0.3s all ease;
 	  }
 
-	  	.friendFollowed img+p a:hover, .friendFollowing img+p a:hover, .friendFacebook img+p a:hover{
+	  	.friendFollowed img+p a:hover, .friendFollowing img+p a:hover, .friendFacebook img+p a:hover, .userSearched img+p a:hover{
 	  	color: #288DFF
 	  }
 
-	  .friendFollowed img+p, .friendFollowing img+p, .friendFacebook img+p{
+	  .friendFollowed img+p, .friendFollowing img+p, .friendFacebook img+p, .userSearched img+p{
 	  	margin-top: 8px;
 	  	text-decoration: none;
 	  	font-family: "varela round";
@@ -1064,6 +1064,10 @@ form[action="setInfos"] input[type="file"]{
 	  	line-height: 27pt;
 	  	margin-left: 12px;
 	  	transition: 0.3s all ease;
+	  }
+
+	  .resultsSearch{
+	  	margin-bottom: 50px;
 	  }
 
 	  /* 5.4 - Contribution Page */ 
