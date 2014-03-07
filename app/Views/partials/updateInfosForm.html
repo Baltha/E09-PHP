@@ -13,5 +13,8 @@
     <input placeholder="" type="file" name="photo" />
     <input type="submit">
   </form>
-
-<p><a href="<?php echo $BASEDIR.'/updatePicture';?>" title="Modifier sa photo de profil facebook">Modifier sa photo de profil Facebook</a></p>
+<?php
+if(!empty($infos['id_facebook'])){
+    echo'
+    <p><a href="'.$BASEDIR.'/updatePicture" title="Modifier sa photo de profil facebook">Modifier sa photo de profil Facebook</a></p>';
+}?>
