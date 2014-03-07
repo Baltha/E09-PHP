@@ -42,7 +42,8 @@ class App_controller extends Controller{
           'lastname'=>$f3->get('informations->fields.nom.value'),
           'profil_picture'=>$f3->get('informations->fields.photo.value'),
           'ville'=>$f3->get('informations->fields.ville.value'),
-          'access_token' => $facebook->getAccessToken()
+          'access_token' => $facebook->getAccessToken(),
+          'id_facebook'=>$f3->get('user')
 
 
         );
@@ -291,20 +292,22 @@ class App_controller extends Controller{
     }
     $f3->set('myfollowers', $myfollowersuser);
 
-    $ourServiceUsers = array();
-    $f3->set('friends',$facebook->api('/me/friends','GET',array('access_token'=>$f3->get('SESSION.access_token'))));
-    $f3->set('allusers', $this->model->getAllUsers());
-    foreach ($f3->get('friends.data') as $i => $friend) {
-      foreach ($f3->get('allusers') as $user) {
-        if($friend["id"] == $user["id_facebook"] && !$this->model->getfollowing(array('user_parent'=>$f3->get('SESSION.id'), 'user_enfant'=>$user["id_user"]))){
-          $friend["id_user"] = $user["id_user"];
-          $getUser = $this->model->getUser(array('id_user'=>$user["id_user"]));
-          $friend["photo"] = $getUser["fields"]["photo"]["value"];
-          array_push($ourServiceUsers, $friend);
+    if($f3->get('SESSION.id_facebook')){
+      $ourServiceUsers = array();
+      $f3->set('friends',$facebook->api('/me/friends','GET',array('access_token'=>$f3->get('SESSION.access_token'))));
+      $f3->set('allusers', $this->model->getAllUsers());
+      foreach ($f3->get('friends.data') as $i => $friend) {
+        foreach ($f3->get('allusers') as $user) {
+          if($friend["id"] == $user["id_facebook"] && !$this->model->getfollowing(array('user_parent'=>$f3->get('SESSION.id'), 'user_enfant'=>$user["id_user"]))){
+            $friend["id_user"] = $user["id_user"];
+            $getUser = $this->model->getUser(array('id_user'=>$user["id_user"]));
+            $friend["photo"] = $getUser["fields"]["photo"]["value"];
+            array_push($ourServiceUsers, $friend);
+          }
         }
       }
+      $f3->set('FacebookFriendsUsers', $ourServiceUsers);
     }
-    $f3->set('FacebookFriendsUsers', $ourServiceUsers);
     $f3->set('stats.nbfollowers', count($this->model->getfollowers(array('id_user'=>$f3->get('SESSION.id')))));
     $f3->set('stats.nbfollows', count($this->model->getfollows(array('id_user'=>$f3->get('SESSION.id')))));
     $f3->set('stats.wishs', count($this->model->getProducts(array('id_user'=>$f3->get('SESSION.id')))));
