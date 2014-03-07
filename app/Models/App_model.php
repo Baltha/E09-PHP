@@ -85,8 +85,8 @@ class App_model extends Model{
   }
 
   public function login($params){
-      return $this->getMapper('users')->load(array('mail=? AND mdp=?',$params['login'],password($params['password'])));
-  }
+    return $this->getMapper('users')->load(array('mail=? AND mdp=?',$params['login'], $this->password($params['password'])));
+   }
   
  public function parseProduct($params)
   {

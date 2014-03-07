@@ -59,7 +59,7 @@ class Jerem_model extends App_model{
   }
 
   public function getContrib($params){
-    return $this->dB->exec('SELECT *, c.nom AS nom_contrib, u2.photo AS photo_referent FROM contrib c INNER JOIN users u ON c.user_createur=u.id_user INNER JOIN users u2 ON c.user_referent=u2.id_user WHERE c.clef=:clef AND c.user_referent!=:id', array('clef'=>$params['clef'], 'id'=>$params['id_user']));
+    return $this->dB->exec('SELECT *, c.nom AS nom_contrib, u.nom AS createur_nom, u.prenom AS createur_prenom, u2.photo AS photo_referent FROM contrib c INNER JOIN users u ON c.user_createur=u.id_user INNER JOIN users u2 ON c.user_referent=u2.id_user WHERE c.clef=:clef AND c.user_referent!=:id', array('clef'=>$params['clef'], 'id'=>$params['id_user']));
   }
 
 
