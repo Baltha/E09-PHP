@@ -1486,7 +1486,9 @@ form[action="setInfos"] input[type="file"]{
 }
 
 
-
+.paypal{
+	padding-top: 6px;
+}
 
 
 
